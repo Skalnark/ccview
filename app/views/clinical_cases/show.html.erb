@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @clinical_case.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @clinical_case.description %>
+</p>
+
+<p>
+  <strong>Auxtext:</strong>
+  <%= @clinical_case.auxText %>
+</p>
+
+<%= link_to 'Edit', edit_clinical_case_path(@clinical_case) %> |
+<%= link_to 'Back', clinical_cases_path %>

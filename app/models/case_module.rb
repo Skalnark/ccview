@@ -1,0 +1,2 @@
+class CaseModule < ApplicationRecord
+end

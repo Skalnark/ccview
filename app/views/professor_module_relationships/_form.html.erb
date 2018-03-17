@@ -1,0 +1,27 @@
+<%= form_with(model: professor_module_relationship, local: true) do |form| %>
+  <% if professor_module_relationship.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(professor_module_relationship.errors.count, "error") %> prohibited this professor_module_relationship from being saved:</h2>
+
+      <ul>
+      <% professor_module_relationship.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :case_modules_id %>
+    <%= form.text_field :case_modules_id, id: :professor_module_relationship_case_modules_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :professors_id %>
+    <%= form.text_field :professors_id, id: :professor_module_relationship_professors_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+module ProfessorModuleRelationshipsHelper
+end

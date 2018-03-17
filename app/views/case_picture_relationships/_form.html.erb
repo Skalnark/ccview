@@ -1,0 +1,27 @@
+<%= form_with(model: case_picture_relationship, local: true) do |form| %>
+  <% if case_picture_relationship.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(case_picture_relationship.errors.count, "error") %> prohibited this case_picture_relationship from being saved:</h2>
+
+      <ul>
+      <% case_picture_relationship.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :picture_id %>
+    <%= form.text_field :picture_id, id: :case_picture_relationship_picture_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clinical_cases_id %>
+    <%= form.text_field :clinical_cases_id, id: :case_picture_relationship_clinical_cases_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

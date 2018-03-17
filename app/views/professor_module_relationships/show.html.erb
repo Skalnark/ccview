@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Case modules:</strong>
+  <%= @professor_module_relationship.case_modules %>
+</p>
+
+<p>
+  <strong>Professors:</strong>
+  <%= @professor_module_relationship.professors %>
+</p>
+
+<%= link_to 'Edit', edit_professor_module_relationship_path(@professor_module_relationship) %> |
+<%= link_to 'Back', professor_module_relationships_path %>
