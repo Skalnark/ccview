@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'home/index'
+  root 'home#index'
+
   resources :case_picture_relationships
   resources :question_answer_relationships
   resources :student_class_relationships
