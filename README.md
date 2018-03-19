@@ -24,3 +24,13 @@ Os casos são o nosso objeto principal aqui, é bem provável que essa estrutura
 
 
 Quanto a estética do site, essa vai ter que esperar um pouco.
+
+
+## Rodando o projeto
+
+Parar rodar o servidor, além de ter que configurar o database.yaml e o secrets.yaml, vc vai precisar usar os seguintes comandos:
+
+rails db:create
+rails db:migrate
+
+para criar e fazer a migração do banco de dados.
