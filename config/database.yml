@@ -12,3 +12,7 @@ default: &default
 development:
   <<: *default
   database: ccview_development
+
+productoin:
+  <<: *default
+  database: ccview
