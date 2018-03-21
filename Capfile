@@ -17,6 +17,16 @@ install_plugin Capistrano::SCM::Git
 
 require "capistrano3/unicorn"
 
+task :require_rvm do
+  require 'capistrano/rvm'
+end
+
+task :require_bundler do
+  require 'capistrano/bundler'
+end
+
+task 'staging' => [:require_rvm, :require_bundler]
+task 'production' => [:require_bundler]
 # Include tasks from other gems included in your Gemfile
 #
 # For documentation on these, see for example:
@@ -28,7 +38,6 @@ require "capistrano3/unicorn"
 #   https://github.com/capistrano/rails
 #   https://github.com/capistrano/passenger
 #
-# require "capistrano/rvm"
 # require "capistrano/rbenv"
 # require "capistrano/chruby"
 # require "capistrano/bundler"
