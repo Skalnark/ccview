@@ -34,3 +34,7 @@ rails db:create
 rails db:migrate
 
 para criar e fazer a migração do banco de dados.
+
+## Mandando o projeto pro servidor de deploy
+
+O capistrano já está configurado!
