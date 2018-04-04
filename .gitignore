@@ -21,5 +21,7 @@
 /yarn-error.log
 
 .byebug_history
-/config/deploy/production.rb
-/config/deploy/staging.rb
+
+config/deploy/*
+config/database.yml
+config/secrets.yml
