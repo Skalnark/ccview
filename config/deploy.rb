@@ -4,12 +4,11 @@ lock "~> 3.10.1"
 set :application, 'Ccview'
 set :repo_url, 'https://github.com/Skalnark/ccview.git' # repositório git do seu projeto
 set :deploy_to, '/var/www/ccview'
-set :scm, :git
 set :branch, 'master'
 set :keep_releases, 5
 set :format, :airbrussh
 set :log_level, :debug
-append :linked_files, "config/database.yml"
+append :linked_files, "config/database.yml", "config/secrets.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 after 'deploy:publishing', 'deploy:restart'
