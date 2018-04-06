@@ -5,14 +5,10 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
 
 development:
   <<: *default
-  database: ccview_development
-
-productoin:
-  <<: *default
-  database: ccview
+  database: db/development.sqlite3
