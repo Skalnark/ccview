@@ -1,23 +1,28 @@
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
-
+ruby '2.3.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.5'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'rails', '~> 5.2.1'
+# i18n For 5.0.x, 5.1.x and 5.2.x
+gem 'rails-i18n', '~> 5.1' 
+# Bundler
+gem 'bundler', '>= 1.8.4'
+# Flexible authentication solution for Rails with Warden
+gem 'devise'
+# Translations for the devise gem
+gem 'devise-i18n'
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+# gem 'mini_racer', platforms: :ruby
+# Ruby on Rails unobtrusive scripting adapter for jQuery 
+gem 'jquery-rails'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -25,45 +30,58 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-gem 'nio4r', '~> 2.3.0'
-gem 'unicorn'
+# Active Storage Amazon S3 gem.
+gem "aws-sdk-s3", require: false
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Use ActiveStorage variant
+# gem 'mini_magick', '~> 4.8'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
+  gem 'rails-erd'
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
 end
 
 group :development do
-
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-
-   #Capistrano files
-  gem 'capistrano', '~> 3.6'
-  gem 'capistrano-bundler', '~> 1.3'
-  gem 'capistrano-rails', '~> 1.2'
-  gem 'capistrano3-unicorn'
-  gem 'capistrano3-puma'
+  gem 'capistrano', '>= 3.2.1'
   gem 'capistrano-rvm'
+  gem "capistrano3-unicorn" 
+  gem 'capistrano-bundler', '~> 1.1.2'       # support for bundler
+  gem 'capistrano-rails', '~> 1.0'           # automatic migrations and asset compilation
+  gem 'capistrano-unicorn-nginx', '~> 2.0'   # plug-n-play nginx and unicorn
+  gem 'capistrano-postgresql', '~> 3.0'      # plug-n-play postgresql
+end
+
+group :test do
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '>= 2.15', '< 4.0'
+  gem 'selenium-webdriver'
+  # Easy installation and use of chromedriver to run system tests with Chrome
+  gem 'chromedriver-helper'
 end
 
 group :production do
-  # use Postgres as database on production
-  gem 'pg', '>= 0.18' , '< 2.0'
+  gem 'unicorn'
+  gem 'pg'
 end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
