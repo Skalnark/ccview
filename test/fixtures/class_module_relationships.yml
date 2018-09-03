@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  student_classes: one
-  case_modules: one
-
-two:
-  student_classes: two
-  case_modules: two

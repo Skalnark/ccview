@@ -1,1 +1,0 @@
-json.partial! "case_picture_relationships/case_picture_relationship", case_picture_relationship: @case_picture_relationship

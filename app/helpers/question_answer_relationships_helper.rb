@@ -1,2 +1,0 @@
-module QuestionAnswerRelationshipsHelper
-end

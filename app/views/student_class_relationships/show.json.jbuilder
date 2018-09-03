@@ -1,1 +1,0 @@
-json.partial! "student_class_relationships/student_class_relationship", student_class_relationship: @student_class_relationship

@@ -1,1 +1,0 @@
-json.partial! "question_answer_relationships/question_answer_relationship", question_answer_relationship: @question_answer_relationship

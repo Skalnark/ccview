@@ -1,2 +1,0 @@
-class ClinicalCase < ApplicationRecord
-end
