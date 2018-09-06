@@ -1,0 +1,37 @@
+<%= form_for(@clinic_case, html:{class:'form-style-5'}) do |form| %>
+  <% if clinic_case.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(clinic_case.errors.count, "error") %> prohibited this clinic_case from being saved:</h2>
+
+      <ul>
+      <% clinic_case.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    Título: <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    Informações Clinicas: <br> <%= form.text_area :clinicInformation %>
+  </div>
+
+  <div class="field">
+    Descrições do caso: <br> <%= form.text_area :caseDescription %>
+  </div>
+
+  <div class="field">
+    Evolução do caso: <br> <%= form.text_area :caseEvolution %>
+  </div>
+
+  <div class="field">
+    Informações extras: <br> <%= form.text_area :extraInformation %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Criar Caso Clinico"%>
+  </div>
+<% end %>
