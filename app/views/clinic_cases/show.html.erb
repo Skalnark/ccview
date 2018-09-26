@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @clinic_case.title %>
+</p>
+
+<p>
+  <strong>Clinicinformation:</strong>
+  <%= @clinic_case.clinicInformation %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @clinic_case.description %>
+</p>
+
+<p>
+  <strong>Caseevolution:</strong>
+  <%= @clinic_case.caseEvolution %>
+</p>
+
+<p>
+  <strong>Extrainformation:</strong>
+  <%= @clinic_case.extraInformation %>
+</p>
+
+<%= link_to 'Edit', edit_clinic_case_path(@clinic_case) %> |
+<%= link_to 'Back', clinic_cases_path %>

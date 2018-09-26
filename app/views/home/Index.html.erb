@@ -1,0 +1,7 @@
+<% if user_signed_in? %>
+  <%= link_to "Sair", destroy_user_session_path, :method => :delete %> <br />
+  <%= current_user.email %> <br />
+  Role: <%= current_user.role %>
+<% else %>
+  <%= link_to "Login", new_user_session_path %>
+<%end%>
