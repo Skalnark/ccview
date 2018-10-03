@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  resources :clinic_cases
+  root 'home#Index'
+  get 'home/About'
   devise_for :users
-  get 'home/index', to: 'home#index'
-  root 'clinic_cases#index'
-
+  resources :clinic_cases
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

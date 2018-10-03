@@ -17,7 +17,7 @@ class ClinicCasesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create clinic_case" do
     assert_difference('ClinicCase.count') do
-      post clinic_cases_url, params: { clinic_case: { caseDescription: @clinic_case.caseDescription, caseEvolution: @clinic_case.caseEvolution, clinicInformation: @clinic_case.clinicInformation, extraInformation: @clinic_case.extraInformation, title: @clinic_case.title } }
+      post clinic_cases_url, params: { clinic_case: { caseEvolution: @clinic_case.caseEvolution, clinicInformation: @clinic_case.clinicInformation, description: @clinic_case.description, extraInformation: @clinic_case.extraInformation, title: @clinic_case.title } }
     end
 
     assert_redirected_to clinic_case_url(ClinicCase.last)
@@ -34,7 +34,11 @@ class ClinicCasesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update clinic_case" do
+<<<<<<< HEAD
     patch clinic_case_url(@clinic_case), params: { clinic_case: { caseDescription: @clinic_case.caseDescription, caseEvolution: @clinic_case.caseEvolution, clinicInformation: @clinic_case.clinicInformation, extraInformation: @clinic_case.extraInformation, title: @clinic_case.title } }
+=======
+    patch clinic_case_url(@clinic_case), params: { clinic_case: { caseEvolution: @clinic_case.caseEvolution, clinicInformation: @clinic_case.clinicInformation, description: @clinic_case.description, extraInformation: @clinic_case.extraInformation, title: @clinic_case.title } }
+>>>>>>> origin/master
     assert_redirected_to clinic_case_url(@clinic_case)
   end
 

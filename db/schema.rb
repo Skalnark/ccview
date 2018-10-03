@@ -9,15 +9,25 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema.define(version: 2018_09_06_132803) do
+ActiveRecord::Schema.define(version: 2018_09_25_231102) do
 
   create_table "clinic_cases", force: :cascade do |t|
-    t.string "title", limit: 45
+    t.string "title", limit:45
     t.text "clinicInformation"
-    t.text "caseDescription"
+    t.text "description"
     t.text "caseEvolution"
     t.text "extraInformation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

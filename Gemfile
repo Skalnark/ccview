@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.3.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.1'
+gem 'rails', '~> 5.2.0'
 # i18n For 5.0.x, 5.1.x and 5.2.x
 gem 'rails-i18n', '~> 5.1' 
 # Bundler

@@ -3,13 +3,13 @@
 one:
   title: MyString
   clinicInformation: MyText
-  caseDescription: MyText
+  description: MyText
   caseEvolution: MyText
   extraInformation: MyText
 
 two:
   title: MyString
   clinicInformation: MyText
-  caseDescription: MyText
+  description: MyText
   caseEvolution: MyText
   extraInformation: MyText

@@ -14,9 +14,9 @@ class ClinicCasesTest < ApplicationSystemTestCase
     visit clinic_cases_url
     click_on "New Clinic Case"
 
-    fill_in "Casedescription", with: @clinic_case.caseDescription
     fill_in "Caseevolution", with: @clinic_case.caseEvolution
     fill_in "Clinicinformation", with: @clinic_case.clinicInformation
+    fill_in "Description", with: @clinic_case.description
     fill_in "Extrainformation", with: @clinic_case.extraInformation
     fill_in "Title", with: @clinic_case.title
     click_on "Create Clinic case"
@@ -29,9 +29,9 @@ class ClinicCasesTest < ApplicationSystemTestCase
     visit clinic_cases_url
     click_on "Edit", match: :first
 
-    fill_in "Casedescription", with: @clinic_case.caseDescription
     fill_in "Caseevolution", with: @clinic_case.caseEvolution
     fill_in "Clinicinformation", with: @clinic_case.clinicInformation
+    fill_in "Description", with: @clinic_case.description
     fill_in "Extrainformation", with: @clinic_case.extraInformation
     fill_in "Title", with: @clinic_case.title
     click_on "Update Clinic case"
