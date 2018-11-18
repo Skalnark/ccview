@@ -2,6 +2,11 @@
   <%= link_to "Sair", destroy_user_session_path, :method => :delete %> <br />
   <%= current_user.email %> <br />
   Role: <%= current_user.role %>
+<br />
+<br />
+<br />
+  <%= link_to "Casos Clínicos", clinic_cases_path %>
+
 <% else %>
   <%= link_to "Login", new_user_session_path %>
 <%end%>
