@@ -24,3 +24,5 @@ test:
 production:
   <<: *default
   database: ccview_production
+  username: <%= ENV['CCVIEW_DATABASE_USERNAME'] %>
+  password: <%= ENV['CCVIEW_DATABASE_PASSWORD'] %>
