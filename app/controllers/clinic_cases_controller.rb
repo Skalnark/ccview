@@ -4,7 +4,8 @@ class ClinicCasesController < ApplicationController
   # GET /clinic_cases
   # GET /clinic_cases.json
   def index
-    @clinic_cases = ClinicCase.all
+    # Use the built-in with_attached_images scope to avoid N+1
+    @clinic_cases = ClinicCase.all.with_attached_images
   end
 
   # GET /clinic_cases/1
@@ -69,6 +70,6 @@ class ClinicCasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clinic_case_params
-      params.require(:clinic_case).permit(:title, :clinicInformation, :description, :caseEvolution, :extraInformation)
+      params.require(:clinic_case).permit(:title, :clinicInformation, :description, :caseEvolution, :extraInformation, images: [])
     end
 end

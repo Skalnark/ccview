@@ -163,19 +163,11 @@ a:visited {
 }
 
 /*Images stylesheets*/
-.white-image{
-    display: block;
-    margin: 0 auto;
-    width: 25vw;
-    height: 25vw;
-}
-
-.black-image{
+.image{
     display: block;
     margin: 0 auto;
     width: 300px;
     height: 300px;
-    border-radius: 260px;
 }
 
 .icon{

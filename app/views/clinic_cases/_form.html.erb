@@ -19,6 +19,10 @@
     Informações Clinicas: <br> <%= form.text_area :clinicInformation %>
   </div>
 
+   <div class="field">
+    Imagem: <br> <%= form.file_field :images, multiple: true %><br><br>
+  </div>
+
   <div class="field">
     Descrições do caso: <br> <%= form.text_area :description %>
   </div>
