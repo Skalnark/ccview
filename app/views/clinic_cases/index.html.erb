@@ -1,41 +1,39 @@
+<%= render partial: "layouts/header" %>
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
 
-  <h1>Clinic Cases</h1>
+  <h1>Casos Clínicos</h1>
 
+      <% @clinic_cases.each do |clinic_case| %>
   <table>
     <thead>
       <tr>
-        <th>Titulo</th>
-        <th>Informações clinicas</th>
+        <th>
+          <%= clinic_case.title %>
+        </th>
         <th>Descrições do caso</th>
-        <th>Evolução do caso</th>
-        <th>Informações extras</th>
-        <th>Imagem</th>
         <th colspan="3"></th>
       </tr>
     </thead>
 
     <tbody>
-      <% @clinic_cases.each do |clinic_case| %>
         <tr>
-          <td><%= clinic_case.title %></td>
-          <td><%= clinic_case.clinicInformation %></td>
-          <td><%= clinic_case.description %></td>
-          <td><%= clinic_case.caseEvolution %></td>
-          <td><%= clinic_case.extraInformation %></td>
           <% clinic_case.images.each do | image | %>
             <td><%= image_tag(image, :class => "image")%></td>
           <% end%>
-          <td><%= link_to 'Show', clinic_case %></td>
-          <td><%= link_to 'Edit', edit_clinic_case_path(clinic_case) %></td>
-          <td><%= link_to 'Destroy', clinic_case, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= clinic_case.description %></td>
+          <td>
+            <%= link_to 'Exibir', clinic_case %><br>
+            <%= link_to 'Editar', edit_clinic_case_path(clinic_case) %><br>
+            <%= link_to 'Apagar', clinic_case, method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
+            <br>
+          </td>
         </tr>
-      <% end %>
     </tbody>
   </table>
 
+      <% end %>
   <br>
 
-  <%= link_to 'New Clinic Case', new_clinic_case_path %>
+  <%= link_to 'Novo Caso Clínico', new_clinic_case_path %>
 </div>

@@ -1,5 +1,7 @@
 body{
     font-family: Georgia, "Times New Roman", Times, serif;
+    padding-left: 20%;
+    padding-right: 20%;
 }
 .form-style-5{
     width: 90vw;
@@ -102,7 +104,7 @@ a:visited {
     width: 22vw;
     margin: 0 auto;
     padding: 20px;
-    background: #f4f7f8;
+    background: #rgba(255, 65, 111, 255);
     border-radius: 8px;
     font-family: Georgia, "Times New Roman", Times, serif;
 }
@@ -119,7 +121,7 @@ a:visited {
     padding: 18px 0px;
     color: #FFF;
     margin: 0 auto;
-    background: #226f77;
+    background: rgba(255, 65, 111, 255);
     font-size: 18px;
     text-align: center;
     font-style: normal;
@@ -137,7 +139,7 @@ a:visited {
 .button-style a:hover,
 .button-style input[type="submit"]:hover
 {
-    background: #5b949a;
+    background: rgba(194, 0, 25, 255);
 }
 
 /*Table stylesheets*/
