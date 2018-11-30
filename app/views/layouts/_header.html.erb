@@ -1,16 +1,14 @@
-<div class='form-style-5'>
-	<span class="actions">
-	  <%= link_to "Home", root_path %>
-	</span>
+<div class="navbar">
 
-	<span class="actions">
-	  <% if user_signed_in? %>
-	  	<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
-	  <%else%>
-	    <%= link_to "Login", new_user_session_path %>
-	  <%end%>
-	</span>
+	<div class="actions">
+		<%= image_tag("/CCVIEW_logo.jpeg", :alt => "logo", :class => "icon") %>
+		<%= link_to "Home", root_path %>
 
+		<% if user_signed_in? %>
+			<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
+		<%else%>
+		<%= link_to "Login", new_user_session_path %>
+		<%end%>
+	</div>
 	<br/>
-
 </div>

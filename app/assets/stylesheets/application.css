@@ -4,12 +4,11 @@ body{
     padding-right: 20%;
 }
 .form-style-5{
-    width: 90vw;
+    width: 90%;
     margin: 10px auto;
     padding: 20px;
     background: #f4f7f8;
     border-radius: 8px;
-    font-family: Georgia, "Times New Roman", Times, serif;
 }
 .form-style-5 fieldset{
     border: none;
@@ -86,18 +85,16 @@ body{
 
 /*Buttons stylesheets*/
 a:link {
-    font-family: Georgia, "Times New Roman", Times, serif;
     text-decoration: none;
 }
 
 a:visited {
-    font-family: Georgia, "Times New Roman", Times, serif;
     text-decoration: none;
 }
 
 .actions{
     text-align: center;
-    padding: 10px 0px 0px 0px;
+    padding: 15px 0px 0px 0px;
 }
 
 .button-style{
@@ -121,12 +118,12 @@ a:visited {
     padding: 18px 0px;
     color: #FFF;
     margin: 0 auto;
-    background: rgba(255, 65, 111, 255);
+    background: #ff1a26;
     font-size: 18px;
     text-align: center;
     font-style: normal;
     width: 22vw;
-    border: 1px solid #134c52;
+    border: 1px solid #c20018;
     border-width: 1px 1px 3px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -139,7 +136,7 @@ a:visited {
 .button-style a:hover,
 .button-style input[type="submit"]:hover
 {
-    background: rgba(194, 0, 25, 255);
+    background: #c20018;
 }
 
 /*Table stylesheets*/
@@ -169,16 +166,39 @@ a:visited {
     display: block;
     margin: 0 auto;
     width: 300px;
-    height: 300px;
 }
 
 .icon{
+    display: inline;
     width: 100px;
-    height: 100px;
-    border-radius: 50px;
 }
 
-#already_drank,
-#already_smoked{
-    display: none;
+/*Nav Bar stylesheets*/
+.navbar{
+    width: 90%;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.navbar a{
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 0px;
+    color: #FFF;
+    margin: 0 auto;
+    background: #ff1a26;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    width: 10vw;
+    border: 1px solid #c20018;
+    border-width: 1px 1px 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.navbar a:hover{
+    background: #c20018;
 }

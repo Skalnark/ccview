@@ -1,0 +1,37 @@
+<%= image_tag("/CCVIEW_logo.jpeg", :alt => "logo", :class => "image") %>
+
+<div class="form-style-5">
+
+  <h2>Iniciar Sessão</h2>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="field">
+      <%= f.label :email do %>
+        E-mail:
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <% end -%>
+    </div>
+
+    <div class="field">
+      <%= f.label :password do %>
+        Senha:
+        <%= f.password_field :password, autocomplete: "off" %>
+      <% end -%>
+    </div>
+
+    <% if devise_mapping.rememberable? -%>
+      <div class="field">
+        <%= f.label :remember_me do %>
+          <%= f.check_box :remember_me%>
+          Lembrar-me
+        <% end -%>
+
+      </div>
+    <% end -%>
+
+    <div class="actions">
+      <%= f.submit "Login" %>
+      <%= render "devise/shared/links" %>
+    </div>
+  <% end %>
+</div>

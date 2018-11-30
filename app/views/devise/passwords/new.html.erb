@@ -1,0 +1,21 @@
+<%= image_tag("/CCVIEW_logo.jpeg", :alt => "logo", :class => "image") %>
+
+<div class="form-style-5">
+	<h2>Esqueceu sua senha?</h2>
+
+	<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+	  <%= devise_error_messages! %>
+
+	  <div class="field">
+	    <%= f.label :email do%>
+	    	Email:
+	    	<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+	    <% end -%>
+	  </div>
+
+	  <div class="actions">
+	    <%= f.submit "Mande me instruções para mudar a senha" %>
+	    <%= render "devise/shared/links" %>
+	  </div>
+	<% end %>
+</div>

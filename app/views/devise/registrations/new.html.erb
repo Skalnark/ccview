@@ -1,0 +1,32 @@
+<%= image_tag("/CCVIEW_logo.jpeg", :alt => "logo", :class => "image") %>
+
+<div class="form-style-5">
+  <h2>Cadastro</h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="field">
+      <%= f.label :email, "Email:" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+      Senha: <% if @minimum_password_length %>
+      <em>(No mínimo <%= @minimum_password_length %> characteres)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
+
+    <div class="field">
+      Digite novamente a senha:
+      <br />
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Finalizar Cadastro" %>
+      <%= render "devise/shared/links" %>
+    </div>
+  <% end %>
+</div>
