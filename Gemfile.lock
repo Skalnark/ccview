@@ -303,7 +303,7 @@ DEPENDENCIES
   mini_magick (~> 4.8)
   pg
   puma (~> 3.11)
-  rails (~> 5.2.0)
+  rails (~> 5.2.1)
   rails-erd
   rails-i18n (~> 5.1)
   sass-rails (~> 5.0)
