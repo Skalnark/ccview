@@ -5,7 +5,7 @@
 		<%= link_to "Home", root_path %>
 
 		<% if user_signed_in? %>
-			<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
+			<%= link_to "Sair", root_path, :method => :delete %>
 			<%= current_user.email %>
 		<%else%>
 		<%= link_to "Login", new_user_session_path %>

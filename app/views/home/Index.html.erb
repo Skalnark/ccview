@@ -1,14 +1,22 @@
 <%= image_tag("/CCVIEW_logo.jpeg", :alt => "logo", :class => "image") %>
 
-<% if user_signed_in? %>
-	<br /><br />
-	<div class='form-style-5'>
+<div class='form-style-5'>
+	<% if user_signed_in? %>
+		<br /><br />	
 		<div class="actions">
 		  <%= link_to "Casos Clínicos", clinic_cases_path %>
-		  <%= link_to "Sair", destroy_user_session_path, :method => :delete %>
+		  <%= link_to "Sair", root_path, :method => :delete %>
 		</div>
+
 		<div class='text'>
 			<%= current_user.email %>
 		</div>
-	</div>
-<%end%>
+	<%else%>
+		<div class="actions">
+			<h1>Bem-vindo</h1>
+			<p> O "Clinical Cases View - CCView" é um visualizador de casos clínicos, conheça melhor os casos clinícos e aprenda com os que estão disponiveis. Caso você seja um professor, monte seus casos clinícos e disponibilize para seus alunos.</p>
+			<%= link_to "Login", new_user_session_path %> |
+			<%= link_to "Cadastro", new_user_registration_path%><br />
+		</div>
+	<%end%>
+</div>
