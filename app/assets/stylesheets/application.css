@@ -1,12 +1,12 @@
 body{
     font-family: Georgia, "Times New Roman", Times, serif;
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 .form-style-5{
-    width: 90%;
-    margin: 10px auto;
-    padding: 20px;
+    width: 95%;
+    margin: 5px auto;
+    padding: 5px;
     background: #f4f7f8;
     border-radius: 8px;
 }

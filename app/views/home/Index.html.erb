@@ -1,7 +1,8 @@
 <%= render partial: "layouts/header" %>
 
 <% if user_signed_in? %>
-  <%= current_user.email %> <br />
-<br />
-  <%= link_to "Casos Clínicos", clinic_cases_path %>
+<br /><br />
+	<div class="actions">
+	  <%= link_to "Casos Clínicos", clinic_cases_path %>
+	</div>
 <%end%>

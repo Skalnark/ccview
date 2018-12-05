@@ -9,6 +9,7 @@
       <%= submit_tag 'Search', name: nil %>
   <% end %>
 
+  <%= link_to 'Novo Caso Clínico', new_clinic_case_path %>
   <% @clinic_cases.each do |clinic_case| %>
     <table>
       <thead>
@@ -23,9 +24,7 @@
 
       <tbody>
           <tr>
-            <% clinic_case.images.each do | image | %>
-              <td><%= image_tag(image, :class => "image")%></td>
-            <% end%>
+            <td><%= image_tag(clinic_case.images[0], :class => "image")%></td>
             <td><%= clinic_case.description %></td>
             <td>
               <%= link_to 'Exibir', clinic_case %><br>

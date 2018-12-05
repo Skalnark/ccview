@@ -13,6 +13,7 @@ class ClinicCasesController < ApplicationController
   # GET /clinic_cases/1
   # GET /clinic_cases/1.json
   def show
+    @image_counter = 0
   end
 
   # GET /clinic_cases/new
@@ -28,7 +29,6 @@ class ClinicCasesController < ApplicationController
   # POST /clinic_cases.json
   def create
     @clinic_case = ClinicCase.new(clinic_case_params)
-
     respond_to do |format|
       if @clinic_case.save
         format.html { redirect_to @clinic_case, notice: 'Clinic case was successfully created.' }
@@ -72,6 +72,6 @@ class ClinicCasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clinic_case_params
-      params.require(:clinic_case).permit(:title, :clinicInformation, :description, :caseEvolution, :extraInformation, :term, :images)
+      params.require(:clinic_case).permit(:title, :clinicInformation, :description, :caseEvolution, :extraInformation, :term, images: [])
     end
 end

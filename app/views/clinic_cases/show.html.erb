@@ -6,15 +6,25 @@
     <strong>Título:</strong>
     <%= @clinic_case.title %>
   </p>
-
-  <p>
-    <strong>Informações Clinicas:</strong>
-    <%= @clinic_case.clinicInformation %>
-  </p>
-
+  
   <p>
     <strong>Descrição do caso:</strong>
     <%= @clinic_case.description %>
+  </p>
+  <table>
+    <tr>
+      <% @clinic_case.images.each_with_index do |image, i| %>
+        <% if i != 0 && i % 3 == 0 %>
+          </tr><tr>
+        <%end%>
+        <td><%= image_tag(image, :class => "image") %></td>
+          <br>
+      <%end%>
+    </tr>
+  </table>
+  <p>
+    <strong>Informações Clinicas:</strong>
+    <%= @clinic_case.clinicInformation %>
   </p>
 
   <p>
