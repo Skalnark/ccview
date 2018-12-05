@@ -1,8 +1,14 @@
-<%= render partial: "layouts/header" %>
+<%= image_tag("/CCVIEW_logo.jpeg", :alt => "logo", :class => "image") %>
 
 <% if user_signed_in? %>
-<br /><br />
-	<div class="actions">
-	  <%= link_to "Casos Clínicos", clinic_cases_path %>
+	<br /><br />
+	<div class='form-style-5'>
+		<div class="actions">
+		  <%= link_to "Casos Clínicos", clinic_cases_path %>
+		  <%= link_to "Sair", destroy_user_session_path, :method => :delete %>
+		</div>
+		<div class='text'>
+			<%= current_user.email %>
+		</div>
 	</div>
 <%end%>

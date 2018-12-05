@@ -83,6 +83,10 @@ body{
     border-radius: 15px 15px 15px 0px;
 }
 
+.text{
+    text-align: center;
+}
+
 /*Buttons stylesheets*/
 a:link {
     text-decoration: none;
