@@ -1,0 +1,42 @@
+<%= form_with(model: case_module, local: true) do |form| %>
+  <% if case_module.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(case_module.errors.count, "error") %> prohibited this case_module from being saved:</h2>
+
+      <ul>
+      <% case_module.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :authors %>
+    <%= form.text_field :authors %>
+  </div>
+
+  <div class="field">
+    <%= form.label :privacyPolicy %>
+    <%= form.text_area :privacyPolicy %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Topic_id %>
+    <%= form.text_field :Topic_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

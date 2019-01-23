@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @case_module.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @case_module.description %>
+</p>
+
+<p>
+  <strong>Authors:</strong>
+  <%= @case_module.authors %>
+</p>
+
+<p>
+  <strong>Privacypolicy:</strong>
+  <%= @case_module.privacyPolicy %>
+</p>
+
+<p>
+  <strong>Topic:</strong>
+  <%= @case_module.Topic %>
+</p>
+
+<%= link_to 'Edit', edit_case_module_path(@case_module) %> |
+<%= link_to 'Back', case_modules_path %>

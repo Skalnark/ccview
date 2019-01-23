@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :case_modules
+  resources :topics
   root 'home#Index'
   get 'home/About'
   devise_for :users

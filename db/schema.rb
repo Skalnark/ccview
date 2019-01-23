@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_082951) do
+ActiveRecord::Schema.define(version: 2019_01_23_013144) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 2018_11_26_082951) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "case_modules", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "authors"
+    t.text "privacyPolicy"
+    t.integer "Topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["Topic_id"], name: "index_case_modules_on_Topic_id"
+  end
+
   create_table "clinic_cases", force: :cascade do |t|
     t.string "title"
     t.text "clinicInformation"
@@ -41,6 +52,17 @@ ActiveRecord::Schema.define(version: 2018_11_26_082951) do
     t.text "extraInformation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "authors"
+    t.string "about"
+    t.integer "ClinicCase_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ClinicCase_id"], name: "index_topics_on_ClinicCase_id"
   end
 
   create_table "users", force: :cascade do |t|
