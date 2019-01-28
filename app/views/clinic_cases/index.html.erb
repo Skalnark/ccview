@@ -6,35 +6,33 @@
 
   <%= form_tag(clinic_cases_path, method: :get) do %>
       <%= text_field_tag :term, params[:term] %>
-      <%= submit_tag 'Search', name: nil %>
+      <%= submit_tag 'Buscar', name: nil %>
   <% end %>
 
   <%= link_to 'Novo Caso Clínico', new_clinic_case_path %>
-  <% @clinic_cases.each do |clinic_case| %>
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <%= clinic_case.title %>
-          </th>
-          <th>Descrições do caso</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
 
-      <tbody>
-          <tr>
-            <td><%= image_tag(clinic_case.images[0], :class => "image")%></td>
-            <td><%= clinic_case.description %></td>
-            <td>
-              <%= link_to 'Exibir', clinic_case %><br>
-              <%= link_to 'Editar', edit_clinic_case_path(clinic_case) %><br>
-              <%= link_to 'Apagar', clinic_case, method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
-              <br>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-  <% end%>
+  <ol>
+    <% @clinic_cases.each do |clinic_case| %>
+      <li>
+        <% div_id = "#{clinic_case.id}" -%>
+        <div class='clinic_case_item', id="<%= div_id -%>">
+          <a href="/clinic_cases/<%= div_id -%>">
+            <div class='item_image'>
+              <%= image_tag(clinic_case.images[0], :class => "image")%><br>
+            </div>
+
+            <div class='separator_line'></div>
+            
+            <div class='item_description'>
+              <span> <%= clinic_case.title %> </span><br>
+              <p> <%= clinic_case.description %> </p><br>
+            </div>
+          </a>
+        </div>
+      </li>
+    <% end%>
+  </ol>
+
   <br>
+
 </div>

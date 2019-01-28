@@ -37,6 +37,8 @@
     <%= @clinic_case.extraInformation %>
   </p>
 
-  <%= link_to 'Edit', edit_clinic_case_path(@clinic_case) %> |
-  <%= link_to 'Back', clinic_cases_path %>
+  <div class="actions">
+    <%= link_to 'Editar', edit_clinic_case_path(@clinic_case) %> |
+    <%= link_to 'Voltar', clinic_cases_path %>
+  </div>
 </div>

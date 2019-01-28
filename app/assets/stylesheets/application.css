@@ -9,6 +9,7 @@ body{
     padding: 5px;
     background: #f4f7f8;
     border-radius: 8px;
+    box-sizing: border-box;
 }
 .form-style-5 fieldset{
     border: none;
@@ -205,4 +206,69 @@ a:visited {
 
 .navbar a:hover{
     background: #c20018;
+}
+
+.form-style-5 li{
+    height: 479px;
+    float: left;
+    margin: 0 0 16px 16px;
+    position: relative;
+    display: block;
+}
+
+.clinic_case_item{
+    width: 284px;
+    background-color: #eee;
+    box-sizing: border-box;
+    border: 1px solid #ff1a26;
+    border-width: 1px 1px 1px;
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1), 0 -1px 2px 0 rgba(0,0,0,.1);
+}
+
+.clinic_case_item a,
+.clinic_case_item a:hover{
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: #eee;
+    color: #000;
+    display: inline;
+}
+
+.item_image,
+.item_image img{
+    width: 282px;
+    height: 284px;
+    border-radius: 4px 4px 0 0;
+    box-sizing: border-box;
+}
+
+.item_description{
+    height: 130px;
+    width: 244px;
+    padding: 30px 20px 30px;
+    position: relative;
+}
+
+.item_description span{
+    display: -webkit-box;    
+    font-size: 24px;
+    line-height: 1.2;
+    vertical-align: middle;
+    color: #333;
+    box-sizing: border-box;
+    max-width: 284px;
+    overflow: hidden;    
+    text-overflow: ellipsis;
+}
+
+.separator_line{
+    border-width: 0px 0px 2px;
+    border-style: solid;
+    border-color: #ff8592;
+    box-sizing: border-box;
 }

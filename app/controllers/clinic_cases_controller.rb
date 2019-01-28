@@ -31,7 +31,7 @@ class ClinicCasesController < ApplicationController
     @clinic_case = ClinicCase.new(clinic_case_params)
     respond_to do |format|
       if @clinic_case.save
-        format.html { redirect_to @clinic_case, notice: 'Clinic case was successfully created.' }
+        format.html { redirect_to @clinic_case, notice: 'Caso clínico foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @clinic_case }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class ClinicCasesController < ApplicationController
   def update
     respond_to do |format|
       if @clinic_case.update(clinic_case_params)
-        format.html { redirect_to @clinic_case, notice: 'Clinic case was successfully updated.' }
+        format.html { redirect_to @clinic_case, notice: 'Caso clínico foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @clinic_case }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class ClinicCasesController < ApplicationController
   def destroy
     @clinic_case.destroy
     respond_to do |format|
-      format.html { redirect_to clinic_cases_url, notice: 'Clinic case was successfully destroyed.' }
+      format.html { redirect_to clinic_cases_url, notice: 'Caso clínico foi destruído com sucesso.' }
       format.json { head :no_content }
     end
   end

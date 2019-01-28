@@ -4,6 +4,8 @@
 
 	<%= render 'form', clinic_case: @clinic_case %>
 
-	<%= link_to 'Mostrar', @clinic_case %> |
-	<%= link_to 'Voltar', clinic_cases_path %>
+	<div class="actions">
+		<%= link_to 'Mostrar', @clinic_case %> | 
+		<%= link_to 'Apagar', @clinic_case, method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
+	</div>
 </div>

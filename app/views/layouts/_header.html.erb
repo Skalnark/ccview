@@ -2,13 +2,13 @@
 
 	<div class="actions">
 		<%= image_tag("/CCVIEW_logo.jpeg", :alt => "logo", :class => "icon") %>
-		<%= link_to "Home", root_path %>
+		<%= link_to "Início", root_path %>
 
 		<% if user_signed_in? %>
 			<%= link_to "Sair", root_path, :method => :delete %>
 			<%= current_user.email %>
 		<%else%>
-		<%= link_to "Login", new_user_session_path %>
+		<%= link_to "Iniciar Sessão", new_user_session_path %>
 		<%end%>
 	</div>
 	<br/>
