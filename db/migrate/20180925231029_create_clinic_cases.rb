@@ -7,6 +7,7 @@ class CreateClinicCases < ActiveRecord::Migration[5.2]
       t.text :caseEvolution
       t.text :extraInformation
 
+      t.references :topic, foreign_key: true
       t.timestamps
     end
   end

@@ -17,7 +17,7 @@ class CaseModulesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create case_module" do
     assert_difference('CaseModule.count') do
-      post case_modules_url, params: { case_module: { Topic_id: @case_module.Topic_id, authors: @case_module.authors, description: @case_module.description, privacyPolicy: @case_module.privacyPolicy, title: @case_module.title } }
+      post case_modules_url, params: { case_module: { author: @case_module.author, description: @case_module.description, dictionary: @case_module.dictionary, privacy: @case_module.privacy, title: @case_module.title } }
     end
 
     assert_redirected_to case_module_url(CaseModule.last)
@@ -34,7 +34,7 @@ class CaseModulesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update case_module" do
-    patch case_module_url(@case_module), params: { case_module: { Topic_id: @case_module.Topic_id, authors: @case_module.authors, description: @case_module.description, privacyPolicy: @case_module.privacyPolicy, title: @case_module.title } }
+    patch case_module_url(@case_module), params: { case_module: { author: @case_module.author, description: @case_module.description, dictionary: @case_module.dictionary, privacy: @case_module.privacy, title: @case_module.title } }
     assert_redirected_to case_module_url(@case_module)
   end
 
