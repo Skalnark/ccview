@@ -24,8 +24,10 @@
             <div class='separator_line'></div>
             
             <div class='item_description'>
-              <span> <%= clinic_case.title %> </span><br>
-              <p> <%= clinic_case.description %> </p><br>
+              <div class='item_description_title'>
+                <%= clinic_case.title %>
+              </div>
+              <pre> <%= clinic_case.description %> </pre>
             </div>
           </a>
         </div>
