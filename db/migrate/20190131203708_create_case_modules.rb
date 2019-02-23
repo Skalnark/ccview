@@ -3,9 +3,9 @@ class CreateCaseModules < ActiveRecord::Migration[5.2]
     create_table :case_modules do |t|
       t.string :title
       t.text :description
-      t.string :authors
-      t.text :privacyPolicy
-      t.references :Topic, foreign_key: true
+      t.string :author
+      t.text :dictionary
+      t.text :privacy
 
       t.timestamps
     end

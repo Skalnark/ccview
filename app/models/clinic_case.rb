@@ -1,4 +1,5 @@
 class ClinicCase < ApplicationRecord
+	belongs_to :topic
 	has_many_attached :images
 
 	def self.search(term)

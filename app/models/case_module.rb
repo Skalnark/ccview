@@ -1,3 +1,4 @@
 class CaseModule < ApplicationRecord
-  belongs_to :Topic
+	has_many :topics
+	has_one_attached :image
 end

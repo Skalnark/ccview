@@ -14,9 +14,9 @@ class TopicsTest < ApplicationSystemTestCase
     visit topics_url
     click_on "New Topic"
 
-    fill_in "Cliniccase", with: @topic.ClinicCase_id
     fill_in "About", with: @topic.about
     fill_in "Authors", with: @topic.authors
+    fill_in "Casemodule", with: @topic.caseModule_id
     fill_in "Description", with: @topic.description
     fill_in "Title", with: @topic.title
     click_on "Create Topic"
@@ -29,9 +29,9 @@ class TopicsTest < ApplicationSystemTestCase
     visit topics_url
     click_on "Edit", match: :first
 
-    fill_in "Cliniccase", with: @topic.ClinicCase_id
     fill_in "About", with: @topic.about
     fill_in "Authors", with: @topic.authors
+    fill_in "Casemodule", with: @topic.caseModule_id
     fill_in "Description", with: @topic.description
     fill_in "Title", with: @topic.title
     click_on "Update Topic"

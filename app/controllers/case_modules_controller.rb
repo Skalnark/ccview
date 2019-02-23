@@ -15,6 +15,7 @@ class CaseModulesController < ApplicationController
   # GET /case_modules/new
   def new
     @case_module = CaseModule.new
+    @active_module = @case_module
   end
 
   # GET /case_modules/1/edit
@@ -25,7 +26,7 @@ class CaseModulesController < ApplicationController
   # POST /case_modules.json
   def create
     @case_module = CaseModule.new(case_module_params)
-
+    @active_module = @case_module
     respond_to do |format|
       if @case_module.save
         format.html { redirect_to @case_module, notice: 'Case module was successfully created.' }
@@ -65,10 +66,11 @@ class CaseModulesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_case_module
       @case_module = CaseModule.find(params[:id])
+      @active_module = @case_module
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def case_module_params
-      params.require(:case_module).permit(:title, :description, :authors, :privacyPolicy, :Topic_id)
+      params.require(:case_module).permit(:title, :description, :author, :dictionary, :privacy)
     end
 end

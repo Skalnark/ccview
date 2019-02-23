@@ -14,10 +14,10 @@ class CaseModulesTest < ApplicationSystemTestCase
     visit case_modules_url
     click_on "New Case Module"
 
-    fill_in "Topic", with: @case_module.Topic_id
-    fill_in "Authors", with: @case_module.authors
+    fill_in "Author", with: @case_module.author
     fill_in "Description", with: @case_module.description
-    fill_in "Privacypolicy", with: @case_module.privacyPolicy
+    fill_in "Dictionary", with: @case_module.dictionary
+    fill_in "Privacy", with: @case_module.privacy
     fill_in "Title", with: @case_module.title
     click_on "Create Case module"
 
@@ -29,10 +29,10 @@ class CaseModulesTest < ApplicationSystemTestCase
     visit case_modules_url
     click_on "Edit", match: :first
 
-    fill_in "Topic", with: @case_module.Topic_id
-    fill_in "Authors", with: @case_module.authors
+    fill_in "Author", with: @case_module.author
     fill_in "Description", with: @case_module.description
-    fill_in "Privacypolicy", with: @case_module.privacyPolicy
+    fill_in "Dictionary", with: @case_module.dictionary
+    fill_in "Privacy", with: @case_module.privacy
     fill_in "Title", with: @case_module.title
     click_on "Update Case module"
 

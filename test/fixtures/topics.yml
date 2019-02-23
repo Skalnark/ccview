@@ -4,12 +4,12 @@ one:
   title: MyString
   description: MyText
   authors: MyString
-  about: MyString
-  ClinicCase: one
+  about: MyText
+  caseModule: one
 
 two:
   title: MyString
   description: MyText
   authors: MyString
-  about: MyString
-  ClinicCase: two
+  about: MyText
+  caseModule: two

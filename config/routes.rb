@@ -1,9 +1,22 @@
 Rails.application.routes.draw do
-  resources :case_modules
-  resources :topics
+  
+  devise_for :users
+
+  authenticated :users do
+
+      get 'users/sign_in' to: 'home#Index'
+      get 'users/sign_up' to: 'home#Index'
+      post 'users/sign_in' to: 'home#Index'
+      post 'users/sign_in' to: 'home#Index'
+
+	  resources :case_modules
+	  resources :topics
+	  resources :clinic_cases
+  end
+
   root 'home#Index'
   get 'home/About'
-  devise_for :users
-  resources :clinic_cases
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
