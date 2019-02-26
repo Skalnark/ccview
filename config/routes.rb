@@ -2,17 +2,9 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-  authenticated :users do
-
-      get 'users/sign_in' to: 'home#Index'
-      get 'users/sign_up' to: 'home#Index'
-      post 'users/sign_in' to: 'home#Index'
-      post 'users/sign_in' to: 'home#Index'
-
-	  resources :case_modules
-	  resources :topics
-	  resources :clinic_cases
-  end
+  resources :case_modules
+  resources :topics
+  resources :clinic_cases
 
   root 'home#Index'
   get 'home/About'
