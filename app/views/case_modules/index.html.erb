@@ -1,35 +1,34 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+  <p id="notice"><%= notice %></p>
 
-<h1>Case Modules</h1>
+  <h1>Módulos dos Casos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Author</th>
-      <th>Dictionary</th>
-      <th>Privacy</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <%= link_to 'Novo Modulo', new_case_module_path %>
 
-  <tbody>
+  <ol>
     <% @case_modules.each do |case_module| %>
-      <tr>
-        <td><%= case_module.title %></td>
-        <td><%= case_module.description %></td>
-        <td><%= case_module.author %></td>
-        <td><%= case_module.dictionary %></td>
-        <td><%= case_module.privacy %></td>
-        <td><%= link_to 'Show', case_module %></td>
-        <td><%= link_to 'Edit', edit_case_module_path(case_module) %></td>
-        <td><%= link_to 'Destroy', case_module, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <li>
+        <% div_id = "#{case_module.id}" -%>
+        <div class='clinic_case_item', id="<%= div_id -%>">
+          <a href="/case_modules/<%= div_id -%>">
+            <div class='item_image'>
+            </div>
 
-<br>
+            <div class='separator_line'></div>
+            
+            <div class='item_description'>
+              <div class='item_description_title'>
+                <%= case_module.title %>
+              </div>
+              <pre> <%= case_module.description %> </pre>
+            </div>
+          </a>
+        </div>
+      </li>
+    <% end%>
+  </ol>
 
-<%= link_to 'New Case Module', new_case_module_path %>
+  <br>
+
+</div>

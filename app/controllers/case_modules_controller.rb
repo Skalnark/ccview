@@ -4,7 +4,7 @@ class CaseModulesController < ApplicationController
   # GET /case_modules
   # GET /case_modules.json
   def index
-    @case_modules = CaseModule.all
+    @case_modules = CaseModule.all.with_attached_image
   end
 
   # GET /case_modules/1
@@ -71,6 +71,6 @@ class CaseModulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def case_module_params
-      params.require(:case_module).permit(:title, :description, :author, :dictionary, :privacy)
+      params.require(:case_module).permit(:title, :description, :author, :dictionary, :privacy, :image)
     end
 end
