@@ -1,4 +1,4 @@
-<%= form_with(model: case_module, local: true) do |form| %>
+<%= form_for(@case_module, html:{class:'form-style-5'}) do |form| %>
   <% if case_module.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(case_module.errors.count, "error") %> prohibited this case_module from being saved:</h2>
@@ -12,31 +12,31 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    Título: <%= form.text_field :title %>
+  </div>
+
+   <div class="field">
+    Imagem: <br> <%= form.file_field :image%><br><br>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+    Descrições do Modulo: <br> <%= form.text_area :description %>
   </div>
 
   <div class="field">
-    <%= form.label :author %>
-    <%= form.text_field :author %>
+    Autor(es) do Módulo: <br> <%= form.text_area :author %>
   </div>
 
   <div class="field">
-    <%= form.label :dictionary %>
-    <%= form.text_area :dictionary %>
+    Dicionário: <br> <%= form.text_area :dictionary %>
   </div>
 
   <div class="field">
-    <%= form.label :privacy %>
-    <%= form.text_area :privacy %>
+    Privacidade: <br> <%= form.text_area :privacy %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Criar Módulo"%> | 
+    <%= link_to 'Voltar', case_modules_path %>
   </div>
 <% end %>
