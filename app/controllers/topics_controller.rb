@@ -1,10 +1,12 @@
 class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
+  before_action :set_module!, only: [:index, :new, :create]
+  before_action :set_topic!, only: [:index, :new, :create]
 
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all
+    @topics = @module.topics
   end
 
   # GET /topics/1
@@ -24,7 +26,8 @@ class TopicsController < ApplicationController
   # POST /topics
   # POST /topics.json
   def create
-    @topic = @case_module.topics.create(topic_params)
+    topic_params[:case_module_id] = @module.id
+    @topic = Topic.new(topic_params)
 
     respond_to do |format|
       if @topic.save
@@ -65,6 +68,16 @@ class TopicsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_topic
       @topic = Topic.find(params[:id])
+    end
+
+    def set_module!
+      @module = $active_module
+      puts "MODULO DEBUG: #{@module.id}"
+      puts "MODULO DEBUG: #{@module.title}"
+    end
+
+    def set_topic!
+      @Topic = Topic.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -29,6 +29,11 @@
     <%= @case_module.privacy %>
   </p>
 
+
+  <div class="actions">
+    <%= link_to 'Adicionar topicó', case_module_topics_path(@case_module)%>
+  </div>
+
   <div class="actions">
     <%= link_to 'Editar', edit_case_module_path(@case_module) %> |
     <%= link_to 'Voltar', case_modules_path %>
