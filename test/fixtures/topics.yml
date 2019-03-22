@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  authors: MyString
+  about: MyText
+  case_module_id: 1
+
+two:
+  title: MyString
+  description: MyText
+  authors: MyString
+  about: MyText
+  case_module_id: 1

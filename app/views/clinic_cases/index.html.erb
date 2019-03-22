@@ -1,0 +1,40 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+  <p id="notice"><%= notice %></p>
+
+  <h1>Casos Clínicos</h1>
+
+  <%= form_tag(clinic_cases_path, method: :get) do %>
+      <%= text_field_tag :term, params[:term] %>
+      <%= submit_tag 'Buscar', name: nil %>
+  <% end %>
+
+  <%= link_to 'Novo Caso Clínico', new_clinic_case_path %>
+
+  <ol>
+    <% @clinic_cases.each do |clinic_case| %>
+      <li>
+        <% div_id = "#{clinic_case.id}" -%>
+        <div class='clinic_case_item', id="<%= div_id -%>">
+          <a href="/clinic_cases/<%= div_id -%>">
+            <div class='item_image'>
+              <%= image_tag(clinic_case.images[0], :class => "image")%><br>
+            </div>
+
+            <div class='separator_line'></div>
+            
+            <div class='item_description'>
+              <div class='item_description_title'>
+                <%= clinic_case.title %>
+              </div>
+              <pre> <%= clinic_case.description %> </pre>
+            </div>
+          </a>
+        </div>
+      </li>
+    <% end%>
+  </ol>
+
+  <br>
+
+</div>

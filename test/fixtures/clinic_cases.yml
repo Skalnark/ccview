@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  clinicInformation: MyText
+  description: MyText
+  caseEvolution: MyText
+  extraInformation: MyText
+  topic_id: 1
+
+two:
+  title: MyString
+  clinicInformation: MyText
+  description: MyText
+  caseEvolution: MyText
+  extraInformation: MyText
+  topic_id: 1

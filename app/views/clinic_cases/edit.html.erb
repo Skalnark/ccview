@@ -1,0 +1,11 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+	<h1>Editando o Caso Clinico</h1>
+
+	<%= render 'form', clinic_case: @clinic_case %>
+
+	<div class="actions">
+		<%= link_to 'Mostrar', @clinic_case %> | 
+		<%= link_to 'Apagar', @clinic_case, method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
+	</div>
+</div>

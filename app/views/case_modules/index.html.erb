@@ -1,0 +1,35 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+  <p id="notice"><%= notice %></p>
+
+  <h1>Módulos dos Casos</h1>
+
+  <%= link_to 'Novo Modulo', new_case_module_path %>
+
+  <ol>
+    <% @case_modules.each do |case_module| %>
+      <li>
+        <% div_id = "#{case_module.id}" -%>
+        <div class='clinic_case_item', id="<%= div_id -%>">
+          <a href="/case_modules/<%= div_id -%>">
+            <div class='item_image'>
+              <%= image_tag(case_module.image, :class => "image")%><br>
+            </div>
+
+            <div class='separator_line'></div>
+            
+            <div class='item_description'>
+              <div class='item_description_title'>
+                <%= case_module.title %>
+              </div>
+              <pre> <%= case_module.description %> </pre>
+            </div>
+          </a>
+        </div>
+      </li>
+    <% end%>
+  </ol>
+
+  <br>
+
+</div>
