@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_31_203720) do
+ActiveRecord::Schema.define(version: 2019_03_20_201245) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 2019_01_31_203720) do
     t.integer "topic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["topic_id"], name: "index_clinic_cases_on_topic_id"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -60,10 +59,9 @@ ActiveRecord::Schema.define(version: 2019_01_31_203720) do
     t.text "description"
     t.string "authors"
     t.text "about"
-    t.integer "caseModule_id"
+    t.integer "case_module_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["caseModule_id"], name: "index_topics_on_caseModule_id"
   end
 
   create_table "users", force: :cascade do |t|

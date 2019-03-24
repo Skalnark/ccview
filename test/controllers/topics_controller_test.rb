@@ -17,7 +17,7 @@ class TopicsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create topic" do
     assert_difference('Topic.count') do
-      post topics_url, params: { topic: { about: @topic.about, authors: @topic.authors, caseModule_id: @topic.caseModule_id, description: @topic.description, title: @topic.title } }
+      post topics_url, params: { topic: { about: @topic.about, authors: @topic.authors, case_module_id: @topic.case_module_id, description: @topic.description, title: @topic.title } }
     end
 
     assert_redirected_to topic_url(Topic.last)
@@ -34,7 +34,7 @@ class TopicsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update topic" do
-    patch topic_url(@topic), params: { topic: { about: @topic.about, authors: @topic.authors, caseModule_id: @topic.caseModule_id, description: @topic.description, title: @topic.title } }
+    patch topic_url(@topic), params: { topic: { about: @topic.about, authors: @topic.authors, case_module_id: @topic.case_module_id, description: @topic.description, title: @topic.title } }
     assert_redirected_to topic_url(@topic)
   end
 

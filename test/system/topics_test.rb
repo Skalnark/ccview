@@ -16,7 +16,7 @@ class TopicsTest < ApplicationSystemTestCase
 
     fill_in "About", with: @topic.about
     fill_in "Authors", with: @topic.authors
-    fill_in "Casemodule", with: @topic.caseModule_id
+    fill_in "Case module", with: @topic.case_module_id
     fill_in "Description", with: @topic.description
     fill_in "Title", with: @topic.title
     click_on "Create Topic"
@@ -31,7 +31,7 @@ class TopicsTest < ApplicationSystemTestCase
 
     fill_in "About", with: @topic.about
     fill_in "Authors", with: @topic.authors
-    fill_in "Casemodule", with: @topic.caseModule_id
+    fill_in "Case module", with: @topic.case_module_id
     fill_in "Description", with: @topic.description
     fill_in "Title", with: @topic.title
     click_on "Update Topic"

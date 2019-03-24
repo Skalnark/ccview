@@ -5,11 +5,11 @@ one:
   description: MyText
   authors: MyString
   about: MyText
-  caseModule: one
+  case_module_id: 1
 
 two:
   title: MyString
   description: MyText
   authors: MyString
   about: MyText
-  caseModule: two
+  case_module_id: 1

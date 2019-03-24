@@ -1,34 +1,37 @@
 class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
+  before_action :set_module!
 
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all
+    @topics = @module.topics.all.with_attached_image
   end
 
   # GET /topics/1
   # GET /topics/1.json
   def show
+    @topic = @module.topics.find(params[:id])
   end
 
   # GET /topics/new
   def new
-    @topic = Topic.new
+    @topic = @module.topics.new
   end
 
   # GET /topics/1/edit
   def edit
+    @topic = @module.topics.find(params[:id])
   end
 
   # POST /topics
   # POST /topics.json
   def create
-    @topic = Topic.new(topic_params)
+    @topic = @module.topics.new(topic_params)
 
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to @topic, notice: 'Topic was successfully created.' }
+        format.html { redirect_to [@module, @topic], notice: 'Topic was successfully created.' }
         format.json { render :show, status: :created, location: @topic }
       else
         format.html { render :new }
@@ -40,9 +43,11 @@ class TopicsController < ApplicationController
   # PATCH/PUT /topics/1
   # PATCH/PUT /topics/1.json
   def update
+    @topic = @module.topics.find(params[:id])
+
     respond_to do |format|
       if @topic.update(topic_params)
-        format.html { redirect_to @topic, notice: 'Topic was successfully updated.' }
+        format.html { redirect_to [@module, @topic], notice: 'Topic was successfully updated.' }
         format.json { render :show, status: :ok, location: @topic }
       else
         format.html { render :edit }
@@ -54,9 +59,11 @@ class TopicsController < ApplicationController
   # DELETE /topics/1
   # DELETE /topics/1.json
   def destroy
+    @topic = @module.topics.find(params[:id])
     @topic.destroy
+
     respond_to do |format|
-      format.html { redirect_to topics_url, notice: 'Topic was successfully destroyed.' }
+      format.html { redirect_to case_module_topics_path(@module), notice: 'Topic was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +74,12 @@ class TopicsController < ApplicationController
       @topic = Topic.find(params[:id])
     end
 
+    def set_module!
+      @module = CaseModule.find(params[:case_module_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params
-      params.require(:topic).permit(:title, :description, :authors, :about, :caseModule_id)
+      params.require(:topic).permit(:title, :description, :authors, :about, :image)
     end
 end

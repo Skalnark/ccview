@@ -19,6 +19,7 @@ class ClinicCasesTest < ApplicationSystemTestCase
     fill_in "Description", with: @clinic_case.description
     fill_in "Extrainformation", with: @clinic_case.extraInformation
     fill_in "Title", with: @clinic_case.title
+    fill_in "Topic", with: @clinic_case.topic_id
     click_on "Create Clinic case"
 
     assert_text "Clinic case was successfully created"
@@ -34,6 +35,7 @@ class ClinicCasesTest < ApplicationSystemTestCase
     fill_in "Description", with: @clinic_case.description
     fill_in "Extrainformation", with: @clinic_case.extraInformation
     fill_in "Title", with: @clinic_case.title
+    fill_in "Topic", with: @clinic_case.topic_id
     click_on "Update Clinic case"
 
     assert_text "Clinic case was successfully updated"

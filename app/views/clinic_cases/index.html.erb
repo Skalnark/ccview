@@ -4,21 +4,23 @@
 
   <h1>Casos Clínicos</h1>
 
-  <%= form_tag(clinic_cases_path, method: :get) do %>
+  <%= form_tag(topic_clinic_cases_path(@topic), method: :get) do %>
       <%= text_field_tag :term, params[:term] %>
       <%= submit_tag 'Buscar', name: nil %>
   <% end %>
 
-  <%= link_to 'Novo Caso Clínico', new_clinic_case_path %>
+  <%= link_to 'Novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
+  <%= link_to 'Tópicos', case_module_topics_path(@topic.case_module_id, @topic) %>
 
   <ol>
     <% @clinic_cases.each do |clinic_case| %>
       <li>
         <% div_id = "#{clinic_case.id}" -%>
+        <% div_topic_id = "#{@topic.id}" -%>
         <div class='clinic_case_item', id="<%= div_id -%>">
-          <a href="/clinic_cases/<%= div_id -%>">
+          <a href="/topics/<%= div_topic_id -%>/clinic_cases/<%= div_id -%>">
             <div class='item_image'>
-              <%= image_tag(clinic_case.images[0], :class => "image")%><br>
+              <%= image_tag(clinic_case.images[0], :class => "image") if clinic_case.images.attached? %><br>
             </div>
 
             <div class='separator_line'></div>

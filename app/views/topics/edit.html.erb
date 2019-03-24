@@ -2,5 +2,5 @@
 
 <%= render 'form', topic: @topic %>
 
-<%= link_to 'Show', @topic %> |
-<%= link_to 'Back', topics_path %>
+<%= link_to 'Show', case_module_topic_path(@module, @topic) %> |
+<%= link_to 'Back', case_module_topics_path(@module) %>

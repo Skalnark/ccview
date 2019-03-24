@@ -1,5 +1,7 @@
-<h1>New Case Module</h1>
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+	<h1>Novo Módulo</h1>
 
-<%= render 'form', case_module: @case_module %>
-
-<%= link_to 'Back', case_modules_path %>
+	<p> Página para criar módulos de casos </p>
+	<%= render 'form', case_module: @case_module %>
+</div>

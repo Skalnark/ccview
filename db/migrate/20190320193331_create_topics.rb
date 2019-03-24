@@ -5,7 +5,7 @@ class CreateTopics < ActiveRecord::Migration[5.2]
       t.text :description
       t.string :authors
       t.text :about
-      t.references :caseModule, foreign_key: true
+      t.integer :case_module_id
 
       t.timestamps
     end
