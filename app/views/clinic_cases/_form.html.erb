@@ -1,4 +1,4 @@
-<%= form_for(@clinic_case, html:{class:'form-style-5'}) do |form| %>
+<%= form_for([@topic, @clinic_case], html:{class:'form-style-5'}) do |form| %>
   <% if clinic_case.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(clinic_case.errors.count, "error") %> prohibited this clinic_case from being saved:</h2>
@@ -37,6 +37,6 @@
 
   <div class="actions">
     <%= form.submit "Criar Caso Clinico"%> | 
-    <%= link_to 'Voltar', clinic_cases_path %>
+    <%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
   </div>
 <% end %>

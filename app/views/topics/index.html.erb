@@ -15,16 +15,15 @@
   </thead>
 
   <tbody>
-    <% @Topic.each do |topic| %>
+    <% @topics.each do |topic| %>
       <tr>
         <td><%= topic.title %></td>
         <td><%= topic.description %></td>
         <td><%= topic.authors %></td>
         <td><%= topic.about %></td>
-        <td><%= topic.caseModule %></td>
-        <td><%= link_to 'Show', case_module_topic_path(@case_module, topic) %></td>
-        <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
-        <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', case_module_topic_path(@module, topic) %></td>
+        <td><%= link_to 'Edit', edit_case_module_topic_path(@module, topic) %></td>
+        <td><%= link_to 'Destroy', [@module, topic], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +31,5 @@
 
 <br>
 
-<%= link_to 'New Topic', new_case_module_topic_path %>
+<%= link_to 'New Topic', new_case_module_topic_path(@module) %> <br>
+<%= link_to 'Back', case_module_path(@module) %>

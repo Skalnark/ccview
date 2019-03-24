@@ -12,7 +12,7 @@
     <%= @case_module.description %>
   </p>
   <div class='item_image'>
-    <%= image_tag(@case_module.image, :class => "image")%><br>
+    <%= image_tag(@case_module.image, :class => "image") if @case_module.image.attached? %><br>
   </div>
   <p>
     <strong>Autor(es):</strong>

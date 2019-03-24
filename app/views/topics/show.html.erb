@@ -19,6 +19,8 @@
   <strong>About:</strong>
   <%= @topic.about %>
 </p>
+<%= link_to 'Adicionar caso clinico', topic_clinic_cases_path(@topic)%>
+<br>
 
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>
+<%= link_to 'Edit', edit_case_module_topic_path(@module, @topic) %> |
+<%= link_to 'Back', case_module_topics_path(@module) %>
