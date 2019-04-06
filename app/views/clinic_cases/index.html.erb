@@ -9,8 +9,9 @@
       <%= submit_tag 'Buscar', name: nil %>
   <% end %>
 
+  <%= link_to "Voltar para o Tópico '#{@topic.title}'", case_module_topics_path(@topic.case_module_id, @topic) %>
+  <br>
   <%= link_to 'Novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
-  <%= link_to 'Tópicos', case_module_topics_path(@topic.case_module_id, @topic) %>
 
   <ol>
     <% @clinic_cases.each do |clinic_case| %>

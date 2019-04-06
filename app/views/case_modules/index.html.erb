@@ -4,7 +4,12 @@
 
   <h1>Módulos dos Casos</h1>
 
-  <%= link_to 'Novo Modulo', new_case_module_path %>
+  <%= form_tag(case_modules_path, method: :get) do %>
+      <%= text_field_tag :term, params[:term] %>
+      <%= submit_tag 'Buscar', name: nil %>
+  <% end %>
+
+  <%= link_to 'Novo Módulo', new_case_module_path %>
 
   <ol>
     <% @case_modules.each do |case_module| %>

@@ -15,6 +15,10 @@
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
+  
+  <div class="field">
+    Imagem: <br> <%= form.file_field :image%><br><br>
+  </div>
 
   <div class="field">
     <%= form.label :description %>
@@ -32,6 +36,7 @@
   </div>
 
   <div class="actions">
-    <%= form.submit%>
+    <%= form.submit "Criar Tópico"%> | 
+    <%= link_to 'Voltar', case_module_topics_path(@module) %>
   </div>
 <% end %>

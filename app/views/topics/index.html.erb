@@ -1,35 +1,43 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+  <p id="notice"><%= notice %></p>
 
-<h1>Topics</h1>
+  <h1>Tópicos dos Casos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Authors</th>
-      <th>About</th>
-      <th>Casemodule</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <%= form_tag(case_module_topics_path(@module), method: :get) do %>
+      <%= text_field_tag :term, params[:term] %>
+      <%= submit_tag 'Buscar', name: nil %>
+  <% end %>
 
-  <tbody>
+  <%= link_to "Voltar para o Módulo '#{@module.title}'", case_module_path(@module) %>
+  <br>
+  <%= link_to 'Criar Tópico', new_case_module_topic_path(@module) %>
+
+  <ol>
     <% @topics.each do |topic| %>
-      <tr>
-        <td><%= topic.title %></td>
-        <td><%= topic.description %></td>
-        <td><%= topic.authors %></td>
-        <td><%= topic.about %></td>
-        <td><%= link_to 'Show', case_module_topic_path(@module, topic) %></td>
-        <td><%= link_to 'Edit', edit_case_module_topic_path(@module, topic) %></td>
-        <td><%= link_to 'Destroy', [@module, topic], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <li>
+        <% div_id = "#{topic.id}" -%>
+        <% div_module_id = "#{@module.id}" -%>
+        <div class='clinic_case_item', id="<%= div_id -%>">
+          <a href="/case_modules/<%= div_module_id -%>/topics/<%= div_id -%>">
+            <div class='item_image'>
+              <%= image_tag(topic.image, :class => "image") if topic.image.attached? %><br>
+            </div>
 
-<br>
+            <div class='separator_line'></div>
+            
+            <div class='item_description'>
+              <div class='item_description_title'>
+                <%= topic.title %>
+              </div>
+              <pre> <%= topic.description %> </pre>
+            </div>
+          </a>
+        </div>
+      </li>
+    <% end%>
+  </ol>
 
-<%= link_to 'New Topic', new_case_module_topic_path(@module) %> <br>
-<%= link_to 'Back', case_module_path(@module) %>
+  <br>
+
+</div>

@@ -1,6 +1,11 @@
-<h1>Editing Topic</h1>
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+	<h1>Editando o Tópico</h1>
 
-<%= render 'form', topic: @topic %>
+	<%= render 'form', topic: @topic %>
 
-<%= link_to 'Show', case_module_topic_path(@module, @topic) %> |
-<%= link_to 'Back', case_module_topics_path(@module) %>
+	<div class="actions">
+		<%= link_to 'Mostrar', case_module_topic_path(@module, @topic) %> | 
+		<%= link_to 'Apagar', [@module, @topic], method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
+	</div>
+</div>

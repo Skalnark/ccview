@@ -6,6 +6,8 @@ class TopicsController < ApplicationController
   # GET /topics.json
   def index
     @topics = @module.topics.all.with_attached_image
+
+    @topics = @module.topics.search(params[:term])
   end
 
   # GET /topics/1
@@ -80,6 +82,6 @@ class TopicsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params
-      params.require(:topic).permit(:title, :description, :authors, :about, :image)
+      params.require(:topic).permit(:title, :description, :authors, :about, :term, :image)
     end
 end

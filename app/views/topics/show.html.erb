@@ -1,26 +1,37 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @topic.title %>
-</p>
+  <p>
+    <strong>Título:</strong>
+    <%= @topic.title %>
+  </p>
+  
+  <p>
+    <strong>Descrição do tópico:</strong>
+    <%= @topic.description %>
+  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @topic.description %>
-</p>
+  <div class='item_image'>
+    <%= image_tag(@topic.image, :class => "image") if @topic.image.attached? %><br>
+  </div>
 
-<p>
-  <strong>Authors:</strong>
-  <%= @topic.authors %>
-</p>
+  <p>
+    <strong>Autores:</strong>
+    <%= @topic.authors %>
+  </p>
 
-<p>
-  <strong>About:</strong>
-  <%= @topic.about %>
-</p>
-<%= link_to 'Adicionar caso clinico', topic_clinic_cases_path(@topic)%>
-<br>
+  <p>
+    <strong>Sobre o Tópico:</strong>
+    <%= @topic.about %>
+  </p>
 
-<%= link_to 'Edit', edit_case_module_topic_path(@module, @topic) %> |
-<%= link_to 'Back', case_module_topics_path(@module) %>
+  <div class="actions">
+    <%= link_to 'Visualizar casos clínicos', topic_clinic_cases_path(@topic)%>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Editar', edit_case_module_topic_path(@module, @topic) %> |
+    <%= link_to 'Voltar', case_module_topics_path(@module) %>
+  </div>
+</div>
