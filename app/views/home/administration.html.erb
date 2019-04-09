@@ -1,0 +1,21 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+
+<% if current_user.admin? %>
+    <% User.all.each do |user| %>
+        <table>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Permissão</th>
+              <th>Editar</th>
+            </tr>
+            <tr>
+              <td><%=user.email=%></td>
+              <td><%=user.role=%></td>
+              <td>
+                <li><%= button_to 'Tornar Professor', action: user.promover_professor =%></li>
+              </td>
+            </tr>
+    <%end%>
+<%end%>

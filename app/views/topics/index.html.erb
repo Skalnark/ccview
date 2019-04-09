@@ -11,7 +11,10 @@
 
   <%= link_to "Voltar para o Módulo '#{@module.title}'", case_module_path(@module) %>
   <br>
+
+  <% if !current_user.student? %>
   <%= link_to 'Criar Tópico', new_case_module_topic_path(@module) %>
+  <%end%>
 
   <ol>
     <% @topics.each do |topic| %>

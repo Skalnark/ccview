@@ -2,10 +2,14 @@
 <div class='form-style-5'>
 	<h1>Editando o Módulo</h1>
 
-	<%= render 'form', case_module: @case_module %>
+	<%if !current_user.student? %>
+	  <%= render 'form', case_module: @case_module %>
 
 	<div class="actions">
 		<%= link_to 'Mostrar', @case_module %> | 
 		<%= link_to 'Apagar', @case_module, method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
 	</div>
+	<%else%>
+		Você não possúi autorização para editar esse módulo.
+	<%end%>
 </div>

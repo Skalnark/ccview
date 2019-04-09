@@ -5,7 +5,10 @@
 		<%= link_to "Início", root_path %>
 
 		<% if user_signed_in? %>
-			<%= link_to "Sair", root_path, :method => :delete %>
+			<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
+			<% if current_user.admin?%>
+				<%= link_to "Gerenciar Contas", home_administration_path %>
+			<%end%>
 			<%= current_user.email %>
 		<%else%>
 		<%= link_to "Iniciar Sessão", new_user_session_path %>

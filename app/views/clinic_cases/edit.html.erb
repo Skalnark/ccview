@@ -2,10 +2,14 @@
 <div class='form-style-5'>
 	<h1>Editando o Caso Clinico</h1>
 
+	<%if !current_user.student? %>
 	<%= render 'form', clinic_case: @clinic_case %>
 
 	<div class="actions">
 		<%= link_to 'Mostrar', topic_clinic_case_path(@topic, @clinic_case) %> | 
 		<%= link_to 'Apagar', [@topic, @clinic_case], method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
 	</div>
+	<%else%>
+		Você não possui autorização para editar esse caso clínico.
+	<%end%>
 </div>

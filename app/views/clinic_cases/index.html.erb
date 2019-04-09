@@ -11,8 +11,10 @@
 
   <%= link_to "Voltar para o Tópico '#{@topic.title}'", case_module_topics_path(@topic.case_module_id, @topic) %>
   <br>
-  <%= link_to 'Novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
-
+  
+  <%if !current_user.student? %>
+    <%= link_to 'Novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
+  <%end%>
   <ol>
     <% @clinic_cases.each do |clinic_case| %>
       <li>

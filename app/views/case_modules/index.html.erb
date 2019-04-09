@@ -9,8 +9,11 @@
       <%= submit_tag 'Buscar', name: nil %>
   <% end %>
 
-  <%= link_to 'Novo Módulo', new_case_module_path %>
-
+  
+	<%if !current_user.student? %>
+    <%= link_to 'Novo Módulo', new_case_module_path %>
+  <%end%>
+  
   <ol>
     <% @case_modules.each do |case_module| %>
       <li>

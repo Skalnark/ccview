@@ -31,7 +31,10 @@
   </div>
 
   <div class="actions">
-    <%= link_to 'Editar', edit_case_module_topic_path(@module, @topic) %> |
+    <% if !current_user.student? %>
+      <%= link_to 'Editar', edit_case_module_topic_path(@module, @topic) %> |
+    <%end%>
+
     <%= link_to 'Voltar', case_module_topics_path(@module) %>
   </div>
 </div>

@@ -1,11 +1,18 @@
 <%= render partial: "layouts/header" %>
 <div class='form-style-5'>
 	<h1>Editando o Tópico</h1>
+	
+	<% if !current_user.student? %>
+		<%= render 'form', topic: @topic %>
 
-	<%= render 'form', topic: @topic %>
+		<div class="actions">
+			<%= link_to 'Mostrar', case_module_topic_path(@module, @topic) %> | 
+			<%= link_to 'Apagar', [@module, @topic], method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
+		</div>
 
-	<div class="actions">
-		<%= link_to 'Mostrar', case_module_topic_path(@module, @topic) %> | 
-		<%= link_to 'Apagar', [@module, @topic], method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
-	</div>
+	<% else %>
+		<div class="actions":
+			<%= link_to 'home', root_path %=>
+		</div>
+	<%end%>
 </div>

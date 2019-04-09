@@ -10,33 +10,37 @@
       </ul>
     </div>
   <% end %>
+  <%if !current_user.student? %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </div>
+    
+    <div class="field">
+      Imagem: <br> <%= form.file_field :image%><br><br>
+    </div>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-  
-  <div class="field">
-    Imagem: <br> <%= form.file_field :image%><br><br>
-  </div>
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+    <div class="field">
+      <%= form.label :authors %>
+      <%= form.text_field :authors %>
+    </div>
 
-  <div class="field">
-    <%= form.label :authors %>
-    <%= form.text_field :authors %>
-  </div>
-
-  <div class="field">
-    <%= form.label :about %>
-    <%= form.text_area :about %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Criar Tópico"%> | 
-    <%= link_to 'Voltar', case_module_topics_path(@module) %>
-  </div>
+    <div class="field">
+      <%= form.label :about %>
+      <%= form.text_area :about %>
+    </div>
+    <div class="actions">
+      <%= form.submit "Criar Tópico"%> | 
+      <%= link_to 'Voltar', case_module_topics_path(@module) %>
+      </div>
+<%else%>
+    <div class="actions">
+        Você não tem autorização para visualizar essa página.
+      <%= link_to 'Voltar', case_module_topics_path(@module) %>
+    </div>
 <% end %>

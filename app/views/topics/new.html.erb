@@ -3,5 +3,9 @@
 	<h1>Novo Tópico</h1>
 
 	<p> Página para criar os tópicos </p>
-	<%= render 'form', topic: @topic %>
+	<% if !current_user.student? %>
+		<%= render 'form', topic: @topic %>
+	<%else%>
+		Você não tem autorização para criar tópicos nesse módulo.
+	<%end%>
 </div>

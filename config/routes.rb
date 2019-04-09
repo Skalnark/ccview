@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  get 'home/administration'
   	devise_for :users
 
 	resources :case_modules do

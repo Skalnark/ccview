@@ -3,5 +3,10 @@
 	<h1>Novo Módulo</h1>
 
 	<p> Página para criar módulos de casos </p>
-	<%= render 'form', case_module: @case_module %>
+	
+	<%if !current_user.student? %>
+	  <%= render 'form', case_module: @case_module %>
+	<%else%>
+		Você não possúi autorização para adicionar um caso clínico a esse tópico.
+	<%end%>
 </div>
