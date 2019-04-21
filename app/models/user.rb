@@ -8,10 +8,6 @@ class User < ApplicationRecord
     self.role ||= :student
   end
 
-  def promover_professor
-    self.role ||= :professor
-  end
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end

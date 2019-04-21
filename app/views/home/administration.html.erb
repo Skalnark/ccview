@@ -2,20 +2,32 @@
 <div class='form-style-5'>
 
 <% if current_user.admin? %>
-    <% User.all.each do |user| %>
-        <table>
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Permissão</th>
-              <th>Editar</th>
-            </tr>
-            <tr>
-              <td><%=user.email=%></td>
-              <td><%=user.role=%></td>
-              <td>
-                <li><%= button_to 'Tornar Professor', action: user.promover_professor =%></li>
-              </td>
-            </tr>
-    <%end%>
+  <% User.all.each do |user| %>
+      <table>
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Permissão</th>
+            <th>Editar</th>
+          </tr>
+          <tr>
+            <td><%=user.email=%></td>
+            <td><%=user.role=%></td>
+            <td>
+              <% if user.role == "student" %>
+                <li>
+                  <%= form_tag home_action_path, method: :post do %>
+                    <%= submit_tag 'tornar_professor #{user.email}' %>
+                  <%end%>
+                </li>
+              <% elsif user.role == "professor" %>
+                <li>
+                    <%= form_tag home_action_path, method: :post do %>
+                      <%= submit_tag 'tornar_estudante #{user.email}' %>
+                    <%end%>
+                </li>
+              <% end %>
+            </td>
+          </tr>
+  <%end%>
 <%end%>
