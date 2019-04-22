@@ -15,5 +15,7 @@ Rails.application.routes.draw do
 
 	root 'home#Index'
 	get 'home/About'
+	post 'home/tornar_professor'
+	post 'home/tornar_estudante'
   	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

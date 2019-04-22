@@ -16,14 +16,14 @@
             <td>
               <% if user.role == "student" %>
                 <li>
-                  <%= form_tag home_action_path, method: :post do %>
-                    <%= submit_tag 'tornar_professor #{user.email}' %>
+                  <%= form_tag(home_tornar_professor_path(:email => user.email), method: :post) do %>
+                    <%= submit_tag "tornar_professor '#{user.email}'" %>
                   <%end%>
                 </li>
               <% elsif user.role == "professor" %>
                 <li>
-                    <%= form_tag home_action_path, method: :post do %>
-                      <%= submit_tag 'tornar_estudante #{user.email}' %>
+                    <%= form_tag(home_tornar_estudante_path(:email => user.email), method: :post) do %>
+                      <%= submit_tag "tornar_estudante '#{user.email}'" %>
                     <%end%>
                 </li>
               <% end %>
