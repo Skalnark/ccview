@@ -27,14 +27,12 @@
   </p>
 
   <div class="actions">
-    <%= link_to 'Visualizar casos clínicos', topic_clinic_cases_path(@topic)%>
-  </div>
-
-  <div class="actions">
     <% if !current_user.student? %>
       <%= link_to 'Editar', edit_case_module_topic_path(@module, @topic) %> |
+      <%= link_to 'Criar novo caso clínico', new_topic_clinic_case_path(@topic) %> |
     <%end%>
 
+    <%= link_to 'Visualizar casos clínicos', topic_clinic_cases_path(@topic)%> |
     <%= link_to 'Voltar', case_module_topics_path(@module) %>
   </div>
 </div>

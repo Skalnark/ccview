@@ -31,19 +31,17 @@
     <%= @case_module.privacy %>
   </p>
 
-
-  <div class="actions">
-    
-  </div>
-
   <%if !current_user.student? %>
     <div class="actions">
       <%= link_to 'Editar Módulo', edit_case_module_path(@case_module) %> |
-      <%= link_to 'Visualizar tópicos', case_module_topics_path(@case_module)%> |
+      <%= link_to 'Visualizar assuntos', case_module_topics_path(@case_module)%> |
+      <%= link_to 'Criar novo assunto', new_case_module_topic_path(@case_module) %> |
       <%= link_to 'Voltar', case_modules_path %>
     </div>
   <%else%>
-    <%= link_to 'Visualizar tópicos', case_module_topics_path(@case_module)%> |
-    <%= link_to 'Voltar', case_modules_path %>
+    <div class="actions">
+      <%= link_to 'Visualizar assuntos', case_module_topics_path(@case_module)%> |
+      <%= link_to 'Voltar', case_modules_path %>
+    </div>
   <%end%>
 </div>

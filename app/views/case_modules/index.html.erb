@@ -9,35 +9,34 @@
       <%= submit_tag 'Buscar', name: nil %>
   <% end %>
 
-  
 	<%if !current_user.student? %>
     <%= link_to 'Novo Módulo', new_case_module_path %>
   <%end%>
-  
-  <ol>
-    <% @case_modules.each do |case_module| %>
-      <li>
-        <% div_id = "#{case_module.id}" -%>
-        <div class='clinic_case_item', id="<%= div_id -%>">
-          <a href="/case_modules/<%= div_id -%>">
-            <div class='item_image'>
-              <%= image_tag(case_module.image, :class => "image") if case_module.image.attached? %><br>
-            </div>
 
-            <div class='separator_line'></div>
-            
-            <div class='item_description'>
-              <div class='item_description_title'>
-                <%= case_module.title %>
+  <div class="model_items">
+    <ol>
+      <% @case_modules.each do |case_module| %>
+        <li>
+          <% div_id = "#{case_module.id}" -%>
+          <div class='clinic_case_item', id="<%= div_id -%>">
+            <a href="/case_modules/<%= div_id -%>">
+              <div class='item_image'>
+                <%= image_tag(case_module.image, :class => "image") if case_module.image.attached? %><br>
               </div>
-              <pre> <%= case_module.description %> </pre>
-            </div>
-          </a>
-        </div>
-      </li>
-    <% end%>
-  </ol>
 
+              <div class='separator_line'></div>
+              
+              <div class='item_description'>
+                <div class='item_description_title'>
+                  <%= case_module.title %>
+                </div>
+                <pre> <%= case_module.description %> </pre>
+              </div>
+            </a>
+          </div>
+        </li>
+      <% end%>
+    </ol>    
+  </div>
   <br>
-
 </div>

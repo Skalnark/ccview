@@ -67,7 +67,7 @@ class ClinicCasesController < ApplicationController
     @clinic_case.destroy
 
     respond_to do |format|
-      format.html { redirect_to topic_clinic_cases_path(@topic), notice: 'Caso clínico foi destruído com sucesso.' }
+      format.html { redirect_to topic_clinic_cases_path(@topic), notice: 'Caso clínico foi excluído com sucesso.' }
       format.json { head :no_content }
     end
   end

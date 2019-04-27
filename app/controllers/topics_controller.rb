@@ -33,7 +33,7 @@ class TopicsController < ApplicationController
 
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to [@module, @topic], notice: 'Topic was successfully created.' }
+        format.html { redirect_to [@module, @topic], notice: 'Assunto foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @topic }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class TopicsController < ApplicationController
 
     respond_to do |format|
       if @topic.update(topic_params)
-        format.html { redirect_to [@module, @topic], notice: 'Topic was successfully updated.' }
+        format.html { redirect_to [@module, @topic], notice: 'Assunto foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @topic }
       else
         format.html { render :edit }
@@ -65,7 +65,7 @@ class TopicsController < ApplicationController
     @topic.destroy
 
     respond_to do |format|
-      format.html { redirect_to case_module_topics_path(@module), notice: 'Topic was successfully destroyed.' }
+      format.html { redirect_to case_module_topics_path(@module), notice: 'Assunto foi excluído com sucesso.' }
       format.json { head :no_content }
     end
   end

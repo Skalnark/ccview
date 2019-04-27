@@ -8,7 +8,7 @@
   </p>
 
   <p>
-    <strong>Informações Clinicas:</strong>
+    <strong>Informações Clínicas:</strong>
     <%= @clinic_case.clinicInformation %>
   </p>
   <table>
@@ -33,19 +33,19 @@
   </p>
 
   <p>
-    <strong>Informações extras:</strong>
+    <strong>Aprendendo um pouco mais:</strong>
     <%= @clinic_case.extraInformation %>
   </p>
   
-  <%if !current_user.student? %>
-    <div class="actions">
-      <%= link_to 'Editar', edit_topic_clinic_case_path(@topic, @clinic_case) %> |
-      <%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
-    </div>
-  <%else%>
-    <div class="actions">
-      <%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
-    </div>
-  <%end%>
+  <div class="actions">
+    <%if !current_user.student? %>
+      <div class="actions">
+        <%= link_to 'Editar', edit_topic_clinic_case_path(@topic, @clinic_case) %> |
+      </div>
+    <%end%>
 
+    <div class="actions">
+      <%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
+    </div>
+  </div>
 </div>

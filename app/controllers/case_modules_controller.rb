@@ -30,7 +30,7 @@ class CaseModulesController < ApplicationController
     @case_module = CaseModule.new(case_module_params)
     respond_to do |format|
       if @case_module.save
-        format.html { redirect_to @case_module, notice: 'Case module was successfully created.' }
+        format.html { redirect_to @case_module, notice: 'Módulo foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @case_module }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class CaseModulesController < ApplicationController
   def update
     respond_to do |format|
       if @case_module.update(case_module_params)
-        format.html { redirect_to @case_module, notice: 'Case module was successfully updated.' }
+        format.html { redirect_to @case_module, notice: 'Módulo foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @case_module }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class CaseModulesController < ApplicationController
   def destroy
     @case_module.destroy
     respond_to do |format|
-      format.html { redirect_to case_modules_path, notice: 'Case module was successfully destroyed.' }
+      format.html { redirect_to case_modules_path, notice: 'Módulo foi removido com sucesso.' }
       format.json { head :no_content }
     end
   end

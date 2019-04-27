@@ -20,7 +20,7 @@ class HomeController < ApplicationController
   end
 
   def tornar_estudante
-    @user = User.find(params[:email])
+    @user = User.find_by_email(params[:email])
 
     respond_to do |format|
       if @user.update_attribute(:role, "student")

@@ -16,11 +16,11 @@
   </div>
 
   <div class="field">
-    Informações Clinicas: <br> <%= form.text_area :clinicInformation %>
+    Informações Clínicas: <br> <%= form.text_area :clinicInformation %>
   </div>
 
    <div class="field">
-    Imagem: <br> <%= form.file_field :images, multiple: true %><br><br>
+    Imagens: <br> <%= form.file_field :images, multiple: true %><br><br>
   </div>
 
   <div class="field">
@@ -32,11 +32,11 @@
   </div>
 
   <div class="field">
-    Informações extras: <br> <%= form.text_area :extraInformation %>
+    Aprendendo um pouco mais: <br> <%= form.text_area :extraInformation %>
   </div>
 
   <div class="actions">
-    <%= form.submit "Criar Caso Clinico"%> | 
+    <%= form.submit "Criar caso clínico"%> | 
     <%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
   </div>
 <% end %>

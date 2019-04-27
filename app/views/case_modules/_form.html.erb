@@ -1,7 +1,7 @@
 <%= form_for(@case_module, html:{class:'form-style-5'}) do |form| %>
   <% if case_module.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(case_module.errors.count, "error") %> prohibited this case_module from being saved:</h2>
+      <h2><%= pluralize(case_module.errors.count, "Error") %> atrapalharam esse Módulo de ser salvo:</h2>
 
       <ul>
       <% case_module.errors.full_messages.each do |message| %>
@@ -9,6 +9,7 @@
       <% end %>
       </ul>
     </div>
+    <br>
   <% end %>
 
   <div class="field">
@@ -16,7 +17,7 @@
   </div>
 
   <div class="field">
-    Imagem: <br> <%= form.file_field :image%><br><br>
+    Imagem: <br> <%= form.file_field :image, accept: 'image/*'%><br><br>
   </div>
 
   <div class="field">
