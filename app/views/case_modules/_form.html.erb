@@ -1,7 +1,7 @@
 <%= form_for(@case_module, html:{class:'form-style-5'}) do |form| %>
   <% if case_module.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(case_module.errors.count, "Error") %> atrapalharam esse Módulo de ser salvo:</h2>
+      <h2><%= pluralize(case_module.errors.count, "error") %> proibiram esse Módulo de ser salvo:</h2>
 
       <ul>
       <% case_module.errors.full_messages.each do |message| %>
@@ -13,11 +13,11 @@
   <% end %>
 
   <div class="field">
-    Título: <%= form.text_field :title %>
+    Título: <br> <%= form.text_field :title %>
   </div>
 
   <div class="field">
-    Imagem: <br> <%= form.file_field :image, accept: 'image/*'%><br><br>
+    Imagem: <br> <%= form.file_field :image%><br><br>
   </div>
 
   <div class="field">
@@ -37,7 +37,10 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "Criar Módulo"%> | 
-    <%= link_to 'Voltar', case_modules_path %>
+    <% if current_page?(:controller => 'case_modules', :action => 'new') %>
+      <%= form.submit "Criar Módulo"%>
+    <%else current_page?(:controller => 'case_modules', :action => 'edit')%>
+      <%= form.submit "Atualizar Módulo"%>
+    <%end%>
   </div>
 <% end %>

@@ -8,9 +8,9 @@
   </p>
   
   <p>
-    <strong>Descrição do tópico:</strong>
-    <%= @topic.description %>
+    <strong>Descrição do Assunto:</strong>
   </p>
+  <pre><%= @topic.description %></pre>
 
   <div class='item_image'>
     <%= image_tag(@topic.image, :class => "image") if @topic.image.attached? %><br>
@@ -22,17 +22,17 @@
   </p>
 
   <p>
-    <strong>Sobre o Tópico:</strong>
+    <strong>Sobre o Assunto:</strong>
     <%= @topic.about %>
   </p>
 
   <div class="actions">
     <% if !current_user.student? %>
-      <%= link_to 'Editar', edit_case_module_topic_path(@module, @topic) %> |
-      <%= link_to 'Criar novo caso clínico', new_topic_clinic_case_path(@topic) %> |
+      <%= link_to 'Editar', edit_case_module_topic_path(@module, @topic) %>
+      <%= link_to 'Criar novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
     <%end%>
 
-    <%= link_to 'Visualizar casos clínicos', topic_clinic_cases_path(@topic)%> |
+    <%= link_to 'Visualizar casos clínicos', topic_clinic_cases_path(@topic)%>
     <%= link_to 'Voltar', case_module_topics_path(@module) %>
   </div>
 </div>

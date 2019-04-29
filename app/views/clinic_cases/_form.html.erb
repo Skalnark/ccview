@@ -1,7 +1,7 @@
 <%= form_for([@topic, @clinic_case], html:{class:'form-style-5'}) do |form| %>
   <% if clinic_case.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(clinic_case.errors.count, "error") %> prohibited this clinic_case from being saved:</h2>
+      <h2><%= pluralize(clinic_case.errors.count, "error") %> proibiram esse Caso Clínico de ser salvo:</h2>
 
       <ul>
       <% clinic_case.errors.full_messages.each do |message| %>
@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    Título: <%= form.text_field :title %>
+    Título: <br> <%= form.text_field :title %>
   </div>
 
   <div class="field">
@@ -36,7 +36,10 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "Criar caso clínico"%> | 
-    <%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
+    <% if current_page?(:controller => 'clinic_cases', :action => 'new') %>
+      <%= form.submit "Criar Caso Clínico"%>
+    <%else current_page?(:controller => 'clinic_cases', :action => 'edit')%>
+      <%= form.submit "Atualizar Caso Clínico"%>
+    <%end%>
   </div>
 <% end %>

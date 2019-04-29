@@ -2,7 +2,7 @@
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
 
-  <h1>Tópicos dos Casos</h1>
+  <h1>Assuntos</h1>
 
   <%= form_tag(case_module_topics_path(@module), method: :get) do %>
       <%= text_field_tag :term, params[:term] %>
@@ -13,7 +13,7 @@
   <br>
 
   <% if !current_user.student? %>
-  <%= link_to 'Criar Tópico', new_case_module_topic_path(@module) %>
+  <%= link_to 'Criar Assunto', new_case_module_topic_path(@module) %>
   <%end%>
 
   <div class="model_items">

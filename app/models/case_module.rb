@@ -1,19 +1,30 @@
 class CaseModule < ApplicationRecord
 	has_many :topics, :dependent => :destroy
 	has_one_attached :image
-	validates :title, presence: true
-	validates :description, presence: true
-	validates :author, presence: true
-	validate :is_an_image_type, on: [:create,:update]
-
-
+	validate :is_fields_nil_module, on: [:create, :update]
+	validate :is_an_image_type_module, on: [:create, :update]
+	
 	private 
 
-	def is_an_image_type
-		if image.attached? && !image.content_type.in?(%w(image/*))
-			errors.add(:image, 'Arquivo selecionado não é uma imagem.')
-		else image.attached? == false
-			errors.add(:image, 'Nenhuma imagem selecionada')
+	def is_an_image_type_module
+		if image.attached? == false
+			errors.add(:base, 'Nenhuma imagem foi selecionada.')
+		end
+
+		if image.attached? && !image.content_type.in?(%('image/jpeg image/png image/jpg'))
+			errors.add(:base, "Arquivo '#{image.filename}' não é uma imagem.")
+		end
+	end
+
+	def is_fields_nil_module
+		if !title.present?
+			errors.add(:base, "Campo do título está vazio.")
+		end
+		if !description.present?
+			errors.add(:base, "Campo da descrição está vazio.")
+		end
+		if !author.present?
+			errors.add(:base, "Campo dos autores está vazio.")
 		end
 	end
 

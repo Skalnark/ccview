@@ -6,10 +6,16 @@
 	  	<%= render 'form', case_module: @case_module %>
 
 		<div class="actions">
-			<%= link_to 'Mostrar', @case_module %> | 
-			<%= link_to 'Apagar', @case_module, method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
+			<%= link_to 'Voltar', @case_module %>
+			<%= link_to 'Excluir Módulo', @case_module, method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
 		</div>
 	<%else%>
-		Você não possui autorização para editar esse módulo.
+		<div class="actions">
+			Você não possui autorização para editar esse módulo.
+			<br>
+			<br>
+			<%= link_to 'Voltar', case_module_path %>
+		</div>
+		
 	<%end%>
 </div>

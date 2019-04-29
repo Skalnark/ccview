@@ -2,10 +2,18 @@
 <div class='form-style-5'>
 	<h1>Novo caso clinico</h1>
 
+	<p> Página para criar os casos clinicos </p>
 	<%if !current_user.student? %>
-		<p> Página para criar os casos clinicos </p>
 		<%= render 'form', clinic_case: @clinic_case %>
+		<div class="actions">
+	  		<%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
+	  	</div>
 	<%else%>
-		Você não tem autorização para editar este caso clínico.
+		<div class="actions">
+			Você não possui autorização para adicionar um novo assunto.
+			<br>
+			<br>
+			<%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
+		</div>
 	<%end%>
 </div>

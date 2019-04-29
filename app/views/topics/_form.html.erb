@@ -1,7 +1,7 @@
 <%= form_for([@module, @topic], html:{class:'form-style-5'}) do |form| %>
   <% if topic.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+      <h2><%= pluralize(topic.errors.count, "error") %> proibiram esse Assunto de ser salvo:</h2>
 
       <ul>
       <% topic.errors.full_messages.each do |message| %>
@@ -10,37 +10,30 @@
       </ul>
     </div>
   <% end %>
-  <%if !current_user.student? %>
-    <div class="field">
-      <%= form.label :title %>
-      <%= form.text_field :title %>
-    </div>
-    
-    <div class="field">
-      Imagem: <br> <%= form.file_field :image%><br><br>
-    </div>
+  <div class="field">
+    Título: <br> <%= form.text_field :title %>
+  </div>
+  
+  <div class="field">
+    Imagem: <br> <%= form.file_field :image%><br><br>
+  </div>
 
-    <div class="field">
-      <%= form.label :description %>
-      <%= form.text_area :description %>
-    </div>
+  <div class="field">
+    Descrição do Assunto: <br> <%= form.text_area :description %>
+  </div>
 
-    <div class="field">
-      <%= form.label :authors %>
-      <%= form.text_field :authors %>
-    </div>
+  <div class="field">
+    Autores: <br> <%= form.text_field :authors %>
+  </div>
 
-    <div class="field">
-      <%= form.label :about %>
-      <%= form.text_area :about %>
-    </div>
-    <div class="actions">
-      <%= form.submit "Criar Tópico"%> | 
-      <%= link_to 'Voltar', case_module_topics_path(@module) %>
-      </div>
-<%else%>
-    <div class="actions">
-        Você não tem autorização para visualizar essa página.
-      <%= link_to 'Voltar', case_module_topics_path(@module) %>
-    </div>
+  <div class="field">
+    Sobre o Assunto: <br> <%= form.text_area :about %>
+  </div>
+  <div class="actions">
+    <% if current_page?(:controller => 'topics', :action => 'new') %>
+      <%= form.submit "Criar Assunto"%>
+    <%else current_page?(:controller => 'topics', :action => 'edit')%>
+      <%= form.submit "Atualizar Assunto"%>
+    <%end%>
+  </div>
 <% end %>
