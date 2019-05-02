@@ -25,7 +25,9 @@
           <div class='clinic_case_item', id="<%= div_id -%>">
             <a href="/case_modules/<%= div_module_id -%>/topics/<%= div_id -%>">
               <div class='item_image'>
-                <%= image_tag(topic.image, :class => "image") if topic.image.attached? %><br>
+                <div class="item_image_inner">
+                  <%= image_tag(topic.thumbnail) if topic.image.attached? %>  
+                </div>
               </div>
 
               <div class='separator_line'></div>

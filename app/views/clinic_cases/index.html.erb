@@ -24,8 +24,11 @@
           <% div_topic_id = "#{@topic.id}" -%>
           <div class='clinic_case_item', id="<%= div_id -%>">
             <a href="/topics/<%= div_topic_id -%>/clinic_cases/<%= div_id -%>">
+
               <div class='item_image'>
-                <%= image_tag(clinic_case.images[0], :class => "image") if clinic_case.images.attached? %><br>
+                <div class="item_image_inner">
+                  <%= image_tag(clinic_case.thumbnail(0)) if clinic_case.images.attached? %>
+                </div>
               </div>
 
               <div class='separator_line'></div>

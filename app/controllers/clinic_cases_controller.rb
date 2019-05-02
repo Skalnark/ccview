@@ -64,11 +64,12 @@ class ClinicCasesController < ApplicationController
   # DELETE /clinic_cases/1.json
   def destroy
     @clinic_case =  @topic.clinic_cases.find(params[:id])
-    @clinic_case.destroy
-
+  
     respond_to do |format|
-      format.html { redirect_to topic_clinic_cases_path(@topic), notice: 'Caso clínico foi excluído com sucesso.' }
-      format.json { head :no_content }
+      if @clinic_case.destroy
+        format.html { redirect_to topic_clinic_cases_path(@topic), notice: 'Caso clínico foi excluído com sucesso.' }
+        format.json { head :no_content }
+      end
     end
   end
 

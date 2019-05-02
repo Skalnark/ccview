@@ -4,6 +4,10 @@ class CaseModule < ApplicationRecord
 	validate :is_fields_nil_module, on: [:create, :update]
 	validate :is_an_image_type_module, on: [:create, :update]
 	
+	def thumbnail
+		return self.image.variant(resize: '282x282', auto_orient: true).processed
+	end
+
 	private 
 
 	def is_an_image_type_module

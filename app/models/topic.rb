@@ -4,6 +4,10 @@ class Topic < ApplicationRecord
 	has_one_attached :image
 	validate :is_fields_nil_topic, on: [:create, :update]
 	validate :is_an_image_type_topic, on: [:create, :update]
+
+	def thumbnail
+		return self.image.variant(resize: '282x282', auto_orient: true).processed
+	end
 	
 	private 
 

@@ -62,11 +62,12 @@ class TopicsController < ApplicationController
   # DELETE /topics/1.json
   def destroy
     @topic = @module.topics.find(params[:id])
-    @topic.destroy
-
+    
     respond_to do |format|
-      format.html { redirect_to case_module_topics_path(@module), notice: 'Assunto foi excluído com sucesso.' }
-      format.json { head :no_content }
+      if @topic.destroy
+        format.html { redirect_to case_module_topics_path(@module), notice: 'Assunto foi excluído com sucesso.' }
+        format.json { head :no_content }
+      end
     end
   end
 

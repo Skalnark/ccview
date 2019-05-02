@@ -12,8 +12,8 @@
   </p>
   <pre><%= @topic.description %></pre>
 
-  <div class='item_image'>
-    <%= image_tag(@topic.image, :class => "image") if @topic.image.attached? %><br>
+  <div>
+    <%= image_tag(@topic.thumbnail) if @topic.image.attached? %><br>
   </div>
 
   <p>

@@ -4,6 +4,10 @@ class ClinicCase < ApplicationRecord
 
 	validate :is_fields_nil_clinic_case, on: [:create, :update]
 	validate :is_an_image_type_clinic_case, on: [:create, :update]
+
+	def thumbnail input
+		return self.images[input].variant(resize: '282x282', auto_orient: true).processed
+	end
 	
 	private 
 

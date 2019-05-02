@@ -12,8 +12,8 @@
   </p>
   <pre><%= @case_module.description %></pre>
 
-  <div class='item_image'>
-    <%= image_tag(@case_module.image, :class => "image") if @case_module.image.attached? %><br>
+  <div>
+    <%= image_tag(@case_module.thumbnail) if @case_module.image.attached? %><br>
   </div>
   
   <p>

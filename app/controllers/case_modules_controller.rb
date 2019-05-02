@@ -56,10 +56,11 @@ class CaseModulesController < ApplicationController
   # DELETE /case_modules/1
   # DELETE /case_modules/1.json
   def destroy
-    @case_module.destroy
     respond_to do |format|
-      format.html { redirect_to case_modules_path, notice: 'Módulo foi removido com sucesso.' }
-      format.json { head :no_content }
+      if @case_module.destroy
+        format.html { redirect_to case_modules_path, notice: 'Módulo foi removido com sucesso.' }
+        format.json { head :no_content }
+      end
     end
   end
 
