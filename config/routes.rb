@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :dictionaries
   get 'home/administration'
   	devise_for :users
 
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
 
 	root 'home#Index'
 	get 'home/About'
+	get 'dictionaries/Index'
 	post 'home/tornar_professor'
 	post 'home/tornar_estudante'
   	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
