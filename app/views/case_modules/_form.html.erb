@@ -12,34 +12,14 @@
     <br>
   <% end %>
 
-  <div class="field">
-    Título: <br> <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    Imagem: <br> <%= form.file_field :image%><br><br>
-  </div>
-
-  <div class="field">
-    Descrição do Módulo: <br> <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    Autor(es) do Módulo: <br> <%= form.text_area :author %>
-  </div>
-
-  <div class="field">
-    Dicionário: <br> <%= form.text_area :dictionary %>
-  </div>
-
-  <div class="field">
-    Privacidade: <br> <%= form.text_area :privacy %>
-  </div>
+  <%= render "#{@case_module.current_step}_step", :form => form %>
 
   <div class="actions">
-    <% if current_page?(:controller => 'case_modules', :action => 'new') %>
+    <% if @case_module.new_record? && @case_module.first_step?%>
+      <%= form.submit "Avançar etapa"%>
+    <% elsif @case_module.new_record? && !@case_module.first_step?%>
       <%= form.submit "Criar Módulo"%>
-    <%else current_page?(:controller => 'case_modules', :action => 'edit')%>
+    <%else%>
       <%= form.submit "Atualizar Módulo"%>
     <%end%>
   </div>

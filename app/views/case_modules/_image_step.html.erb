@@ -1,0 +1,15 @@
+<div>
+	<%= image_tag(@case_module.thumbnail) if @case_module.image.attached? %><br>
+	<%= puts '' %>
+	<%= puts 'AAAAAA' %>
+	<%= puts @case_module.image %>
+	<%= puts '' %>
+</div>
+
+<div class="field">
+  Legenda: <br> <%= form.text_field :image_subtitle %>
+</div>
+
+<div class="field">
+  Descrição da Imagem: <br> <%= form.text_field :image_description %>
+</div>

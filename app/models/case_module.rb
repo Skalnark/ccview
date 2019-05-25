@@ -1,8 +1,30 @@
 class CaseModule < ApplicationRecord
 	has_many :topics, :dependent => :destroy
 	has_one_attached :image
-	validate :is_fields_nil_module, on: [:create, :update]
-	validate :is_an_image_type_module, on: [:create, :update]
+	validate :is_description_module_fields_nil, on: [:create, :update], :if => lambda { |o| o.current_step == "description" }
+	validate :is_an_image_type_module, on: [:create, :update], :if => lambda { |o| o.current_step == "description" }
+	validate :is_image_module_fields_nil, on: [:create, :update], :if => lambda { |o| o.current_step == "image" }
+	attr_writer :current_step
+
+	def current_step
+		@current_step || steps.first
+	end
+
+	def steps
+		%w[description image]
+	end
+
+	def next_step
+		self.current_step = steps[steps.index(current_step) + 1]
+	end
+
+	def first_step?
+		self.current_step == steps.first
+	end
+
+	def last_step?
+		self.current_step == steps.last
+	end
 	
 	def thumbnail
 		return self.image.variant(resize: '282x282', auto_orient: true).processed
@@ -20,7 +42,7 @@ class CaseModule < ApplicationRecord
 		end
 	end
 
-	def is_fields_nil_module
+	def is_description_module_fields_nil
 		if !title.present?
 			errors.add(:base, "Campo do título está vazio.")
 		end
@@ -29,6 +51,15 @@ class CaseModule < ApplicationRecord
 		end
 		if !author.present?
 			errors.add(:base, "Campo dos autores está vazio.")
+		end
+	end
+
+	def is_image_module_fields_nil
+		if !image_subtitle.present?
+			errors.add(:base, "Campo da legenda da imagem está vazio.")
+		end
+		if !image_description.present?
+			errors.add(:base, "Campo da descrição da imagem está vazio.")
 		end
 	end
 

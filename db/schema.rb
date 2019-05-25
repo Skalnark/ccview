@@ -38,7 +38,8 @@ ActiveRecord::Schema.define(version: 2019_03_20_201245) do
     t.text "description"
     t.string "author"
     t.text "dictionary"
-    t.text "privacy"
+    t.string "image_subtitle"
+    t.text "image_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

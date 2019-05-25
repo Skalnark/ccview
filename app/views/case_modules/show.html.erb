@@ -26,11 +26,6 @@
     <%= @case_module.dictionary %>
   </p>
 
-  <p>
-    <strong>Privacidade:</strong>
-    <%= @case_module.privacy %>
-  </p>
-
   <div class="actions">
     <%if !current_user.student? %>
       <%= link_to 'Editar Módulo', edit_case_module_path(@case_module) %>
