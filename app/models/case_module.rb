@@ -59,7 +59,7 @@ class CaseModule < ApplicationRecord
 	end
 
 	def is_image_module_fields_nil
-		if !image_subtitle.present?
+		if !image_label.present?
 			errors.add(:base, "Campo da legenda da imagem está vazio.")
 		end
 		if !image_description.present?

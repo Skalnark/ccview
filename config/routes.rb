@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   	devise_for :users
 
 	resources :case_modules do
-		resources :topics, :name_prefix => "case_module_"
+		resources :topics, :name_prefix => "case_module_" do
+			member do
+	    		get 'show_image', as: 'image'
+			end
+		end
+
 		member do
 	    	get 'show_image', as: 'image'
 		end

@@ -26,8 +26,8 @@ class CaseModulesController < ApplicationController
     session[:module_params] ||= {}
     @case_module = CaseModule.new(session[:module_params])
     @case_module.current_step = session[:module_step]
-    if session[:img]
-      @case_module.image.attach(ActiveStorage::Blob.find_signed(session[:img]))
+    if session[:module_img]
+      @case_module.image.attach(ActiveStorage::Blob.find_signed(session[:module_img]))
     end
   end
 
@@ -41,23 +41,23 @@ class CaseModulesController < ApplicationController
   def create
     @case_module = CaseModule.new(case_module_params)
     @case_module.current_step = session[:module_step]
-    if session[:img] && !params[:case_module][:image]
+    if session[:module_img] && !params[:case_module][:image]
       # here how validation will work
-      @blob = ActiveStorage::Blob.find_signed(session[:img])
+      @blob = ActiveStorage::Blob.find_signed(session[:module_img])
       @case_module.image.attach(@blob)
     end
 
     if @case_module.valid?
       if params[:case_module][:image]
-        session[:img] = @case_module.image.signed_id
+        session[:module_img] = @case_module.image.signed_id
         params[:case_module].delete(:image)
       end
 
       session[:module_params].deep_merge!(params[:case_module].to_unsafe_h) if params[:case_module].to_unsafe_h
       @case_module = CaseModule.new(session[:module_params])
-      if session[:img]
+      if session[:module_img]
         # here how validation will work
-        @blob = ActiveStorage::Blob.find_signed(session[:img])
+        @blob = ActiveStorage::Blob.find_signed(session[:module_img])
         @case_module.image.attach(@blob)
       end
 
@@ -81,15 +81,15 @@ class CaseModulesController < ApplicationController
           format.json { render json: @case_module.errors, status: :unprocessable_entity }
 
         else
-          session[:module_step] = session[:module_params] = session[:img] = nil
+          session[:module_step] = session[:module_params] = session[:module_img] = nil
           format.html { redirect_to @case_module, notice: 'Módulo foi criado com sucesso.' }
           format.json { render :show, status: :created, location: @case_module }
         end
       end
 
     else
-      if session[:img]
-        @blob = ActiveStorage::Blob.find_signed(session[:img])
+      if session[:module_img]
+        @blob = ActiveStorage::Blob.find_signed(session[:module_img])
         @case_module.image.attach(@blob)
       end
 
@@ -152,6 +152,6 @@ class CaseModulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def case_module_params
-      params.require(:case_module).permit(:title, :description, :author, :dictionary, :term, :image, :image_subtitle, :image_description)
+      params.require(:case_module).permit(:title, :description, :author, :dictionary, :term, :image, :image_label, :image_description)
     end
 end

@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2019_05_23_022415) do
     t.text "description"
     t.text "author"
     t.text "dictionary"
-    t.string "image_subtitle"
+    t.string "image_label"
     t.text "image_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2019_05_23_022415) do
     t.text "description"
     t.text "authors"
     t.text "about"
+    t.string "image_label"
+    t.text "image_description"
     t.integer "case_module_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

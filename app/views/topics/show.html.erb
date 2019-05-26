@@ -1,6 +1,7 @@
 <%= render partial: "layouts/header" %>
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
+  <p style='text-align: center;'><b>Clique na imagem para aumentar sua resolução.</b></p>
 
   <p>
     <strong>Título:</strong>
@@ -12,8 +13,10 @@
   </p>
   <pre><%= @topic.description %></pre>
 
-  <div>
-    <%= image_tag(@topic.thumbnail) if @topic.image.attached? %><br>
+  <div class="image_button">
+    <%= link_to image_case_module_topic_path(@module, @topic) do %>
+      <%= image_tag(@topic.thumbnail) if @topic.image.attached? %>
+    <% end %><br>
   </div>
 
   <p>
@@ -32,7 +35,7 @@
       <%= link_to 'Criar novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
     <%end%>
 
-    <%= link_to 'Visualizar casos clínicos', topic_clinic_cases_path(@topic)%>
+    <%= link_to 'Visualizar Casos Clínicos', topic_clinic_cases_path(@topic)%>
     <%= link_to 'Voltar', case_module_topics_path(@module) %>
   </div>
 </div>

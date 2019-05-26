@@ -5,7 +5,7 @@ class CreateCaseModules < ActiveRecord::Migration[5.2]
       t.text :description
       t.text :author
       t.text :dictionary
-      t.string :image_subtitle
+      t.string :image_label
       t.text :image_description
 
       t.timestamps

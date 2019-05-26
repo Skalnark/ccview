@@ -1,0 +1,24 @@
+<div class="field">
+	Título: <br> <%= form.text_field :title %>
+</div>
+
+<div class="field">
+	<% if @topic.image.attached? %>
+		<%= image_tag(@topic.thumbnail) %> <br>
+		Deseja mudar de Imagem? <br> <%= form.file_field :image%><br><br>
+	<% else %>
+		Imagem: <br> <%= form.file_field :image%><br><br>
+	<% end %>
+</div>
+
+<div class="field">
+	Descrição do Assunto: <br> <%= form.text_area :description %>
+</div>
+
+<div class="field">
+	Autores: <br> <%= form.text_area :authors %>
+</div>
+
+<div class="field">
+	Sobre o Assunto: <br> <%= form.text_area :about %>
+</div>

@@ -2,9 +2,35 @@ class Topic < ApplicationRecord
 	belongs_to :case_module
 	has_many :clinic_cases, :dependent => :destroy
 	has_one_attached :image
-	validate :is_fields_nil_topic, on: [:create, :update]
-	validate :is_an_image_type_topic, on: [:create, :update]
+	validate :is_description_topic_fields_nil, on: [:create, :update], :if => lambda { |o| o.current_step == "description" }
+	validate :is_an_image_type_topic, on: [:create, :update], :if => lambda { |o| o.current_step == "description" }
+	validate :is_image_topic_fields_nil, on: [:create, :update], :if => lambda { |o| o.current_step == "image" }
+	attr_writer :current_step
 
+	def current_step
+		@current_step || steps.first
+	end
+
+	def steps
+		%w[description image]
+	end
+
+	def next_step
+		self.current_step = steps[steps.index(current_step) + 1]
+	end
+
+	def previous_step
+		self.current_step = steps[steps.index(current_step) - 1]
+	end
+
+	def first_step?
+		self.current_step == steps.first
+	end
+
+	def last_step?
+		self.current_step == steps.last
+	end
+	
 	def thumbnail
 		return self.image.variant(resize: '282x282', auto_orient: true).processed
 	end
@@ -21,7 +47,7 @@ class Topic < ApplicationRecord
 		end
 	end
 
-	def is_fields_nil_topic
+	def is_description_topic_fields_nil
 		if !title.present?
 			errors.add(:base, "Campo do título está vazio.")
 		end
@@ -33,6 +59,15 @@ class Topic < ApplicationRecord
 		end
 		if !about.present?
 			errors.add(:base, "Campo sobre o Assunto está vazio.")
+		end
+	end
+
+	def is_image_topic_fields_nil
+		if !image_label.present?
+			errors.add(:base, "Campo da legenda da imagem está vazio.")
+		end
+		if !image_description.present?
+			errors.add(:base, "Campo da descrição da imagem está vazio.")
 		end
 	end
 
