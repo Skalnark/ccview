@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   
-  resources :dictionaries
-  get 'home/administration'
   	devise_for :users
 
 	resources :case_modules do
 		resources :topics, :name_prefix => "case_module_"
+		member do
+	    	get 'show_image', as: 'image'
+		end
 	end
 
 	resources :topics do
@@ -13,8 +14,10 @@ Rails.application.routes.draw do
 	end
 
 	resources :clinic_cases
+	resources :dictionaries
 
 	root 'home#Index'
+	get 'home/administration'
 	get 'home/About'
 	get 'dictionaries/Index'
 	post 'home/tornar_professor'

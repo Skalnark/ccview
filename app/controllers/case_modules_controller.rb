@@ -15,26 +15,39 @@ class CaseModulesController < ApplicationController
     @case_module = CaseModule.find(params[:id])
   end
 
+  # GET /case_module/1/image
+  # GET /case_module/1/image.json
+  def show_image
+    @case_module = CaseModule.find(params[:id])
+  end
+
   # GET /case_modules/new
   def new
     session[:module_params] ||= {}
     @case_module = CaseModule.new(session[:module_params])
     @case_module.current_step = session[:module_step]
+    if session[:img]
+      @case_module.image.attach(ActiveStorage::Blob.find_signed(session[:img]))
+    end
   end
 
   # GET /case_modules/1/edit
   def edit
+    @case_module.current_step = session[:module_step]
   end
 
   # POST /case_modules
   # POST /case_modules.json
   def create
-
     @case_module = CaseModule.new(case_module_params)
     @case_module.current_step = session[:module_step]
+    if session[:img] && !params[:case_module][:image]
+      # here how validation will work
+      @blob = ActiveStorage::Blob.find_signed(session[:img])
+      @case_module.image.attach(@blob)
+    end
 
     if @case_module.valid?
-
       if params[:case_module][:image]
         session[:img] = @case_module.image.signed_id
         params[:case_module].delete(:image)
@@ -42,7 +55,6 @@ class CaseModulesController < ApplicationController
 
       session[:module_params].deep_merge!(params[:case_module].to_unsafe_h) if params[:case_module].to_unsafe_h
       @case_module = CaseModule.new(session[:module_params])
-
       if session[:img]
         # here how validation will work
         @blob = ActiveStorage::Blob.find_signed(session[:img])
@@ -50,30 +62,37 @@ class CaseModulesController < ApplicationController
       end
 
       @case_module.current_step = session[:module_step]
-      
-      if @case_module.last_step?
-        @case_module.save
+      if params[:back_button]
+        @case_module.previous_step
+
       else
-        @case_module.next_step
+        if @case_module.last_step?
+          @case_module.save       
+
+        else
+          @case_module.next_step
+        end
       end
       
       session[:module_step] = @case_module.current_step
-
       respond_to do |format|
         if @case_module.new_record?
           format.html { render :new }
           format.json { render json: @case_module.errors, status: :unprocessable_entity }
+
         else
           session[:module_step] = session[:module_params] = session[:img] = nil
           format.html { redirect_to @case_module, notice: 'Módulo foi criado com sucesso.' }
           format.json { render :show, status: :created, location: @case_module }
         end
       end
+
     else
       if session[:img]
         @blob = ActiveStorage::Blob.find_signed(session[:img])
         @case_module.image.attach(@blob)
       end
+
       respond_to do |format|
         format.html { render :new }
         format.json { render json: @case_module.errors, status: :unprocessable_entity }
@@ -84,13 +103,32 @@ class CaseModulesController < ApplicationController
   # PATCH/PUT /case_modules/1
   # PATCH/PUT /case_modules/1.json
   def update
+    @case_module.current_step = session[:module_step]
     respond_to do |format|
-      if @case_module.update(case_module_params)
-        format.html { redirect_to @case_module, notice: 'Módulo foi atualizado com sucesso.' }
-        format.json { render :show, status: :ok, location: @case_module }
-      else
+      if params[:back_button]
+        @case_module.previous_step
+        session[:module_step] = @case_module.current_step
         format.html { render :edit }
         format.json { render json: @case_module.errors, status: :unprocessable_entity }
+
+      else
+        if @case_module.update(case_module_params)
+          if @case_module.last_step?
+            session[:module_step] = nil
+            format.html { redirect_to @case_module, notice: 'Módulo foi atualizado com sucesso.' }
+            format.json { render :show, status: :ok, location: @case_module }
+
+          else
+            @case_module.next_step
+            session[:module_step] = @case_module.current_step
+            format.html { render :edit }
+            format.json { render json: @case_module.errors, status: :unprocessable_entity }
+          end
+
+        else
+          format.html { render :edit }
+          format.json { render json: @case_module.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

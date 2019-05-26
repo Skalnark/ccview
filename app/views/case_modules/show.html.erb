@@ -1,6 +1,7 @@
 <%= render partial: "layouts/header" %>
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
+  <p style='text-align: center;'><b>Clique na imagem para aumentar sua resolução.</b></p>
 
   <p>
     <strong>Título:</strong>
@@ -12,8 +13,10 @@
   </p>
   <pre><%= @case_module.description %></pre>
 
-  <div>
-    <%= image_tag(@case_module.thumbnail) if @case_module.image.attached? %><br>
+  <div class="image_button">
+    <%= link_to image_case_module_path(@case_module) do %>
+      <%= image_tag(@case_module.thumbnail) if @case_module.image.attached? %>
+    <% end %><br>
   </div>
   
   <p>

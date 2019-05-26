@@ -1,0 +1,21 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+
+  <div style="text-align:center">
+    <%= image_tag(@case_module.image) if @case_module.image.attached? %><br>
+
+    <p>
+    <strong>Legenda:</strong>
+      <%= @case_module.image_subtitle %>
+    </p>
+
+    <p>
+      <strong>Descrição da Imagem:</strong>
+      <pre><%= @case_module.image_description %></pre>
+    </p>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Voltar', @case_module %>
+  </div>
+</div>

@@ -1,19 +1,24 @@
 <div class="field">
-  Título: <br> <%= form.text_field :title %>
+	Título: <br> <%= form.text_field :title %>
 </div>
 
 <div class="field">
-  Imagem: <br> <%= form.file_field :image%><br><br>
+	<% if @case_module.image.attached? %>
+		<%= image_tag(@case_module.thumbnail) %> <br>
+		Deseja mudar de Imagem? <br> <%= form.file_field :image%><br><br>
+	<% else %>
+		Imagem: <br> <%= form.file_field :image%><br><br>
+	<% end %>
 </div>
 
 <div class="field">
-  Descrição do Módulo: <br> <%= form.text_area :description %>
+	Descrição do Módulo: <br> <%= form.text_area :description %>
 </div>
 
 <div class="field">
-  Autor(es) do Módulo: <br> <%= form.text_area :author %>
+	Autor(es) do Módulo: <br> <%= form.text_area :author %>
 </div>
 
 <div class="field">
-  Dicionário: <br> <%= form.text_area :dictionary %>
+	Dicionário: <br> <%= form.text_area :dictionary %>
 </div>

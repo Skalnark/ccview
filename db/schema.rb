@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2019_05_23_022415) do
   create_table "case_modules", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "author"
+    t.text "author"
     t.text "dictionary"
     t.string "image_subtitle"
     t.text "image_description"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2019_05_23_022415) do
   create_table "topics", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "authors"
+    t.text "authors"
     t.text "about"
     t.integer "case_module_id"
     t.datetime "created_at", null: false
