@@ -15,8 +15,8 @@ class CaseModulesController < ApplicationController
     @case_module = CaseModule.find(params[:id])
   end
 
-  # GET /case_module/1/image
-  # GET /case_module/1/image.json
+  # GET /case_module/1/show_image
+  # GET /case_module/1/show_image.json
   def show_image
     @case_module = CaseModule.find(params[:id])
   end

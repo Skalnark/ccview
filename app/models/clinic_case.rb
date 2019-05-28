@@ -1,9 +1,36 @@
 class ClinicCase < ApplicationRecord
+	serialize :image_label, Array
+	serialize :image_description, Array
 	belongs_to :topic
 	has_many_attached :images
+	validate :is_description_clinic_case_fields_nil, on: [:create, :update], :if => lambda { |o| o.current_step == "description" }
+	validate :is_an_image_type_clinic_case, on: [:create, :update], :if => lambda { |o| o.current_step == "description" }
+	validate :is_image_clinic_case_fields_nil, on: [:create, :update], :if => lambda { |o| o.current_step == "image" }
+	attr_writer :current_step
 
-	validate :is_fields_nil_clinic_case, on: [:create, :update]
-	validate :is_an_image_type_clinic_case, on: [:create, :update]
+	def current_step
+		@current_step || steps.first
+	end
+
+	def steps
+		%w[description image]
+	end
+
+	def next_step
+		self.current_step = steps[steps.index(current_step) + 1]
+	end
+
+	def previous_step
+		self.current_step = steps[steps.index(current_step) - 1]
+	end
+
+	def first_step?
+		self.current_step == steps.first
+	end
+
+	def last_step?
+		self.current_step == steps.last
+	end
 
 	def thumbnail input
 		return self.images[input].variant(resize: '282x282', auto_orient: true).processed
@@ -11,7 +38,7 @@ class ClinicCase < ApplicationRecord
 	
 	private 
 
-	def is_fields_nil_clinic_case
+	def is_description_clinic_case_fields_nil
 		if !title.present?
 			errors.add(:base, "Campo do título está vazio.")
 		end
@@ -46,6 +73,21 @@ class ClinicCase < ApplicationRecord
 			end
 		end
 
+	end
+
+	def is_image_clinic_case_fields_nil
+		image_label.each_with_index do |label, key|
+			if !label.present?
+				errors.add(:base, "Legenda da imagem número: #{key} está vazia")
+			end
+		end
+
+		image_description.each_with_index do |description, key|
+			if !description.present?
+				errors.add(:base, "descrição da imagem número: #{key} está vazia")
+			end
+		end
+		
 	end
 
 	def self.search(term)

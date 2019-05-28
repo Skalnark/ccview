@@ -11,35 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    Título: <br> <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    Informações Clínicas: <br> <%= form.text_area :clinicInformation %>
-  </div>
-
-   <div class="field">
-    Imagens: <br> <%= form.file_field :images, multiple: true %><br><br>
-  </div>
-
-  <div class="field">
-    Descrições do caso: <br> <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    Evolução do caso: <br> <%= form.text_area :caseEvolution %>
-  </div>
-
-  <div class="field">
-    Aprendendo um pouco mais: <br> <%= form.text_area :extraInformation %>
-  </div>
+  <%= render "#{@clinic_case.current_step}_step", :form => form %>
 
   <div class="actions">
-    <% if current_page?(:controller => 'clinic_cases', :action => 'new') %>
+    <% if @clinic_case.first_step?%>
+      <%= form.submit "Avançar etapa"%>
+    <% elsif @clinic_case.new_record?%>
       <%= form.submit "Criar Caso Clínico"%>
-    <%else current_page?(:controller => 'clinic_cases', :action => 'edit')%>
+    <%else%>
       <%= form.submit "Atualizar Caso Clínico"%>
     <%end%>
+
+    <%= form.submit "Voltar etapa", :name => "back_button" unless @clinic_case.first_step? %>
   </div>
 <% end %>

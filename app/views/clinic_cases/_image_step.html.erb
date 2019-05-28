@@ -1,0 +1,25 @@
+<div>
+	<% @clinic_case.image_label.each do |label| %>
+		<% label %>
+	<% end %>
+	<% @clinic_case.images.each_with_index do |image, i| %>
+		<div>
+	        <%= image_tag(@clinic_case.thumbnail(i))%>
+		</div>
+
+		<div class="field">
+			Legenda: 
+			<%= form.fields_for :image_label do |o| %>
+	        	<%= o.text_field "#{i}" %>
+	    	<% end %>
+		</div>
+
+		<div class="field">
+			Descrição da Imagem: <br> 
+			<%= form.fields_for :image_description do |o| %>
+	        	<%= o.text_field "#{i}" %>
+	    	<% end %>
+		</div>
+  	<%end%>
+</div>
+

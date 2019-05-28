@@ -16,8 +16,8 @@ class TopicsController < ApplicationController
     @topic = @module.topics.find(params[:id])
   end
 
-  # GET /case_module/1/image
-  # GET /case_module/1/image.json
+  # GET /topics/1/show_image
+  # GET /topics/1/show_image.json
   def show_image
     @topic = @module.topics.find(params[:id])
   end

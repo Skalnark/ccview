@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2019_05_23_022415) do
     t.text "description"
     t.text "caseEvolution"
     t.text "extraInformation"
+    t.string "image_label"
+    t.text "image_description"
     t.integer "topic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
