@@ -15,7 +15,7 @@
 
   <div class="actions">
     <% if @clinic_case.first_step?%>
-      <%= form.submit "Avançar etapa"%>
+      <%= form.submit "Próximo"%>
     <% elsif @clinic_case.new_record?%>
       <%= form.submit "Criar Caso Clínico"%>
     <%else%>

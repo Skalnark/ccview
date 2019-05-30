@@ -32,7 +32,7 @@
   <div class="actions">
     <% if !current_user.student? %>
       <%= link_to 'Editar', edit_case_module_topic_path(@module, @topic) %>
-      <%= link_to 'Criar novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
+      <%= link_to 'Novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
     <%end%>
 
     <%= link_to 'Visualizar Casos Clínicos', topic_clinic_cases_path(@topic)%>

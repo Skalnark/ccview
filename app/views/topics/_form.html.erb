@@ -16,7 +16,7 @@
 
   <div class="actions">
     <% if @topic.first_step?%>
-      <%= form.submit "Avançar etapa"%>
+      <%= form.submit "Próximo"%>
     <% elsif @topic.new_record?%>
       <%= form.submit "Criar Assunto"%>
     <%else%>

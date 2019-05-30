@@ -32,7 +32,7 @@
   <div class="actions">
     <%if !current_user.student? %>
       <%= link_to 'Editar Módulo', edit_case_module_path(@case_module) %>
-      <%= link_to 'Criar novo Assunto', new_case_module_topic_path(@case_module) %>
+      <%= link_to 'Novo Assunto', new_case_module_topic_path(@case_module) %>
     <%end%>  
     <%= link_to 'Visualizar Assuntos', case_module_topics_path(@case_module)%>
     <%= link_to 'Voltar', case_modules_path %>

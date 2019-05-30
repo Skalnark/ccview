@@ -5,12 +5,11 @@
     <%= image_tag(@topic.image) if @topic.image.attached? %><br>
 
     <p>
-    <strong>Legenda:</strong>
-      <%= @topic.image_label %>
+    <strong><%= @topic.image_label %></strong>
     </p>
 
     <p>
-      <strong>Descrição da Imagem:</strong>
+      <strong>Descrição:</strong>
       <pre><%= @topic.image_description %></pre>
     </p>
   </div>

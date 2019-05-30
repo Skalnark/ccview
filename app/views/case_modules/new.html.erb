@@ -1,8 +1,6 @@
 <%= render partial: "layouts/header" %>
 <div class='form-style-5'>
 	<h1>Novo Módulo</h1>
-
-	<p> Página para criar módulos </p>
 	
 	<%if !current_user.student? %>
 		<%= render 'form', case_module: @case_module %>

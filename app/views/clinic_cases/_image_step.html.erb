@@ -1,5 +1,5 @@
 <div>
-	<% @clinic_case.image_label.each do |label| %>
+	<% @clinic_case.image_label.each do |key, label| %>
 		<% label %>
 	<% end %>
 	<% @clinic_case.images.each_with_index do |image, i| %>

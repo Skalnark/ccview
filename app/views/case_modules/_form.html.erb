@@ -16,7 +16,7 @@
 
   <div class="actions">
     <% if @case_module.first_step?%>
-      <%= form.submit "Avançar etapa"%>
+      <%= form.submit "Próximo"%>
     <% elsif @case_module.new_record?%>
       <%= form.submit "Criar Módulo"%>
     <%else%>

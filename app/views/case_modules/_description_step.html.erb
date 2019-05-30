@@ -5,9 +5,9 @@
 <div class="field">
 	<% if @case_module.image.attached? %>
 		<%= image_tag(@case_module.thumbnail) %> <br>
-		Deseja mudar de Imagem? <br> <%= form.file_field :image%><br><br>
+		Deseja mudar de Imagem? <br> <%= form.file_field :image, accept: 'image/*'%><br><br>
 	<% else %>
-		Imagem: <br> <%= form.file_field :image%><br><br>
+		Imagem: <br> <%= form.file_field :image, accept: 'image/*'%><br><br>
 	<% end %>
 </div>
 

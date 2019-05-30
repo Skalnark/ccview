@@ -178,6 +178,6 @@ class ClinicCasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clinic_case_params
-      params.require(:clinic_case).permit(:title, :clinicInformation, :description, :caseEvolution, :extraInformation, :term, images: [], image_label: [], image_description: [])
+      params.require(:clinic_case).permit(:title, :clinicInformation, :description, :caseEvolution, :extraInformation, :term, images: [], image_label: {}, image_description: {})
     end
 end

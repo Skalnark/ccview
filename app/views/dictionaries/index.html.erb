@@ -16,8 +16,8 @@
     <tbody>
       <% @dictionaries.each do |dictionary| %>
         <tr>
-          <td><%= dictionary.Term %></td>
-          <td><%= dictionary.Description %></td>
+          <td><%= dictionary.term %></td>
+          <td><%= dictionary.description %></td>
 
           <% if current_user.admin?%>
             <td><%= link_to 'Editar', edit_dictionary_path(dictionary) %></td>

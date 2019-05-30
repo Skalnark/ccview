@@ -28,7 +28,7 @@ class DictionariesController < ApplicationController
 
     respond_to do |format|
       if @dictionary.save
-        format.html { redirect_to @dictionary, notice: 'Dictionary was successfully created.' }
+        format.html { redirect_to @dictionary, notice: 'Dicionario foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @dictionary }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class DictionariesController < ApplicationController
   def update
     respond_to do |format|
       if @dictionary.update(dictionary_params)
-        format.html { redirect_to @dictionary, notice: 'Dictionary was successfully updated.' }
+        format.html { redirect_to @dictionary, notice: 'Dicionario foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @dictionary }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class DictionariesController < ApplicationController
   def destroy
     @dictionary.destroy
     respond_to do |format|
-      format.html { redirect_to dictionaries_url, notice: 'Dictionary was successfully destroyed.' }
+      format.html { redirect_to dictionaries_url, notice: 'Dicionario foi excluido com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class DictionariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dictionary_params
-      params.require(:dictionary).permit(:Term, :Description)
+      params.require(:dictionary).permit(:term, :description)
     end
 end

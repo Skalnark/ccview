@@ -1,6 +1,6 @@
 class ClinicCase < ApplicationRecord
-	serialize :image_label, Array
-	serialize :image_description, Array
+	serialize :image_label, Hash
+	serialize :image_description, Hash
 	belongs_to :topic
 	has_many_attached :images
 	validate :is_description_clinic_case_fields_nil, on: [:create, :update], :if => lambda { |o| o.current_step == "description" }
@@ -76,15 +76,15 @@ class ClinicCase < ApplicationRecord
 	end
 
 	def is_image_clinic_case_fields_nil
-		image_label.each_with_index do |label, key|
+		image_label.each do |key, label|
 			if !label.present?
 				errors.add(:base, "Legenda da imagem número: #{key} está vazia")
 			end
 		end
 
-		image_description.each_with_index do |description, key|
+		image_description.each do |key, description|
 			if !description.present?
-				errors.add(:base, "descrição da imagem número: #{key} está vazia")
+				errors.add(:base, "Descrição da imagem número: #{key} está vazia")
 			end
 		end
 		

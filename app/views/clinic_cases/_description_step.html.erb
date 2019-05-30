@@ -11,9 +11,9 @@
     <% @clinic_case.images.each_with_index do |image, i| %>
         <%= image_tag(@clinic_case.thumbnail(i))%>
     <%end%><br>
-    Deseja selecionar outras imagens? <br> <%= form.file_field :images, multiple: true %><br><br>
+    Deseja selecionar outras imagens? <br> <%= form.file_field :images, multiple: true, accept: 'image/*' %><br><br>
   <% else %>
-    Imagens: <br> <%= form.file_field :images, multiple: true %><br><br>
+    Imagens: <br> <%= form.file_field :images, multiple: true, accept: 'image/*' %><br><br>
   <% end %>
 </div>
 

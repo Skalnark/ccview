@@ -5,12 +5,11 @@
     <%= image_tag(@case_module.image) if @case_module.image.attached? %><br>
 
     <p>
-    <strong>Legenda:</strong>
-      <%= @case_module.image_label %>
+    <strong><%= @case_module.image_label %></strong>
     </p>
 
     <p>
-      <strong>Descrição da Imagem:</strong>
+      <strong>Descrição:</strong>
       <pre><%= @case_module.image_description %></pre>
     </p>
   </div>
