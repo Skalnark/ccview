@@ -3,10 +3,12 @@
 
 <div class='form-style-5'>
 	<% if user_signed_in? %>
-		<br /><br />	
 		<div class="actions">
-		  <%= link_to "Visualizar Módulos", case_modules_path %>
-		  <%= link_to "Sair", root_path, :method => :delete %>
+			<%= link_to "Visualizar Módulos", case_modules_path %> | 
+			<% if current_user.admin?%>
+				<%= link_to "Gerenciar Contas", home_administration_path %> |
+			<%end%>
+			<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
 		</div>
 
 		<div class='text'>

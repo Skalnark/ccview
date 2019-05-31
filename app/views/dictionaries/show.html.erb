@@ -1,0 +1,18 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <strong>Termo:</strong>
+	  <%= @dictionary.term %>
+	</p>
+
+	<p>
+	  <strong>Descrição:</strong>
+	  <%= @dictionary.description %>
+	</p>
+	<div class="actions">
+		<%= link_to 'Editar', edit_dictionary_path(@dictionary) %> |
+		<%= link_to 'Voltar', dictionaries_path %>
+	</div>
+</div>

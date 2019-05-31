@@ -2,7 +2,7 @@
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
 
-  <h1>Tópicos dos Casos</h1>
+  <h1>Assuntos</h1>
 
   <%= form_tag(case_module_topics_path(@module), method: :get) do %>
       <%= text_field_tag :term, params[:term] %>
@@ -11,33 +11,41 @@
 
   <%= link_to "Voltar para o Módulo '#{@module.title}'", case_module_path(@module) %>
   <br>
-  <%= link_to 'Criar Tópico', new_case_module_topic_path(@module) %>
 
-  <ol>
-    <% @topics.each do |topic| %>
-      <li>
-        <% div_id = "#{topic.id}" -%>
-        <% div_module_id = "#{@module.id}" -%>
-        <div class='clinic_case_item', id="<%= div_id -%>">
-          <a href="/case_modules/<%= div_module_id -%>/topics/<%= div_id -%>">
-            <div class='item_image'>
-              <%= image_tag(topic.image, :class => "image") if topic.image.attached? %><br>
-            </div>
+  <% if !current_user.student? %>
+  <%= link_to 'Criar Assunto', new_case_module_topic_path(@module) %>
+  <%end%>
 
-            <div class='separator_line'></div>
-            
-            <div class='item_description'>
-              <div class='item_description_title'>
-                <%= topic.title %>
+  <div class="model_items">
+    <p style='text-align: center;'><b>Clique na imagem para visualizar o assunto.</b></p>
+    <ol>
+      <% @topics.each do |topic| %>
+        <li>
+          <% div_id = "#{topic.id}" -%>
+          <% div_module_id = "#{@module.id}" -%>
+          <div class='clinic_case_item', id="<%= div_id -%>">
+            <a href="/case_modules/<%= div_module_id -%>/topics/<%= div_id -%>">
+              <div class='item_image'>
+                <div class="item_image_inner">
+                  <%= image_tag(topic.thumbnail) if topic.image.attached? %>  
+                </div>
               </div>
-              <pre> <%= topic.description %> </pre>
-            </div>
-          </a>
-        </div>
-      </li>
-    <% end%>
-  </ol>
 
+              <div class='separator_line'></div>
+              
+              <div class='item_description'>
+                <div class='item_description_title'>
+                  <%= topic.title %>
+                </div>
+                <pre> <%= topic.description %> </pre>
+              </div>
+            </a>
+          </div>
+        </li>
+      <% end%>
+    </ol>  
+  </div>
+  
   <br>
 
 </div>

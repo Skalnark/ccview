@@ -6,6 +6,8 @@ class CreateClinicCases < ActiveRecord::Migration[5.2]
       t.text :description
       t.text :caseEvolution
       t.text :extraInformation
+      t.string :image_label
+      t.text :image_description
       t.integer :topic_id
 
       t.timestamps

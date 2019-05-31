@@ -9,35 +9,43 @@
       <%= submit_tag 'Buscar', name: nil %>
   <% end %>
 
-  <%= link_to "Voltar para o Tópico '#{@topic.title}'", case_module_topics_path(@topic.case_module_id, @topic) %>
+  <%= link_to "Voltar para o Assunto '#{@topic.title}'", case_module_topics_path(@topic.case_module_id, @topic) %>
   <br>
-  <%= link_to 'Novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
+  
+  <%if !current_user.student? %>
+    <%= link_to 'Novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
+  <%end%>
 
-  <ol>
-    <% @clinic_cases.each do |clinic_case| %>
-      <li>
-        <% div_id = "#{clinic_case.id}" -%>
-        <% div_topic_id = "#{@topic.id}" -%>
-        <div class='clinic_case_item', id="<%= div_id -%>">
-          <a href="/topics/<%= div_topic_id -%>/clinic_cases/<%= div_id -%>">
-            <div class='item_image'>
-              <%= image_tag(clinic_case.images[0], :class => "image") if clinic_case.images.attached? %><br>
-            </div>
+  <div class="model_items">
+    <p style='text-align: center;'><b>Clique na imagem para visualizar o caso.</b></p>
+    <ol>
+      <% @clinic_cases.each do |clinic_case| %>
+        <li>
+          <% div_id = "#{clinic_case.id}" -%>
+          <% div_topic_id = "#{@topic.id}" -%>
+          <div class='clinic_case_item', id="<%= div_id -%>">
+            <a href="/topics/<%= div_topic_id -%>/clinic_cases/<%= div_id -%>">
 
-            <div class='separator_line'></div>
-            
-            <div class='item_description'>
-              <div class='item_description_title'>
-                <%= clinic_case.title %>
+              <div class='item_image'>
+                <div class="item_image_inner">
+                  <%= image_tag(clinic_case.thumbnail(0)) if clinic_case.images.attached? %>
+                </div>
               </div>
-              <pre> <%= clinic_case.description %> </pre>
-            </div>
-          </a>
-        </div>
-      </li>
-    <% end%>
-  </ol>
 
+              <div class='separator_line'></div>
+              
+              <div class='item_description'>
+                <div class='item_description_title'>
+                  <%= clinic_case.title %>
+                </div>
+                <pre> <%= clinic_case.clinicInformation %> </pre>
+              </div>
+            </a>
+          </div>
+        </li>
+      <% end%>
+    </ol>
+  </div>
+  
   <br>
-
 </div>

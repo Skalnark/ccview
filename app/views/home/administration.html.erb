@@ -1,0 +1,34 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+<p id="notice"><%= notice %></p>
+
+<% if current_user.admin? %>
+  <% User.all.each do |user| %>
+      <table>
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Permissão</th>
+            <th>Editar</th>
+          </tr>
+          <tr>
+            <td><%=user.email=%></td>
+            <td><%=user.role=%></td>
+            <td>
+              <% if user.role == "student" %>
+                <li>
+                  <%= form_tag(home_tornar_professor_path(:email => user.email), method: :post) do %>
+                    <%= submit_tag "tornar_professor '#{user.email}'" %>
+                  <%end%>
+                </li>
+              <% elsif user.role == "professor" %>
+                <li>
+                    <%= form_tag(home_tornar_estudante_path(:email => user.email), method: :post) do %>
+                      <%= submit_tag "tornar_estudante '#{user.email}'" %>
+                    <%end%>
+                </li>
+              <% end %>
+            </td>
+          </tr>
+  <%end%>
+<%end%>

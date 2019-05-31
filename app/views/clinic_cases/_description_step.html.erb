@@ -1,0 +1,30 @@
+<div class="field">
+  Título: <br> <%= form.text_field :title %>
+</div>
+
+<div class="field">
+  Informações Clínicas: <br> <%= form.text_area :clinicInformation %>
+</div>
+
+ <div class="field">
+  <% if @clinic_case.images.attached? %>
+    <% @clinic_case.images.each_with_index do |image, i| %>
+        <%= image_tag(@clinic_case.thumbnail(i))%>
+    <%end%><br>
+    Deseja selecionar outras imagens? <br> <%= form.file_field :images, multiple: true, accept: 'image/*' %><br><br>
+  <% else %>
+    Imagens: <br> <%= form.file_field :images, multiple: true, accept: 'image/*' %><br><br>
+  <% end %>
+</div>
+
+<div class="field">
+  Descrições do caso: <br> <%= form.text_area :description %>
+</div>
+
+<div class="field">
+  Evolução do caso: <br> <%= form.text_area :caseEvolution %>
+</div>
+
+<div class="field">
+  Aprendendo um pouco mais: <br> <%= form.text_area :extraInformation %>
+</div>

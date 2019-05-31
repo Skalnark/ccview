@@ -1,7 +1,7 @@
 <%= form_for([@module, @topic], html:{class:'form-style-5'}) do |form| %>
   <% if topic.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+      <h2><%= pluralize(topic.errors.count, "error") %> proibiram esse Assunto de ser salvo:</h2>
 
       <ul>
       <% topic.errors.full_messages.each do |message| %>
@@ -9,34 +9,20 @@
       <% end %>
       </ul>
     </div>
+    <br>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-  
-  <div class="field">
-    Imagem: <br> <%= form.file_field :image%><br><br>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :authors %>
-    <%= form.text_field :authors %>
-  </div>
-
-  <div class="field">
-    <%= form.label :about %>
-    <%= form.text_area :about %>
-  </div>
+  <%= render "#{@topic.current_step}_step", :form => form %>
 
   <div class="actions">
-    <%= form.submit "Criar Tópico"%> | 
-    <%= link_to 'Voltar', case_module_topics_path(@module) %>
+    <% if @topic.first_step?%>
+      <%= form.submit "Próximo"%>
+    <% elsif @topic.new_record?%>
+      <%= form.submit "Criar Assunto"%>
+    <%else%>
+      <%= form.submit "Atualizar Assunto"%>
+    <%end%>
+
+    <%= form.submit "Voltar etapa", :name => "back_button" unless @topic.first_step? %>
   </div>
 <% end %>

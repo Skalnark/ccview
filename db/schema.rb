@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_20_201245) do
+ActiveRecord::Schema.define(version: 2019_05_23_022415) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -36,9 +36,10 @@ ActiveRecord::Schema.define(version: 2019_03_20_201245) do
   create_table "case_modules", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "author"
+    t.text "author"
     t.text "dictionary"
-    t.text "privacy"
+    t.string "image_label"
+    t.text "image_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,7 +50,16 @@ ActiveRecord::Schema.define(version: 2019_03_20_201245) do
     t.text "description"
     t.text "caseEvolution"
     t.text "extraInformation"
+    t.string "image_label"
+    t.text "image_description"
     t.integer "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "dictionaries", force: :cascade do |t|
+    t.string "term"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -57,8 +67,10 @@ ActiveRecord::Schema.define(version: 2019_03_20_201245) do
   create_table "topics", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "authors"
+    t.text "authors"
     t.text "about"
+    t.string "image_label"
+    t.text "image_description"
     t.integer "case_module_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

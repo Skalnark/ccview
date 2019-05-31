@@ -1,0 +1,29 @@
+ <%= form_with(model: dictionary, local: true) do |form| %>
+  <% if dictionary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(dictionary.errors.count, "erro") %> Erro ao salvar o dicionário:</h2>
+
+      <ul>
+      <% dictionary.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    Termo: 
+    <br>
+    <%= form.text_field :term %>
+  </div>
+
+  <div class="field">
+    Descrição: 
+    <br>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Salvar" %>
+  </div>
+<% end %>

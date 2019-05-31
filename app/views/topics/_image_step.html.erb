@@ -1,0 +1,11 @@
+<div>
+	<%= image_tag(@topic.thumbnail) if @topic.image.attached? %><br>
+</div>
+
+<div class="field">
+  Legenda: <br> <%= form.text_field :image_label %>
+</div>
+
+<div class="field">
+  Descrição da Imagem: <br> <%= form.text_field :image_description %>
+</div>

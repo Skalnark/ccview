@@ -16,9 +16,20 @@ class TopicsController < ApplicationController
     @topic = @module.topics.find(params[:id])
   end
 
+  # GET /topics/1/show_image
+  # GET /topics/1/show_image.json
+  def show_image
+    @topic = @module.topics.find(params[:id])
+  end
+
   # GET /topics/new
   def new
-    @topic = @module.topics.new
+    session[:topic_params] ||= {}
+    @topic = @module.topics.new(session[:topic_params])
+    @topic.current_step = session[:topic_step]
+    if session[:topic_img]
+      @topic.image.attach(ActiveStorage::Blob.find_signed(session[:topic_img]))
+    end
   end
 
   # GET /topics/1/edit
@@ -30,12 +41,60 @@ class TopicsController < ApplicationController
   # POST /topics.json
   def create
     @topic = @module.topics.new(topic_params)
+    @topic.current_step = session[:topic_step]
+    if session[:topic_img] && !params[:topic][:image]
+      # here how validation will work
+      @blob = ActiveStorage::Blob.find_signed(session[:topic_img])
+      @topic.image.attach(@blob)
+    end
 
-    respond_to do |format|
-      if @topic.save
-        format.html { redirect_to [@module, @topic], notice: 'Topic was successfully created.' }
-        format.json { render :show, status: :created, location: @topic }
+    if @topic.valid?
+      if params[:topic][:image]
+        session[:topic_img] = @topic.image.signed_id
+        params[:topic].delete(:image)
+      end
+
+      session[:topic_params].deep_merge!(params[:topic].to_unsafe_h) if params[:topic].to_unsafe_h
+      @topic = @module.topics.new(session[:topic_params])
+      if session[:topic_img]
+        # here how validation will work
+        @blob = ActiveStorage::Blob.find_signed(session[:topic_img])
+        @topic.image.attach(@blob)
+      end
+
+      @topic.current_step = session[:topic_step]
+      if params[:back_button]
+        @topic.previous_step
+
       else
+        if @topic.last_step?
+          @topic.save       
+
+        else
+          @topic.next_step
+        end
+      end
+      
+      session[:topic_step] = @topic.current_step
+      respond_to do |format|
+        if @topic.new_record?
+          format.html { render :new }
+          format.json { render json: @topic.errors, status: :unprocessable_entity }
+
+        else
+          session[:topic_step] = session[:topic_params] = session[:topic_img] = nil
+          format.html { redirect_to [@module, @topic], notice: 'Assunto foi criado com sucesso.' }
+          format.json { render :show, status: :created, location: @topic }
+        end
+      end
+
+    else
+      if session[:topic_img]
+        @blob = ActiveStorage::Blob.find_signed(session[:topic_img])
+        @topic.image.attach(@blob)
+      end
+
+      respond_to do |format|
         format.html { render :new }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
@@ -46,14 +105,32 @@ class TopicsController < ApplicationController
   # PATCH/PUT /topics/1.json
   def update
     @topic = @module.topics.find(params[:id])
-
+    @topic.current_step = session[:topic_step]
     respond_to do |format|
-      if @topic.update(topic_params)
-        format.html { redirect_to [@module, @topic], notice: 'Topic was successfully updated.' }
-        format.json { render :show, status: :ok, location: @topic }
-      else
+      if params[:back_button]
+        @topic.previous_step
+        session[:topic_step] = @topic.current_step
         format.html { render :edit }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
+
+      else
+        if @topic.update(topic_params)
+          if @topic.last_step?
+            session[:topic_step] = nil
+            format.html { redirect_to [@module, @topic], notice: 'Assunto foi atualizado com sucesso.' }
+            format.json { render :show, status: :ok, location: @topic }
+
+          else
+            @topic.next_step
+            session[:topic_step] = @topic.current_step
+            format.html { render :edit }
+            format.json { render json: @topic.errors, status: :unprocessable_entity }
+          end
+
+        else
+          format.html { render :edit }
+          format.json { render json: @topic.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -61,12 +138,12 @@ class TopicsController < ApplicationController
   # DELETE /topics/1
   # DELETE /topics/1.json
   def destroy
-    @topic = @module.topics.find(params[:id])
-    @topic.destroy
-
+    @topic = @module.topics.find(params[:id])    
     respond_to do |format|
-      format.html { redirect_to case_module_topics_path(@module), notice: 'Topic was successfully destroyed.' }
-      format.json { head :no_content }
+      if @topic.destroy
+        format.html { redirect_to case_module_topics_path(@module), notice: 'Assunto foi excluído com sucesso.' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -82,6 +159,6 @@ class TopicsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params
-      params.require(:topic).permit(:title, :description, :authors, :about, :term, :image)
+      params.require(:topic).permit(:title, :description, :authors, :about, :term, :image, :image_label, :image_description)
     end
 end

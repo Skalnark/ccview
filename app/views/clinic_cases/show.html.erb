@@ -1,15 +1,21 @@
 <%= render partial: "layouts/header" %>
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
+  <p style='text-align: center;'><b>Clique na imagem para aumentar sua resolução.</b></p>
 
   <p>
     <strong>Título:</strong>
     <%= @clinic_case.title %>
   </p>
-  
+
   <p>
-    <strong>Descrição do caso:</strong>
-    <%= @clinic_case.description %>
+    <strong>Informações Clínicas:</strong>
+    <%= @clinic_case.clinicInformation %>
+  </p>
+
+  <p>
+    <strong>Legendas das imagens:</strong>
+    <%= @clinic_case.image_label %>
   </p>
   <table>
     <tr>
@@ -17,14 +23,14 @@
         <% if i != 0 && i % 3 == 0 %>
           </tr><tr>
         <%end%>
-        <td><%= image_tag(image, :class => "image")%></td>
+        <td><%= image_tag(@clinic_case.thumbnail(i))%></td>
           <br>
       <%end%>
     </tr>
   </table>
   <p>
-    <strong>Informações Clinicas:</strong>
-    <%= @clinic_case.clinicInformation %>
+    <strong>Descrição do caso:</strong>
+    <%= @clinic_case.description %>
   </p>
 
   <p>
@@ -33,12 +39,15 @@
   </p>
 
   <p>
-    <strong>Informações extras:</strong>
+    <strong>Aprendendo um pouco mais:</strong>
     <%= @clinic_case.extraInformation %>
   </p>
-
+  
   <div class="actions">
-    <%= link_to 'Editar', edit_topic_clinic_case_path(@topic, @clinic_case) %> |
-    <%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
+    <%if !current_user.student? %>
+      <%= link_to 'Editar', edit_topic_clinic_case_path(@topic, @clinic_case) %>
+    <%end%>
+    
+      <%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
   </div>
 </div>

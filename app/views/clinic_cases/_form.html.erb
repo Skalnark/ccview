@@ -1,7 +1,7 @@
 <%= form_for([@topic, @clinic_case], html:{class:'form-style-5'}) do |form| %>
   <% if clinic_case.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(clinic_case.errors.count, "error") %> prohibited this clinic_case from being saved:</h2>
+      <h2><%= pluralize(clinic_case.errors.count, "error") %> proibiram esse Caso Clínico de ser salvo:</h2>
 
       <ul>
       <% clinic_case.errors.full_messages.each do |message| %>
@@ -11,32 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    Título: <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    Informações Clinicas: <br> <%= form.text_area :clinicInformation %>
-  </div>
-
-   <div class="field">
-    Imagem: <br> <%= form.file_field :images, multiple: true %><br><br>
-  </div>
-
-  <div class="field">
-    Descrições do caso: <br> <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    Evolução do caso: <br> <%= form.text_area :caseEvolution %>
-  </div>
-
-  <div class="field">
-    Informações extras: <br> <%= form.text_area :extraInformation %>
-  </div>
+  <%= render "#{@clinic_case.current_step}_step", :form => form %>
 
   <div class="actions">
-    <%= form.submit "Criar Caso Clinico"%> | 
-    <%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
+    <% if @clinic_case.first_step?%>
+      <%= form.submit "Próximo"%>
+    <% elsif @clinic_case.new_record?%>
+      <%= form.submit "Criar Caso Clínico"%>
+    <%else%>
+      <%= form.submit "Atualizar Caso Clínico"%>
+    <%end%>
+
+    <%= form.submit "Voltar etapa", :name => "back_button" unless @clinic_case.first_step? %>
   </div>
 <% end %>

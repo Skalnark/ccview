@@ -3,9 +3,10 @@ class CreateCaseModules < ActiveRecord::Migration[5.2]
     create_table :case_modules do |t|
       t.string :title
       t.text :description
-      t.string :author
+      t.text :author
       t.text :dictionary
-      t.text :privacy
+      t.string :image_label
+      t.text :image_description
 
       t.timestamps
     end

@@ -84,6 +84,12 @@ body{
     border-radius: 15px 15px 15px 0px;
 }
 
+pre{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+    white-space: pre-wrap;
+}
+
 .text{
     text-align: center;
 }
@@ -178,6 +184,17 @@ a:visited {
     width: 100px;
 }
 
+.image_button a,
+.image_button a:hover{
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background-color: #ffffff00;
+    display: inline;
+}
+
 /*Nav Bar stylesheets*/
 .navbar{
     width: 90%;
@@ -209,17 +226,23 @@ a:visited {
 }
 
 /* Clinical Cases itens stylesheet*/
-.form-style-5 li{
+.model_items ol{
+    position: relative;
+    display: inline-block;
+    padding-inline-start: 0px;
+}
+.model_items li{
     float: left;
     margin: 0 0 16px 16px;
     position: relative;
     display: block;
+    background: #f4f7f8;
 }
 
 .clinic_case_item{
     width: 284px;
     height: 479px;
-    background-color: #eee;
+    background-color: #fdfffd;
     box-sizing: border-box;
     border: 1px solid #ff1a26;
     border-width: 1px 1px 1px;
@@ -244,22 +267,31 @@ a:visited {
     border: 0;
     outline: 0;
     vertical-align: baseline;
-    background: #eee;
+    background-color: #fdfffd;
     color: #000;
     display: inline;
 }
 
-.item_image,
-.item_image img{
+.item_image{
     width: 282px;
-    height: 284px;
+    height: 286px;
+    vertical-align: middle;
     border-radius: 4px 4px 0 0;
     box-sizing: border-box;
+    position: relative;
 }
 
-.clinic_case_item:hover .item_image img{
+.clinic_case_item:hover .item_image{
     -webkit-box-shadow: 7px 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
     box-shadow: 7px 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+}
+
+.item_image_inner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  
+    transform: translate(-50%, -50%);    
 }
 
 .separator_line{
@@ -284,7 +316,7 @@ a:visited {
     height: auto!important;
     min-height: 191px;
     width: 284px;
-    background-color: #eee;
+    background-color: #fdfffd;
     box-sizing: border-box;
     border: 0px solid #ff1a26;
     border-width: 0px 1px 1px;

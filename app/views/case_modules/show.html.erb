@@ -1,6 +1,7 @@
 <%= render partial: "layouts/header" %>
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
+  <p style='text-align: center;'><b>Clique na imagem para aumentar sua resolução.</b></p>
 
   <p>
     <strong>Título:</strong>
@@ -9,11 +10,13 @@
   
   <p>
     <strong>Descrição do módulo:</strong>
-    <%= @case_module.description %>
   </p>
+  <pre><%= @case_module.description %></pre>
 
-  <div class='item_image'>
-    <%= image_tag(@case_module.image, :class => "image") if @case_module.image.attached? %><br>
+  <div class="image_button">
+    <%= link_to image_case_module_path(@case_module) do %>
+      <%= image_tag(@case_module.thumbnail) if @case_module.image.attached? %>
+    <% end %><br>
   </div>
   
   <p>
@@ -26,18 +29,12 @@
     <%= @case_module.dictionary %>
   </p>
 
-  <p>
-    <strong>Privacidade:</strong>
-    <%= @case_module.privacy %>
-  </p>
-
-
   <div class="actions">
-    <%= link_to 'Visualizar tópicos', case_module_topics_path(@case_module)%>
-  </div>
-
-  <div class="actions">
-    <%= link_to 'Editar', edit_case_module_path(@case_module) %> |
+    <%if !current_user.student? %>
+      <%= link_to 'Editar Módulo', edit_case_module_path(@case_module) %>
+      <%= link_to 'Novo Assunto', new_case_module_topic_path(@case_module) %>
+    <%end%>  
+    <%= link_to 'Visualizar Assuntos', case_module_topics_path(@case_module)%>
     <%= link_to 'Voltar', case_modules_path %>
   </div>
 </div>

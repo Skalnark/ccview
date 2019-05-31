@@ -1,0 +1,18 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+	<h1>Novo termo</h1>
+
+	<%if !current_user.student? %>
+		<%= render 'form', dictionary: @dictionary %>
+		<div class="actions">
+			<%= link_to 'Voltar', dictionaries_path %>
+		</div>
+	<%else%>
+		<div class="actions">
+			Você não possui autorização para adicionar um novo módulo.
+			<br>
+			<br>
+			<%= link_to 'Voltar', dictionaries_path %>
+		</div>
+	<%end%>
+</div>

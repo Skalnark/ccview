@@ -1,0 +1,20 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+
+  <div style="text-align:center">
+    <%= image_tag(@topic.image) if @topic.image.attached? %><br>
+
+    <p>
+    <strong><%= @topic.image_label %></strong>
+    </p>
+
+    <p>
+      <strong>Descrição:</strong>
+      <pre><%= @topic.image_description %></pre>
+    </p>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Voltar', case_module_topic_path(@module, @topic) %>
+  </div>
+</div>

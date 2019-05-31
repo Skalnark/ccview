@@ -1,0 +1,35 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+  <p id="notice"><%= notice %></p>
+
+  <h1>Dicionário de termos</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Termo</th>
+        <th>Descrição</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @dictionaries.each do |dictionary| %>
+        <tr>
+          <td><%= dictionary.term %></td>
+          <td><%= dictionary.description %></td>
+
+          <% if current_user.admin?%>
+            <td><%= link_to 'Editar', edit_dictionary_path(dictionary) %></td>
+            <td><%= link_to 'Excluir', dictionary, method: :delete, data: { confirm: 'Apagar termo e descição?' } %></td>
+          <%end%>
+        </tr>
+      <% end %>
+    </tbody>
+    
+  </table>
+
+  <br>
+
+  <%= link_to 'Inserir novo termo', new_dictionary_path %>
+</div>

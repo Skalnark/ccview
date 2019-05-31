@@ -14,13 +14,25 @@ class ClinicCasesController < ApplicationController
   # GET /clinic_cases/1
   # GET /clinic_cases/1.json
   def show
-    @image_counter = 0
     @clinic_case =  @topic.clinic_cases.find(params[:id])
+  end
+
+  # GET /clinic_cases/1/show_image/1
+  # GET /clinic_cases/1/show_image/1.json
+  def show_image
+    @clinic_case = @topic.clinic_cases.find(params[:id])
+    @image_id = params[:image_id]
   end
 
   # GET /clinic_cases/new
   def new
-    @clinic_case =  @topic.clinic_cases.new
+    session[:clinic_case_params] ||= {}
+    session[:clinic_case_imgs] ||= []
+    @clinic_case = @topic.clinic_cases.new(session[:clinic_case_params])
+    @clinic_case.current_step = session[:clinic_case_step]
+    if session[:clinic_case_imgs]
+      attach_blobs_to_object()
+    end
   end
 
   # GET /clinic_cases/1/edit
@@ -32,12 +44,62 @@ class ClinicCasesController < ApplicationController
   # POST /clinic_cases.json
   def create
     @clinic_case = @topic.clinic_cases.new(clinic_case_params)
+    @clinic_case.current_step = session[:clinic_case_step]
 
-    respond_to do |format|
-      if @clinic_case.save
-        format.html { redirect_to [@topic, @clinic_case], notice: 'Caso clínico foi criado com sucesso.' }
-        format.json { render :show, status: :created, location: @clinic_case }
+    # In case user alerady chosen images and didn't want to change them
+    if session[:clinic_case_imgs] && !params[:clinic_case][:images]
+      attach_blobs_to_object()
+    end
+
+    if @clinic_case.valid?
+
+      # In case user chosen new images, so we need to save them in a session
+      if params[:clinic_case][:images]
+        session[:clinic_case_imgs] = []
+        @clinic_case.images.each_with_index do |image, i|
+          session[:clinic_case_imgs][i] = image.signed_id
+        end
+        params[:clinic_case].delete(:images)
+      end
+
+      if params[:clinic_case][:image_label]
+        change_hash_key_to_i()
+      end
+
+      session[:clinic_case_params].deep_merge!(params[:clinic_case].to_unsafe_h) if params[:clinic_case].to_unsafe_h
+      @clinic_case = @topic.clinic_cases.new(session[:clinic_case_params])
+      if session[:clinic_case_imgs]
+        attach_blobs_to_object()
+      end
+
+      @clinic_case.current_step = session[:clinic_case_step]
+      if params[:back_button]
+        @clinic_case.previous_step
+
       else
+        if @clinic_case.last_step?
+          @clinic_case.save       
+
+        else
+          @clinic_case.next_step
+        end
+      end
+      
+      session[:clinic_case_step] = @clinic_case.current_step
+      respond_to do |format|
+        if @clinic_case.new_record?
+          format.html { render :new }
+          format.json { render json: @clinic_case.errors, status: :unprocessable_entity }
+
+        else
+          session[:clinic_case_step] = session[:clinic_case_params] = session[:clinic_case_imgs] = nil
+          format.html { redirect_to [@topic, @clinic_case], notice: 'Caso clínico foi criado com sucesso.' }
+          format.json { render :show, status: :created, location: @clinic_case }
+        end
+      end
+
+    else
+      respond_to do |format|
         format.html { render :new }
         format.json { render json: @clinic_case.errors, status: :unprocessable_entity }
       end
@@ -48,14 +110,32 @@ class ClinicCasesController < ApplicationController
   # PATCH/PUT /clinic_cases/1.json
   def update
     @clinic_case =  @topic.clinic_cases.find(params[:id])
-
+    @clinic_case.current_step = session[:clinic_case_step]
     respond_to do |format|
-      if @clinic_case.update(clinic_case_params)
-        format.html { redirect_to [@topic, @clinic_case], notice: 'Caso clínico foi atualizado com sucesso.' }
-        format.json { render :show, status: :ok, location: @clinic_case }
-      else
+      if params[:back_button]
+        @clinic_case.previous_step
+        session[:clinic_case_step] = @clinic_case.current_step
         format.html { render :edit }
         format.json { render json: @clinic_case.errors, status: :unprocessable_entity }
+
+      else
+        if @clinic_case.update(clinic_case_params)
+          if @clinic_case.last_step?
+            session[:clinic_case_step] = nil
+            format.html { redirect_to [@topic, @clinic_case], notice: 'Caso clínico foi atualizado com sucesso.' }
+            format.json { render :show, status: :ok, location: @clinic_case }
+
+          else
+            @clinic_case.next_step
+            session[:clinic_case_step] = @clinic_case.current_step
+            format.html { render :edit }
+            format.json { render json: @clinic_case.errors, status: :unprocessable_entity }
+          end
+
+        else
+          format.html { render :edit }
+          format.json { render json: @clinic_case.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -64,11 +144,12 @@ class ClinicCasesController < ApplicationController
   # DELETE /clinic_cases/1.json
   def destroy
     @clinic_case =  @topic.clinic_cases.find(params[:id])
-    @clinic_case.destroy
-
+  
     respond_to do |format|
-      format.html { redirect_to topic_clinic_cases_path(@topic), notice: 'Caso clínico foi destruído com sucesso.' }
-      format.json { head :no_content }
+      if @clinic_case.destroy
+        format.html { redirect_to topic_clinic_cases_path(@topic), notice: 'Caso clínico foi excluído com sucesso.' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -84,6 +165,31 @@ class ClinicCasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clinic_case_params
-      params.require(:clinic_case).permit(:title, :clinicInformation, :description, :caseEvolution, :extraInformation, :term, images: [])
+      params.require(:clinic_case).permit(:title, :clinicInformation, :description, :caseEvolution, :extraInformation, :term, images: [], image_label: {}, image_description: {})
+    end
+
+    def attach_blobs_to_object
+      blobs = Array.new
+      session[:clinic_case_imgs].each_with_index do |image_id, i|
+        blobs.push(ActiveStorage::Blob.find_signed(image_id))
+      end
+      @clinic_case.images.attach(blobs)
+    end
+
+    def change_hash_key_to_i
+      image_label = Hash.new
+      image_description = Hash.new
+      params[:clinic_case][:image_label].each do |key, label|
+        image_label[key.to_i] = label
+      end
+
+      params[:clinic_case][:image_description].each do |key, description|
+        image_description[key.to_i] = description
+      end
+
+      params[:clinic_case][:image_label] = {}
+      params[:clinic_case][:image_label] = image_label
+      params[:clinic_case][:image_description] = {}
+      params[:clinic_case][:image_description] = image_description
     end
 end

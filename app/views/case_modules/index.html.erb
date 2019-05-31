@@ -2,39 +2,44 @@
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
 
-  <h1>Módulos dos Casos</h1>
+  <h1>Módulos</h1>
 
   <%= form_tag(case_modules_path, method: :get) do %>
       <%= text_field_tag :term, params[:term] %>
       <%= submit_tag 'Buscar', name: nil %>
   <% end %>
 
-  <%= link_to 'Novo Módulo', new_case_module_path %>
+	<%if !current_user.student? %>
+    <%= link_to 'Novo Módulo', new_case_module_path %>
+  <%end%>
 
-  <ol>
-    <% @case_modules.each do |case_module| %>
-      <li>
-        <% div_id = "#{case_module.id}" -%>
-        <div class='clinic_case_item', id="<%= div_id -%>">
-          <a href="/case_modules/<%= div_id -%>">
-            <div class='item_image'>
-              <%= image_tag(case_module.image, :class => "image") if case_module.image.attached? %><br>
-            </div>
-
-            <div class='separator_line'></div>
-            
-            <div class='item_description'>
-              <div class='item_description_title'>
-                <%= case_module.title %>
+  <div class="model_items">
+    <p style='text-align: center;'><b>Clique na imagem para visualizar o módulo.</b></p>
+    <ol>
+      <% @case_modules.each do |case_module| %>
+        <li>
+          <% div_id = "#{case_module.id}" -%>
+          <div class='clinic_case_item', id="<%= div_id -%>">
+            <a href="/case_modules/<%= div_id -%>">
+              <div class='item_image'>
+                <div class="item_image_inner">
+                  <%= image_tag(case_module.thumbnail) if case_module.image.attached? %>  
+                </div>
               </div>
-              <pre> <%= case_module.description %> </pre>
-            </div>
-          </a>
-        </div>
-      </li>
-    <% end%>
-  </ol>
 
+              <div class='separator_line'></div>
+              
+              <div class='item_description'>
+                <div class='item_description_title'>
+                  <%= case_module.title %>
+                </div>
+                <pre> <%= case_module.description %> </pre>
+              </div>
+            </a>
+          </div>
+        </li>
+      <% end%>
+    </ol>    
+  </div>
   <br>
-
 </div>

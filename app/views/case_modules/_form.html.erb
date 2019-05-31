@@ -1,7 +1,7 @@
 <%= form_for(@case_module, html:{class:'form-style-5'}) do |form| %>
   <% if case_module.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(case_module.errors.count, "error") %> prohibited this case_module from being saved:</h2>
+      <h2><%= pluralize(case_module.errors.count, "error") %> proibiram esse Módulo de ser salvo:</h2>
 
       <ul>
       <% case_module.errors.full_messages.each do |message| %>
@@ -9,34 +9,20 @@
       <% end %>
       </ul>
     </div>
+    <br>
   <% end %>
 
-  <div class="field">
-    Título: <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    Imagem: <br> <%= form.file_field :image%><br><br>
-  </div>
-
-  <div class="field">
-    Descrições do Modulo: <br> <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    Autor(es) do Módulo: <br> <%= form.text_area :author %>
-  </div>
-
-  <div class="field">
-    Dicionário: <br> <%= form.text_area :dictionary %>
-  </div>
-
-  <div class="field">
-    Privacidade: <br> <%= form.text_area :privacy %>
-  </div>
+  <%= render "#{@case_module.current_step}_step", :form => form %>
 
   <div class="actions">
-    <%= form.submit "Criar Módulo"%> | 
-    <%= link_to 'Voltar', case_modules_path %>
+    <% if @case_module.first_step?%>
+      <%= form.submit "Próximo"%>
+    <% elsif @case_module.new_record?%>
+      <%= form.submit "Criar Módulo"%>
+    <%else%>
+      <%= form.submit "Atualizar Módulo"%>
+    <%end%>
+
+    <%= form.submit "Voltar etapa", :name => "back_button" unless @case_module.first_step? %>
   </div>
 <% end %>
