@@ -12,6 +12,11 @@
     <strong>Informações Clínicas:</strong>
     <%= @clinic_case.clinicInformation %>
   </p>
+
+  <p>
+    <strong>Legendas das imagens:</strong>
+    <%= @clinic_case.image_label %>
+  </p>
   <table>
     <tr>
       <% @clinic_case.images.each_with_index do |image, i| %>

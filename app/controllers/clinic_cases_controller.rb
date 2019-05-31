@@ -31,11 +31,7 @@ class ClinicCasesController < ApplicationController
     @clinic_case = @topic.clinic_cases.new(session[:clinic_case_params])
     @clinic_case.current_step = session[:clinic_case_step]
     if session[:clinic_case_imgs]
-      blobs = Array.new
-      session[:clinic_case_imgs].each_with_index do |image_id, i|
-        blobs.push(ActiveStorage::Blob.find_signed(image_id))
-      end
-      @clinic_case.images.attach(blobs)
+      attach_blobs_to_object()
     end
   end
 
@@ -49,32 +45,31 @@ class ClinicCasesController < ApplicationController
   def create
     @clinic_case = @topic.clinic_cases.new(clinic_case_params)
     @clinic_case.current_step = session[:clinic_case_step]
+
+    # In case user alerady chosen images and didn't want to change them
     if session[:clinic_case_imgs] && !params[:clinic_case][:images]
-      # here how validation will work
-      blobs = Array.new
-      session[:clinic_case_imgs].each_with_index do |image_id, i|
-        blobs.push(ActiveStorage::Blob.find_signed(image_id))
-      end
-      @clinic_case.images.attach(blobs)
+      attach_blobs_to_object()
     end
 
     if @clinic_case.valid?
+
+      # In case user chosen new images, so we need to save them in a session
       if params[:clinic_case][:images]
+        session[:clinic_case_imgs] = []
         @clinic_case.images.each_with_index do |image, i|
           session[:clinic_case_imgs][i] = image.signed_id
         end
         params[:clinic_case].delete(:images)
       end
 
+      if params[:clinic_case][:image_label]
+        change_hash_key_to_i()
+      end
+
       session[:clinic_case_params].deep_merge!(params[:clinic_case].to_unsafe_h) if params[:clinic_case].to_unsafe_h
       @clinic_case = @topic.clinic_cases.new(session[:clinic_case_params])
       if session[:clinic_case_imgs]
-        # here how validation will work
-        blobs = Array.new
-        session[:clinic_case_imgs].each_with_index do |image_id, i|
-          blobs.push(ActiveStorage::Blob.find_signed(image_id))
-        end
-        @clinic_case.images.attach(blobs)
+        attach_blobs_to_object()
       end
 
       @clinic_case.current_step = session[:clinic_case_step]
@@ -104,14 +99,6 @@ class ClinicCasesController < ApplicationController
       end
 
     else
-      if session[:clinic_case_imgs]
-        blobs = Array.new
-        session[:clinic_case_imgs].each_with_index do |image_id, i|
-          blobs.push(ActiveStorage::Blob.find_signed(image_id))
-        end
-        @clinic_case.images.attach(blobs)
-      end
-
       respond_to do |format|
         format.html { render :new }
         format.json { render json: @clinic_case.errors, status: :unprocessable_entity }
@@ -179,5 +166,30 @@ class ClinicCasesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def clinic_case_params
       params.require(:clinic_case).permit(:title, :clinicInformation, :description, :caseEvolution, :extraInformation, :term, images: [], image_label: {}, image_description: {})
+    end
+
+    def attach_blobs_to_object
+      blobs = Array.new
+      session[:clinic_case_imgs].each_with_index do |image_id, i|
+        blobs.push(ActiveStorage::Blob.find_signed(image_id))
+      end
+      @clinic_case.images.attach(blobs)
+    end
+
+    def change_hash_key_to_i
+      image_label = Hash.new
+      image_description = Hash.new
+      params[:clinic_case][:image_label].each do |key, label|
+        image_label[key.to_i] = label
+      end
+
+      params[:clinic_case][:image_description].each do |key, description|
+        image_description[key.to_i] = description
+      end
+
+      params[:clinic_case][:image_label] = {}
+      params[:clinic_case][:image_label] = image_label
+      params[:clinic_case][:image_description] = {}
+      params[:clinic_case][:image_description] = image_description
     end
 end
