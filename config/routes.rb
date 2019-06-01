@@ -15,7 +15,9 @@ Rails.application.routes.draw do
 	end
 
 	resources :topics do
-		resources :clinic_cases, :name_prefix => "topic_"
+		resources :clinic_cases, :name_prefix => "topic_" do
+			get 'show_image/:image_id', as: 'image', to: 'clinic_cases#show_image'
+		end
 	end
 
 	resources :clinic_cases

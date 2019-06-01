@@ -23,7 +23,13 @@
         <% if i != 0 && i % 3 == 0 %>
           </tr><tr>
         <%end%>
-        <td><%= image_tag(@clinic_case.thumbnail(i))%></td>
+        <td>
+          <div class="image_button">
+            <%= link_to topic_clinic_case_image_path(@topic, @clinic_case, :image_id => i) do %>
+              <%= image_tag(@clinic_case.thumbnail(i)) %>
+            <% end %><br>
+          </div>
+          </td>
           <br>
       <%end%>
     </tr>

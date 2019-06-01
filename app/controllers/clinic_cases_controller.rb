@@ -20,8 +20,8 @@ class ClinicCasesController < ApplicationController
   # GET /clinic_cases/1/show_image/1
   # GET /clinic_cases/1/show_image/1.json
   def show_image
-    @clinic_case = @topic.clinic_cases.find(params[:id])
-    @image_id = params[:image_id]
+    @clinic_case = @topic.clinic_cases.find(params[:clinic_case_id])
+    @image_id = params[:image_id].to_i
   end
 
   # GET /clinic_cases/new
@@ -119,6 +119,9 @@ class ClinicCasesController < ApplicationController
         format.json { render json: @clinic_case.errors, status: :unprocessable_entity }
 
       else
+        if params[:clinic_case][:image_label]
+          change_hash_key_to_i()
+        end
         if @clinic_case.update(clinic_case_params)
           if @clinic_case.last_step?
             session[:clinic_case_step] = nil

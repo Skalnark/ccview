@@ -1,0 +1,20 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+
+  <div style="text-align:center">
+    <%= image_tag(@clinic_case.images[@image_id])%><br>
+
+    <p>
+    <strong><%= @clinic_case.image_label[@image_id] %></strong>
+    </p>
+
+    <p>
+      <strong>Descrição:</strong>
+      <pre><%= @clinic_case.image_description[@image_id] %></pre>
+    </p>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Voltar', topic_clinic_case_path(@topic, @clinic_case) %>
+  </div>
+</div>
