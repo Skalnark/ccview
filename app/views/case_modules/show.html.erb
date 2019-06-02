@@ -26,9 +26,26 @@
 
   <p>
     <strong>Dicionário:</strong>
-    <%= @case_module.dictionary %>
   </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Termo</th>
+        <th>Descrição</th>
+      </tr>
+    </thead>
 
+    <tbody>
+      <% @case_module.dictionaries.each do |dictionary| %>
+        <tr>
+          <td><%= dictionary.term %></td>
+          <td><%= dictionary.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    
+</table>
+  
   <div class="actions">
     <%if !current_user.student? %>
       <%= link_to 'Editar Módulo', edit_case_module_path(@case_module) %>

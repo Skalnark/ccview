@@ -18,7 +18,23 @@
 <div class="field">
 	Autor(es) do Módulo: <br> <%= form.text_area :author %>
 </div>
+<table>
+    <thead>
+      <tr>
+        <th>Termo</th>
+        <th>Descrição</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
 
-<div class="field">
-	Dicionário: <br> <%= form.text_area :dictionary %>
-</div>
+    <tbody>
+      <% @dictionaries.each do |dictionary| %>
+        <tr>
+          <td><%= dictionary.term %></td>
+          <td><%= dictionary.description %></td>
+          <td><%= check_box_tag 'options[]', dictionary.id, checked = true, {multiple:true} %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    
+</table>

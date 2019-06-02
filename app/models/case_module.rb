@@ -1,5 +1,6 @@
 class CaseModule < ApplicationRecord
 	has_many :topics, :dependent => :destroy
+	has_and_belongs_to_many :dictionaries
 	has_one_attached :image
 	validate :is_description_module_fields_nil, on: [:create, :update], :if => lambda { |o| o.current_step == "description" }
 	validate :is_an_image_type_module, on: [:create, :update], :if => lambda { |o| o.current_step == "description" }

@@ -1,5 +1,7 @@
 class CaseModulesController < ApplicationController
   before_action :set_case_module, only: [:show, :edit, :update, :destroy]
+  before_action :set_dictionary, only: [:new, :create, :edit, :update]
+  before_action :save_dictionary_on_session, only: [:create, :update]
 
   # GET /case_modules
   # GET /case_modules.json
@@ -24,6 +26,7 @@ class CaseModulesController < ApplicationController
   # GET /case_modules/new
   def new
     session[:module_params] ||= {}
+    session[:dicionary_bool] ||= {}
     @case_module = CaseModule.new(session[:module_params])
     @case_module.current_step = session[:module_step]
     if session[:module_img]
@@ -33,6 +36,7 @@ class CaseModulesController < ApplicationController
 
   # GET /case_modules/1/edit
   def edit
+    session[:dicionary_bool] ||= {}
     @case_module.current_step = session[:module_step]
   end
 
@@ -67,6 +71,7 @@ class CaseModulesController < ApplicationController
 
       else
         if @case_module.last_step?
+          set_dictionary_to_module()
           @case_module.save       
 
         else
@@ -114,6 +119,7 @@ class CaseModulesController < ApplicationController
       else
         if @case_module.update(case_module_params)
           if @case_module.last_step?
+            set_dictionary_to_module()
             session[:module_step] = nil
             format.html { redirect_to @case_module, notice: 'Módulo foi atualizado com sucesso.' }
             format.json { render :show, status: :ok, location: @case_module }
@@ -152,6 +158,49 @@ class CaseModulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def case_module_params
-      params.require(:case_module).permit(:title, :description, :author, :dictionary, :term, :image, :image_label, :image_description)
+      params.require(:case_module).permit(:title, :description, :author, :term, :image, :image_label, :image_description, options: [])
+    end
+
+    def set_dictionary
+      @dictionaries = Dictionary.all
+    end
+
+    def save_dictionary_on_session
+      if !params[:back_button]
+        if params[:options]
+          session[:dicionary_bool].each do |id, value|
+            session[:dicionary_bool][id] = false
+          end
+
+          params[:options].each do |id|
+            session[:dicionary_bool][id] = true
+          end
+          puts ''
+          puts 'SALVOU O DIC NO SESSION'
+          puts session[:dicionary_bool]
+          puts ''
+
+        elsif !params[:options] && params[:case_module][:title]
+          session[:dicionary_bool] = {}
+          puts ''
+          puts 'SALVOU DIC VAZIO PQ N TINHA OPÇÕES SELECIONADAS'
+          puts session[:dicionary_bool]
+          puts ''
+        end
+      end
+    end
+
+    def set_dictionary_to_module
+      session[:dicionary_bool].each do |id, value|
+        if value
+          dic = Dictionary.find(id)
+          @case_module.dictionaries << dic
+          puts ''
+          puts 'SALVOU O DIC NO MODULO'
+          puts @case_module.dictionaries
+          puts ''
+        end
+      end
+      session[:dicionary_bool] = nil
     end
 end
