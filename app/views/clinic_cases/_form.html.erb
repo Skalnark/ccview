@@ -1,7 +1,7 @@
 <%= form_for([@topic, @clinic_case], html:{class:'form-style-5'}) do |form| %>
   <% if clinic_case.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(clinic_case.errors.count, "error") %> proibiram esse Caso Clínico de ser salvo:</h2>
+      <h2><%= pluralize(clinic_case.errors.count, "error") %> impediram esse Caso Clínico de ser salvo:</h2>
 
       <ul>
       <% clinic_case.errors.full_messages.each do |message| %>
@@ -22,6 +22,6 @@
       <%= form.submit "Atualizar Caso Clínico"%>
     <%end%>
 
-    <%= form.submit "Voltar etapa", :name => "back_button" unless @clinic_case.first_step? %>
+    <%= form.submit "Anterior", :name => "back_button" unless @clinic_case.first_step? %>
   </div>
 <% end %>
