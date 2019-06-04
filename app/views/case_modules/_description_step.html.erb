@@ -18,6 +18,15 @@
 <div class="field">
 	Autor(es) do Módulo: <br> <%= form.text_area :author %>
 </div>
+
+<p> Dicionário do Módulo: <br></p>
+<p style="font-size: 15px;"><b> Selecione os termos que deseja adicionar ao módulo </b></p>
+<p style="font-size: 15px; float: left"><b> Adicione um novo termo, se não existir: </b></p>
+
+<div class="dictionary-button">
+  <%= link_to "Adicionar", new_dictionary_path %>
+</div>
+
 <table>
     <thead>
       <tr>
@@ -32,8 +41,7 @@
         <tr>
           <td><%= dictionary.term %></td>
           <td><%= dictionary.description %></td>
-          <td><%= check_box_tag 'options[]', dictionary.id, checked = true, {multiple:true} %></td>
-        </tr>
+          <td><%= check_box_tag 'options[]', dictionary.id, checked = (session[:dicionary_bool][dictionary.id.to_s] == true ? true : false), {multiple:true} %></td>
       <% end %>
     </tbody>
     

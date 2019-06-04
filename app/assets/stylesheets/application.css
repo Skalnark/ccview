@@ -150,6 +150,13 @@ a:visited {
     background: #c20018;
 }
 
+.dictionary-button a,
+.dictionary-button a:hover{
+    width: 10vw;
+    padding: 6px 0px;
+    margin: 5px 5px;
+}
+
 /*Table stylesheets*/
 .form-style-5 table {
     border-collapse: collapse;
