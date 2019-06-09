@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 	resources :topics do
 		resources :clinic_cases, :name_prefix => "topic_" do
 			get 'show_image/:image_id', as: 'image', to: 'clinic_cases#show_image'
+			delete 'show_image/:image_id', as: 'delete_image', to: 'clinic_cases#delete_image'
 		end
 	end
 

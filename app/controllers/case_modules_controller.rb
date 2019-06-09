@@ -175,17 +175,9 @@ class CaseModulesController < ApplicationController
           params[:options].each do |id|
             session[:dicionary_bool][id] = true
           end
-          puts ''
-          puts 'SALVOU O DIC NO SESSION'
-          puts session[:dicionary_bool]
-          puts ''
 
         elsif !params[:options] && params[:case_module][:title]
           session[:dicionary_bool] = {}
-          puts ''
-          puts 'SALVOU DIC VAZIO PQ N TINHA OPÇÕES SELECIONADAS'
-          puts session[:dicionary_bool]
-          puts ''
         end
       end
     end

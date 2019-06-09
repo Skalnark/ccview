@@ -156,6 +156,23 @@ class ClinicCasesController < ApplicationController
     end
   end
 
+  # DELETE /clinic_cases/1/show_image
+  # DELETE /clinic_cases/1/show_image.json
+  def delete_image
+    @clinic_case = @topic.clinic_cases.find(params[:clinic_case_id])
+    @image_id = params[:image_id].to_i
+    respond_to do |format|
+      if @clinic_case.images[@image_id].purge()
+        update_hash_after_delete()
+        format.html { redirect_to [@topic, @clinic_case], notice: 'Imagem do caso clínico foi excluído com sucesso.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to [@topic, @clinic_case] }
+        format.json { render json: @clinic_case.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_clinic_case
@@ -194,5 +211,15 @@ class ClinicCasesController < ApplicationController
       params[:clinic_case][:image_label] = image_label
       params[:clinic_case][:image_description] = {}
       params[:clinic_case][:image_description] = image_description
+    end
+
+    def update_hash_after_delete
+      for i in @image_id...@clinic_case.image_label.length
+        if i != (@clinic_case.image_label.length - 1)
+          @clinic_case.image_label[i] = @clinic_case.image_label[i+1]
+          @clinic_case.image_description[i] = @clinic_case.image_description[i+1]
+        end
+      end
+      @clinic_case.save
     end
 end

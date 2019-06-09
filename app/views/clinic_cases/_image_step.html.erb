@@ -1,7 +1,4 @@
 <div>
-	<% @clinic_case.image_label.each do |key, label| %>
-		<% label %>
-	<% end %>
 	<% @clinic_case.images.each_with_index do |image, i| %>
 		<div>
 	        <%= image_tag(@clinic_case.thumbnail(i))%>
@@ -17,7 +14,7 @@
 		<div class="field">
 			Descrição da Imagem: <br> 
 			<%= form.fields_for :image_description do |o| %>
-	        	<%= o.text_field "#{i}" %>
+	        	<%= o.text_area "#{i}" %>
 	    	<% end %>
 		</div>
   	<%end%>
