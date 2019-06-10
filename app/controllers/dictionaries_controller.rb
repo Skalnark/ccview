@@ -4,7 +4,7 @@ class DictionariesController < ApplicationController
   # GET /dictionaries
   # GET /dictionaries.json
   def index
-    @dictionaries = Dictionary.all
+    @dictionaries = Dictionary.all.order('term ASC')
   end
 
   # GET /dictionaries/1

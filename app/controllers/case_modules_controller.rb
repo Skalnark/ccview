@@ -162,7 +162,7 @@ class CaseModulesController < ApplicationController
     end
 
     def set_dictionary
-      @dictionaries = Dictionary.all
+      @dictionaries = Dictionary.all.order('term ASC')
     end
 
     def save_dictionary_on_session
