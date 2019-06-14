@@ -4,14 +4,16 @@
 		<%= image_tag("/CCVIEW_logo.jpeg", :alt => "logo", :class => "icon") %>
 		<%= link_to "Início", root_path %>
 
-		<%= link_to "Sobre", home_About_path %>
-
 		<% if user_signed_in? %>
 			<%= link_to "Dicionário", dictionaries_path %>
 			<% if current_user.admin?%>
 				<%= link_to "Gerenciar Contas", home_administration_path %>
 			<%end%>
+		<%end%>
 
+		<%= link_to "Sobre", home_About_path %>
+
+		<% if user_signed_in? %>
 			<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
 			<%= current_user.email %>
 		<%else%>

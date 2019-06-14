@@ -1,6 +1,7 @@
 <%= render partial: "layouts/header" %>
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
+  <h1 style='text-align: center;'> Caso Clínico </h1>
   <p style='text-align: center;'><b>Clique na imagem para aumentar sua resolução.</b></p>
 
   <p>
@@ -25,8 +26,7 @@
               <%= image_tag(@clinic_case.thumbnail(i)) %>
             <% end %><br>
           </div>
-          </td>
-          <br>
+        </td>
       <%end%>
     </tr>
   </table>

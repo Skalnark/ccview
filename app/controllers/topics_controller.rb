@@ -24,45 +24,46 @@ class TopicsController < ApplicationController
 
   # GET /topics/new
   def new
-    session[:topic_params] ||= {}
-    @topic = @module.topics.new(session[:topic_params])
-    @topic.current_step = session[:topic_step]
-    if session[:topic_img]
-      @topic.image.attach(ActiveStorage::Blob.find_signed(session[:topic_img]))
+    session[:new_topic_params] ||= {}
+    @topic = @module.topics.new(session[:new_topic_params])
+    @topic.current_step = session[:new_topic_step]
+    if session[:new_topic_img]
+      @topic.image.attach(ActiveStorage::Blob.find_signed(session[:new_topic_img]))
     end
   end
 
   # GET /topics/1/edit
   def edit
     @topic = @module.topics.find(params[:id])
+    @topic.current_step = session[:edit_topic_step]
   end
 
   # POST /topics
   # POST /topics.json
   def create
     @topic = @module.topics.new(topic_params)
-    @topic.current_step = session[:topic_step]
-    if session[:topic_img] && !params[:topic][:image]
+    @topic.current_step = session[:new_topic_step]
+    if session[:new_topic_img] && !params[:topic][:image]
       # here how validation will work
-      @blob = ActiveStorage::Blob.find_signed(session[:topic_img])
+      @blob = ActiveStorage::Blob.find_signed(session[:new_topic_img])
       @topic.image.attach(@blob)
     end
 
     if @topic.valid?
       if params[:topic][:image]
-        session[:topic_img] = @topic.image.signed_id
+        session[:new_topic_img] = @topic.image.signed_id
         params[:topic].delete(:image)
       end
 
-      session[:topic_params].deep_merge!(params[:topic].to_unsafe_h) if params[:topic].to_unsafe_h
-      @topic = @module.topics.new(session[:topic_params])
-      if session[:topic_img]
+      session[:new_topic_params].deep_merge!(params[:topic].to_unsafe_h) if params[:topic].to_unsafe_h
+      @topic = @module.topics.new(session[:new_topic_params])
+      if session[:new_topic_img]
         # here how validation will work
-        @blob = ActiveStorage::Blob.find_signed(session[:topic_img])
+        @blob = ActiveStorage::Blob.find_signed(session[:new_topic_img])
         @topic.image.attach(@blob)
       end
 
-      @topic.current_step = session[:topic_step]
+      @topic.current_step = session[:new_topic_step]
       if params[:back_button]
         @topic.previous_step
 
@@ -75,22 +76,22 @@ class TopicsController < ApplicationController
         end
       end
       
-      session[:topic_step] = @topic.current_step
+      session[:new_topic_step] = @topic.current_step
       respond_to do |format|
         if @topic.new_record?
           format.html { render :new }
           format.json { render json: @topic.errors, status: :unprocessable_entity }
 
         else
-          session[:topic_step] = session[:topic_params] = session[:topic_img] = nil
+          session[:new_topic_step] = session[:new_topic_params] = session[:new_topic_img] = nil
           format.html { redirect_to [@module, @topic], notice: 'Assunto foi criado com sucesso.' }
           format.json { render :show, status: :created, location: @topic }
         end
       end
 
     else
-      if session[:topic_img]
-        @blob = ActiveStorage::Blob.find_signed(session[:topic_img])
+      if session[:new_topic_img]
+        @blob = ActiveStorage::Blob.find_signed(session[:new_topic_img])
         @topic.image.attach(@blob)
       end
 
@@ -105,24 +106,24 @@ class TopicsController < ApplicationController
   # PATCH/PUT /topics/1.json
   def update
     @topic = @module.topics.find(params[:id])
-    @topic.current_step = session[:topic_step]
+    @topic.current_step = session[:edit_topic_step]
     respond_to do |format|
       if params[:back_button]
         @topic.previous_step
-        session[:topic_step] = @topic.current_step
+        session[:edit_topic_step] = @topic.current_step
         format.html { render :edit }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
 
       else
         if @topic.update(topic_params)
           if @topic.last_step?
-            session[:topic_step] = nil
+            session[:edit_topic_step] = nil
             format.html { redirect_to [@module, @topic], notice: 'Assunto foi atualizado com sucesso.' }
             format.json { render :show, status: :ok, location: @topic }
 
           else
             @topic.next_step
-            session[:topic_step] = @topic.current_step
+            session[:edit_topic_step] = @topic.current_step
             format.html { render :edit }
             format.json { render json: @topic.errors, status: :unprocessable_entity }
           end

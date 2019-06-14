@@ -9,7 +9,7 @@
       <%= submit_tag 'Buscar', name: nil %>
   <% end %>
 
-  <%= link_to "Voltar para o Assunto '#{@topic.title}'", case_module_topics_path(@topic.case_module_id, @topic) %>
+  <%= link_to "Voltar para o Assunto '#{@topic.title}'", case_module_topic_path(@topic.case_module_id, @topic) %>
   <br>
   
   <%if !current_user.student? %>
