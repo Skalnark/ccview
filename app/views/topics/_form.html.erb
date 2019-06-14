@@ -23,6 +23,6 @@
       <%= form.submit "Atualizar Assunto"%>
     <%end%>
 
-    <%= form.submit "Voltar etapa", :name => "back_button" unless @topic.first_step? %>
+    <%= form.submit "Anterior", :name => "back_button" unless @topic.first_step? %>
   </div>
 <% end %>

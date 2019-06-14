@@ -19,6 +19,39 @@
 	Autor(es) do Módulo: <br> <%= form.text_area :author %>
 </div>
 
-<div class="field">
-	Dicionário: <br> <%= form.text_area :dictionary %>
+<p> Dicionário do Módulo: <br></p>
+<p style="font-size: 15px; float: left"><b> Adicione um novo termo, se não existir: </b></p>
+
+<div class="dictionary-button">
+  <%= link_to "Adicionar", new_dictionary_path %>
+</div>
+
+<div id="table-wrapper">
+  <div id="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Termo</th>
+          <th>Descrição</th>
+          <th>Selecione</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @dictionaries.each do |dictionary| %>
+          <tr>
+            <td><%= dictionary.term %></td>
+            <td><%= dictionary.description %></td>
+            <td>
+              <% if @current_page == "new" %>
+                <%= check_box_tag 'options[]', dictionary.id, checked = (session[:new_dicionary_bool][dictionary.id.to_s] == true ? true : false), {multiple:true} %>
+              <% else %>
+                <%= check_box_tag 'options[]', dictionary.id, checked = (session[:edit_dicionary_bool][dictionary.id.to_s] == true ? true : false), {multiple:true} %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>  
+    </table>  
+  </div>
 </div>

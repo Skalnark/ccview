@@ -1,6 +1,7 @@
 <%= render partial: "layouts/header" %>
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
+  <h1 style='text-align: center;'> Caso Clínico </h1>
   <p style='text-align: center;'><b>Clique na imagem para aumentar sua resolução.</b></p>
 
   <p>
@@ -13,18 +14,19 @@
     <%= @clinic_case.clinicInformation %>
   </p>
 
-  <p>
-    <strong>Legendas das imagens:</strong>
-    <%= @clinic_case.image_label %>
-  </p>
   <table>
     <tr>
       <% @clinic_case.images.each_with_index do |image, i| %>
         <% if i != 0 && i % 3 == 0 %>
           </tr><tr>
         <%end%>
-        <td><%= image_tag(@clinic_case.thumbnail(i))%></td>
-          <br>
+        <td>
+          <div class="image_button">
+            <%= link_to topic_clinic_case_image_path(@topic, @clinic_case, :image_id => i) do %>
+              <%= image_tag(@clinic_case.thumbnail(i)) %>
+            <% end %><br>
+          </div>
+        </td>
       <%end%>
     </tr>
   </table>

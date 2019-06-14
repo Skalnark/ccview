@@ -94,7 +94,7 @@ pre{
     text-align: center;
 }
 
-/*Buttons stylesheets*/
+/****** Buttons stylesheets ******/
 a:link {
     text-decoration: none;
 }
@@ -150,7 +150,14 @@ a:visited {
     background: #c20018;
 }
 
-/*Table stylesheets*/
+.dictionary-button a,
+.dictionary-button a:hover{
+    width: 10vw;
+    padding: 6px 0px;
+    margin: 5px 5px;
+}
+
+/******* Table stylesheets ******/
 .form-style-5 table {
     border-collapse: collapse;
 }
@@ -170,6 +177,27 @@ a:visited {
     color:hsl(0, 0%, 35%);
     box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
     margin-bottom: 30px;
+}
+
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  height:126px;
+  overflow:auto;  
+  margin-top:20px;
+}
+#table-wrapper table {
+  width:100%;
+
+}
+#table-wrapper table thead th .text {
+  position:absolute;   
+  top:-20px;
+  z-index:2;
+  height:20px;
+  width:35%;
+  border:1px solid red;
 }
 
 /*Images stylesheets*/

@@ -1,7 +1,7 @@
 <%= form_for(@case_module, html:{class:'form-style-5'}) do |form| %>
   <% if case_module.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(case_module.errors.count, "error") %> proibiram esse Módulo de ser salvo:</h2>
+      <h2><%= pluralize(case_module.errors.count, "error") %> impediram esse Módulo de ser salvo:</h2>
 
       <ul>
       <% case_module.errors.full_messages.each do |message| %>
@@ -23,6 +23,6 @@
       <%= form.submit "Atualizar Módulo"%>
     <%end%>
 
-    <%= form.submit "Voltar etapa", :name => "back_button" unless @case_module.first_step? %>
+    <%= form.submit "Anterior", :name => "back_button" unless @case_module.first_step? %>
   </div>
 <% end %>

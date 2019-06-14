@@ -1,0 +1,23 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+
+  <div style="text-align:center">
+    <%= image_tag(@clinic_case.images[@image_id])%><br>
+
+    <p>
+    <strong><%= @clinic_case.image_label[@image_id] %></strong>
+    </p>
+
+    <p>
+      <strong>Descrição:</strong>
+      <pre><%= @clinic_case.image_description[@image_id] %></pre>
+    </p>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Voltar', topic_clinic_case_path(@topic, @clinic_case) %>
+    <%if !current_user.student? %>
+      <%= link_to 'Deletar Imagem', topic_clinic_case_delete_image_path(@topic, @clinic_case, @image_id), method: :delete, data: { confirm: 'Deseja mesmo apagar a imagem?' } %>
+    <%end%>
+  </div>
+</div>

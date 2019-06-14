@@ -1,25 +1,39 @@
 <div>
-	<% @clinic_case.image_label.each do |key, label| %>
-		<% label %>
-	<% end %>
 	<% @clinic_case.images.each_with_index do |image, i| %>
 		<div>
 	        <%= image_tag(@clinic_case.thumbnail(i))%>
 		</div>
 
 		<div class="field">
-			Legenda: <br> 
+		    Legenda da Imagem: <br>
 			<%= form.fields_for :image_label do |o| %>
-	        	<%= o.text_field "#{i}" %>
+				<% if session[:clinic_case_params] != nil %>
+					<% if session[:clinic_case_params]["image_label"] != nil %>
+						<% label_value = session[:clinic_case_params]["image_label"][i.to_s] %>
+					<%end%>
+				<% else %>
+					<% label_value = @clinic_case.image_label[i] %>
+				<% end %>
+
+	        	<%= o.text_field "#{i}", :value => label_value %>
 	    	<% end %>
 		</div>
 
 		<div class="field">
 			Descrição da Imagem: <br> 
 			<%= form.fields_for :image_description do |o| %>
-	        	<%= o.text_field "#{i}" %>
+				<% if session[:clinic_case_params] != nil %>
+					<% if session[:clinic_case_params]["image_description"] != nil %>
+						<% description_value = session[:clinic_case_params]["image_description"][i.to_s] %>
+					<%end%>
+				<% else %>
+					<% description_value = @clinic_case.image_description[i] %>
+				<% end %>
+
+	        	<%= o.text_area "#{i}", :value => description_value %>
 	    	<% end %>
 		</div>
-  	<%end%>
+
+	<%end%>
 </div>
 
