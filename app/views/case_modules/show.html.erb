@@ -2,11 +2,9 @@
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
   <h1 style='text-align: center;'> Módulo </h1>
-  <p style='text-align: center;'><b>Clique na imagem para aumentar sua resolução.</b></p>
 
   <p>
-    <strong>Título:</strong>
-    <%= @case_module.title %>
+    <h2><u><%= @case_module.title %></u></h2>
   </p>
   
   <p>
@@ -15,6 +13,9 @@
   <pre><%= @case_module.description %></pre>
 
   <div class="image_button">
+    <p style='text-align: left; font-size: 12px; margin-bottom: 6px;'>
+      <i>Clique na imagem para aumentar sua resolução.</i>
+    </p>
     <%= link_to image_case_module_path(@case_module) do %>
       <%= image_tag(@case_module.thumbnail) if @case_module.image.attached? %>
     <% end %><br>

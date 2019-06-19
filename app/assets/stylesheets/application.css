@@ -258,6 +258,7 @@ a:visited {
     position: relative;
     display: inline-block;
     padding-inline-start: 0px;
+    margin-top: 6px;
 }
 .model_items li{
     float: left;
