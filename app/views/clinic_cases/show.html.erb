@@ -2,18 +2,18 @@
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
   <h1 style='text-align: center;'> Caso Clínico </h1>
-  <p style='text-align: center;'><b>Clique na imagem para aumentar sua resolução.</b></p>
 
   <p>
-    <strong>Título:</strong>
-    <%= @clinic_case.title %>
+    <h2><u><%= @clinic_case.title %></u></h2>
   </p>
 
   <p>
     <strong>Informações Clínicas:</strong>
     <%= @clinic_case.clinicInformation %>
   </p>
-
+  <p style='text-align: left; font-size: 12px; margin-bottom: 6px;'>
+    <i>Clique na imagem para aumentar sua resolução.</i>
+  </p>
   <table>
     <tr>
       <% @clinic_case.images.each_with_index do |image, i| %>
