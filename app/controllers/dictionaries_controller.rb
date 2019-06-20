@@ -21,6 +21,10 @@ class DictionariesController < ApplicationController
   def edit
   end
 
+  def module_dic
+    @module = CaseModule.find(params[:case_module_id])
+  end
+
   # POST /dictionaries
   # POST /dictionaries.json
   def create

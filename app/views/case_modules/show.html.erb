@@ -25,27 +25,16 @@
     <%= @case_module.author %>
   </p>
 
-  <p>
+  <p style='margin-bottom: 0px;'>
     <strong>Dicionário:</strong>
   </p>
-  <table>
-    <thead>
-      <tr>
-        <th>Termo</th>
-        <th>Descrição</th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <% @case_module.dictionaries.each do |dictionary| %>
-        <tr>
-          <td><%= dictionary.term %></td>
-          <td><%= dictionary.description %></td>
-        </tr>
-      <% end %>
-    </tbody>
-    
-</table>
+  <div class="dictionary-button">
+    <%= link_to module_dic_dictionaries_path(@case_module) do %>
+      <%= "Dicionário" %>
+      <% session[:back_dic] = {"type" => "module", "id" => @case_module.id} %>
+    <% end %>
+  </div>
   
   <div class="actions">
     <%if !current_user.student? %>

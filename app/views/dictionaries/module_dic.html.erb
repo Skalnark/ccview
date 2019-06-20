@@ -1,0 +1,52 @@
+<%= render partial: "layouts/header" %>
+<div class='form-style-5'>
+  <p id="notice"><%= notice %></p>
+
+  <h1>
+    <%= "Dicionário de termos do Módulo '#{@module.title}'" %>
+  </h1>
+
+  <br>
+
+  <div id="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Termo</th>
+          <th>Descrição</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @module.dictionaries.each do |dictionary| %>
+          <tr>
+            <td><%= dictionary.term %></td>
+            <td><%= dictionary.description %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="actions">
+    <% if session[:back_dic]["type"] == "module" %>
+      <%= link_to case_module_path(session[:back_dic]["id"]) do %>
+        <%= "Voltar" %>
+      <% end%>
+
+      <% session[:back_dic] = nil %>
+    <% elsif session[:back_dic]["type"] == "topic" %>
+      <%= link_to case_module_topic_path(session[:back_dic]["module_id"], session[:back_dic]["topic_id"]) do %>
+        <%= "Voltar" %>
+      <% end%>
+
+      <% session[:back_dic] = nil %>
+    <% elsif session[:back_dic]["type"] == "clinic" %>
+      <%= link_to topic_clinic_case_path(session[:back_dic]["topic_id"], session[:back_dic]["clinic_id"]) do %>
+        <%= "Voltar" %>
+      <% end%>
+
+      <% session[:back_dic] = nil %>
+    <% end %> 
+  </div>
+</div>

@@ -3,8 +3,9 @@
   <p id="notice"><%= notice %></p>
 
   <h1>Dicionário de termos</h1>
-
-  <%= link_to 'Inserir novo termo', new_dictionary_path %>
+  <% if !current_user.student?%>
+    <%= link_to 'Inserir novo termo', new_dictionary_path %>
+  <%end%>
   <br>
 
   <table>

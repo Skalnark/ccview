@@ -15,6 +15,7 @@ class ClinicCasesController < ApplicationController
   # GET /clinic_cases/1.json
   def show
     @clinic_case =  @topic.clinic_cases.find(params[:id])
+    @module = CaseModule.find(@topic.case_module_id)
   end
 
   # GET /clinic_cases/1/show_image/1

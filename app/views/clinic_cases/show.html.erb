@@ -44,6 +44,16 @@
     <strong>Aprendendo um pouco mais:</strong>
     <%= @clinic_case.extraInformation %>
   </p>
+
+  <p style='margin-bottom: 0px;'>
+    <strong>Dicionário:</strong>
+  </p>
+  <div class="dictionary-button">
+    <%= link_to module_dic_dictionaries_path(@module) do %>
+      <%= "Dicionário" %>
+      <% session[:back_dic] = {"type" => "clinic", "topic_id" => @topic.id, "clinic_id" => @clinic_case.id} %>
+    <% end %>
+  </div>
   
   <div class="actions">
     <%if !current_user.student? %>
