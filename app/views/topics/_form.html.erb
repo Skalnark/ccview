@@ -1,4 +1,4 @@
-<%= form_for([@module, @topic], html:{class:'form-style-5'}) do |form| %>
+<%= form_for([@module, @topic]) do |form| %>
   <% if topic.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(topic.errors.count, "error") %> proibiram esse Assunto de ser salvo:</h2>
