@@ -25,7 +25,9 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "Finalizar Cadastro" %> |
+      <%= f.button :submit do %>
+        <%= image_tag("ico03.png")%>
+      <% end %>
       <%= render "devise/shared/links" %>
     </div>
   <% end %>

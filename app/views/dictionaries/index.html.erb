@@ -4,7 +4,10 @@
 
   <h1>Dicionário de termos</h1>
   <% if !current_user.student?%>
-    <%= link_to 'Inserir novo termo', new_dictionary_path %>
+    <div class="button-style">
+      <%= link_to 'Inserir novo termo', new_dictionary_path %>  
+    </div>
+    
   <%end%>
   <br>
 
@@ -26,8 +29,14 @@
           <td><%= dictionary.description %></td>
 
           <% if !current_user.student?%>
-            <td><%= link_to 'Editar', edit_dictionary_path(dictionary) %></td>
-            <td><%= link_to 'Excluir', dictionary, method: :delete, data: { confirm: 'Apagar termo e descição?' } %></td>
+              <td><div class="button-style">
+                <%= link_to 'Editar', edit_dictionary_path(dictionary) %>
+              </div></td>
+              
+              <td><div class="button-style">
+                <%= link_to 'Excluir', dictionary, method: :delete, data: { confirm: 'Apagar termo e descição?' } %>
+              </div></td>  
+            
           <%end%>
         </tr>
       <% end %>

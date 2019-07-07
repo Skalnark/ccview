@@ -4,22 +4,24 @@
 <div class='form-style-5'>
 	<% if user_signed_in? %>
 		<div class="actions">
-			<%= link_to "Visualizar Módulos", case_modules_path %> | 
+			<%= link_to image_tag("ico15.png"), case_modules_path %>
 			<% if current_user.admin?%>
-				<%= link_to "Gerenciar Contas", home_administration_path %> |
+				<%= link_to image_tag("ico07.png"), home_administration_path %>
 			<%end%>
-			<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
+			<div class="button-style">
+				<%= link_to "Sair", destroy_user_session_path, :method => :delete %>	
+			</div>
 		</div>
 
-		<div class='text'>
+		<div class="text">
 			<%= current_user.email %>
 		</div>
 	<%else%>
 		<div class="actions">
 			<h1>Bem-vindo</h1>
 			<p> O "Clinical Cases View - CCView" é um visualizador de casos clínicos, conheça melhor os casos clinícos e aprenda com os que estão disponiveis. Caso você seja um professor, monte seus casos clinícos e disponibilize para seus alunos.</p>
-			<%= link_to "Login", new_user_session_path %> |
-			<%= link_to "Cadastro", new_user_registration_path%><br />
+			<%= link_to image_tag("ico02.png"), new_user_session_path %>
+			<%= link_to image_tag("ico08.png"), new_user_registration_path%>
 		</div>
 	<%end%>
 </div>

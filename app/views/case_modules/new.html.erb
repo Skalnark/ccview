@@ -5,14 +5,14 @@
 	<%if !current_user.student? %>
 		<%= render 'form', case_module: @case_module %>
 		<div class="actions">
-			<%= link_to 'Voltar', @case_module %>
+			<%= link_to image_tag("ico04.png"), @case_module %>
 		</div>
 	<%else%>
 		<div class="actions">
 			Você não possui autorização para adicionar um novo módulo.
 			<br>
 			<br>
-			<%= link_to 'Voltar', case_module_path %>
+			<%= link_to image_tag("ico04.png"), case_module_path %>
 		</div>
 	<%end%>
 </div>

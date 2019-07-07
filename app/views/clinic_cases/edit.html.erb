@@ -6,15 +6,18 @@
 		<%= render 'form', clinic_case: @clinic_case %>
 
 		<div class="actions">
-			<%= link_to 'Voltar', topic_clinic_case_path(@topic, @clinic_case) %>
-			<%= link_to 'Apagar', [@topic, @clinic_case], method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
+			<%= link_to image_tag("ico04.png"), topic_clinic_case_path(@topic, @clinic_case) %>
+			
+			<div class="button-style">
+				<%= link_to 'Apagar', [@topic, @clinic_case], method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>	
+			</div>
 		</div>
 	<%else%>
 		<div class="actions">
 			Você não possui autorização para editar esse caso clínico.
 			<br>
 			<br>
-			<%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
+			<%= link_to image_tag("ico04.png"), topic_clinic_cases_path(@topic) %>
 		</div>
 	<%end%>
 </div>

@@ -6,8 +6,10 @@
 		<%= render 'form', topic: @topic %>
 
 		<div class="actions">
-			<%= link_to 'Voltar', case_module_topic_path(@module, @topic) %>
-			<%= link_to 'Apagar', [@module, @topic], method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>
+			<%= link_to image_tag("ico04.png"), case_module_topic_path(@module, @topic) %>
+			<div class="button-style">
+				<%= link_to 'Apagar', [@module, @topic], method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>	
+			</div>
 		</div>
 
 	<% else %>
@@ -15,7 +17,7 @@
 			Você não possui autorização para editar esse assunto.
 			<br>
 			<br>
-			<%= link_to 'Voltar', case_module_topics_path(@module) %>
+			<%= link_to image_tag("ico04.png"), case_module_topics_path(@module) %>
 		</div>
 	<%end%>
 </div>

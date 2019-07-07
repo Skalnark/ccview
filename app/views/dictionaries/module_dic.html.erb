@@ -28,25 +28,21 @@
     </table>
   </div>
 
-  <div class="actions">
+  <div class="actions button-style", style="display: flex;">
     <% if session[:back_dic]["type"] == "module" %>
       <%= link_to case_module_path(session[:back_dic]["id"]) do %>
         <%= "Voltar" %>
       <% end%>
 
-      <% session[:back_dic] = nil %>
     <% elsif session[:back_dic]["type"] == "topic" %>
       <%= link_to case_module_topic_path(session[:back_dic]["module_id"], session[:back_dic]["topic_id"]) do %>
         <%= "Voltar" %>
       <% end%>
 
-      <% session[:back_dic] = nil %>
     <% elsif session[:back_dic]["type"] == "clinic" %>
       <%= link_to topic_clinic_case_path(session[:back_dic]["topic_id"], session[:back_dic]["clinic_id"]) do %>
         <%= "Voltar" %>
       <% end%>
-
-      <% session[:back_dic] = nil %>
     <% end %> 
   </div>
 </div>

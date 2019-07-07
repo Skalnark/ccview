@@ -34,7 +34,7 @@
   <p style='margin-bottom: 0px;'>
     <strong>Dicionário:</strong>
   </p>
-  <div class="dictionary-button">
+  <div class="dictionary-button button-style">
     <%= link_to module_dic_dictionaries_path(@module) do %>
       <%= "Dicionário" %>
       <% session[:back_dic] = {"type" => "topic", "module_id" => @module.id, "topic_id" => @topic.id} %>
@@ -43,11 +43,14 @@
 
   <div class="actions">
     <% if !current_user.student? %>
-      <%= link_to 'Editar', edit_case_module_topic_path(@module, @topic) %>
-      <%= link_to 'Novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
+      <div class="button-style">
+        <%= link_to 'Editar', edit_case_module_topic_path(@module, @topic) %>
+        <%= link_to 'Novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
+      </div>
     <%end%>
-
-    <%= link_to 'Visualizar Casos Clínicos', topic_clinic_cases_path(@topic)%>
-    <%= link_to 'Voltar', case_module_topics_path(@module) %>
+    <div class="button-style">
+      <%= link_to 'Visualizar Casos Clínicos', topic_clinic_cases_path(@topic)%>
+    </div>
+    <%= link_to image_tag("ico04.png"), case_module_topics_path(@module) %>
   </div>
 </div>

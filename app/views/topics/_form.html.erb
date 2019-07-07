@@ -15,14 +15,19 @@
   <%= render "#{@topic.current_step}_step", :form => form %>
 
   <div class="actions">
-    <% if @topic.first_step?%>
-      <%= form.submit "Próximo"%>
-    <% elsif @topic.new_record?%>
-      <%= form.submit "Criar Assunto"%>
-    <%else%>
-      <%= form.submit "Atualizar Assunto"%>
-    <%end%>
+    <div class="button-style">
+      <%= form.submit "Anterior", :name => "back_button" unless @topic.first_step? %>  
+    </div>
 
-    <%= form.submit "Anterior", :name => "back_button" unless @topic.first_step? %>
+    <% if @topic.first_step?%>
+      <%= form.button :submit do %>
+        <%= image_tag("ico05.png")%>
+      <% end %>
+
+    <% else %>
+      <%= form.button :submit do %>
+        <%= image_tag("ico01.png")%>
+      <% end %>
+    <%end%>
   </div>
 <% end %>

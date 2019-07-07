@@ -30,7 +30,7 @@
     <strong>Dicionário:</strong>
   </p>
 
-  <div class="dictionary-button">
+  <div class="dictionary-button button-style">
     <%= link_to module_dic_dictionaries_path(@case_module) do %>
       <%= "Dicionário" %>
       <% session[:back_dic] = {"type" => "module", "id" => @case_module.id} %>
@@ -39,10 +39,14 @@
   
   <div class="actions">
     <%if !current_user.student? %>
-      <%= link_to 'Editar Módulo', edit_case_module_path(@case_module) %>
-      <%= link_to 'Novo Assunto', new_case_module_topic_path(@case_module) %>
-    <%end%>  
-    <%= link_to 'Visualizar Assuntos', case_module_topics_path(@case_module)%>
-    <%= link_to 'Voltar', case_modules_path %>
+      <div class="button-style">
+        <%= link_to 'Editar Módulo', edit_case_module_path(@case_module) %>
+        <%= link_to 'Novo Assunto', new_case_module_topic_path(@case_module) %>
+      </div>
+    <%end%>
+    <div class="button-style">
+      <%= link_to 'Visualizar Assuntos', case_module_topics_path(@case_module)%>
+    </div>
+    <%= link_to image_tag("ico04.png"), case_modules_path %>
   </div>
 </div>

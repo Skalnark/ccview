@@ -10,11 +10,14 @@
 	    <%= f.label :email do%>
 	    	Email:
 	    	<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-	    <% end -%>
+	    <% end %>
 	  </div>
 
 	  <div class="actions">
-	    <%= f.submit "Mande me instruções para mudar a senha" %>
+	  	<div class="button-style">
+	  		<%= f.submit "Mudar a senha" %>	
+	  	</div>
+	    
 	    <%= render "devise/shared/links" %>
 	  </div>
 	<% end %>
