@@ -16,9 +16,9 @@ require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
 
 
-task :require_rvm do
-  require 'capistrano/rvm'
-end
+#task :require_rvm do
+#  require 'capistrano/rvm'
+#end
 
 task :require_bundler do
   require 'capistrano/bundler'
