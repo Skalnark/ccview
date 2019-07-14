@@ -44,7 +44,7 @@
   <div class="actions">
     <% if !current_user.student? %>
       <div class="button-style">
-        <%= link_to 'Editar', edit_case_module_topic_path(@module, @topic) %>
+        <%= link_to 'Editar Assunto', edit_case_module_topic_path(@module, @topic) %>
         <%= link_to 'Novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
       </div>
     <%end%>

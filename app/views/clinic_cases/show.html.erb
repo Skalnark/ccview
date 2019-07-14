@@ -1,5 +1,5 @@
 <%= render partial: "layouts/header" %>
-<div class='form-style-5'>
+<div class='form-style-5', style="width: fit-content;">
   <p id="notice"><%= notice %></p>
   <h1 style='text-align: center;'> Caso Clínico </h1>
 
@@ -58,7 +58,7 @@
   <div class="actions">
     <%if !current_user.student? %>
       <div class="button-style">
-        <%= link_to 'Editar', edit_topic_clinic_case_path(@topic, @clinic_case) %>
+        <%= link_to 'Editar Caso Clínico', edit_topic_clinic_case_path(@topic, @clinic_case) %>
       </div>
     <%end%>
     

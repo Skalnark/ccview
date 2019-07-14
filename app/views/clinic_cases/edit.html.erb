@@ -9,7 +9,7 @@
 			<%= link_to image_tag("ico04.png"), topic_clinic_case_path(@topic, @clinic_case) %>
 			
 			<div class="button-style">
-				<%= link_to 'Apagar', [@topic, @clinic_case], method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>	
+				<%= link_to 'Excluir Caso Clínico', [@topic, @clinic_case], method: :delete, data: { confirm: 'Deseja mesmo apagar?' } %>	
 			</div>
 		</div>
 	<%else%>
