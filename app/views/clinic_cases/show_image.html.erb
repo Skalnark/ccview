@@ -1,7 +1,7 @@
 <%= render partial: "layouts/header" %>
-<div class='form-style-5'>
+<div class='form-style-5', style="width: fit-content;">
 
-  <div style="text-align:center">
+  <div style="text-align:center; width: fit-content;">
     <%= image_tag(@clinic_case.images[@image_id])%><br>
 
     <p>
@@ -15,9 +15,12 @@
   </div>
 
   <div class="actions">
-    <%= link_to 'Voltar', topic_clinic_case_path(@topic, @clinic_case) %>
+    <%= link_to image_tag("ico04.png"), topic_clinic_case_path(@topic, @clinic_case) %>
+    
     <%if !current_user.student? %>
-      <%= link_to 'Deletar Imagem', topic_clinic_case_delete_image_path(@topic, @clinic_case, @image_id), method: :delete, data: { confirm: 'Deseja mesmo apagar a imagem?' } %>
+      <div class="button-style">
+        <%= link_to 'Deletar Imagem', topic_clinic_case_delete_image_path(@topic, @clinic_case, @image_id), method: :delete, data: { confirm: 'Deseja mesmo apagar a imagem?' } %>
+      </div>
     <%end%>
   </div>
 </div>

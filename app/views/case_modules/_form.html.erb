@@ -1,4 +1,4 @@
-<%= form_for(@case_module, html:{class:'form-style-5'}) do |form| %>
+<%= form_for(@case_module) do |form| %>
   <% if case_module.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(case_module.errors.count, "error") %> impediram esse Módulo de ser salvo:</h2>
@@ -15,14 +15,19 @@
   <%= render "#{@case_module.current_step}_step", :form => form %>
 
   <div class="actions">
-    <% if @case_module.first_step?%>
-      <%= form.submit "Próximo"%>
-    <% elsif @case_module.new_record?%>
-      <%= form.submit "Criar Módulo"%>
-    <%else%>
-      <%= form.submit "Atualizar Módulo"%>
-    <%end%>
+    <div class="button-style">
+      <%= form.submit "Anterior", :name => "back_button" unless @case_module.first_step? %>
+    </div>
 
-    <%= form.submit "Anterior", :name => "back_button" unless @case_module.first_step? %>
+    <% if @case_module.first_step?%>
+      <%= form.button :submit do %>
+        <%= image_tag("ico05.png")%>
+      <% end %>
+      
+    <%else%>
+      <%= form.button :submit do %>
+        <%= image_tag("ico01.png")%>
+      <% end %>
+    <%end%>
   </div>
 <% end %>

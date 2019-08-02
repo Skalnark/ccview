@@ -1,4 +1,4 @@
-<%= form_for([@topic, @clinic_case], html:{class:'form-style-5'}) do |form| %>
+<%= form_for([@topic, @clinic_case]) do |form| %>
   <% if clinic_case.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(clinic_case.errors.count, "error") %> impediram esse Caso Clínico de ser salvo:</h2>
@@ -14,14 +14,20 @@
   <%= render "#{@clinic_case.current_step}_step", :form => form %>
 
   <div class="actions">
+    <div class="button-style">
+      <%= form.submit "Anterior", :name => "back_button" unless @clinic_case.first_step? %>
+    </div>
+
     <% if @clinic_case.first_step?%>
-      <%= form.submit "Próximo"%>
-    <% elsif @clinic_case.new_record?%>
-      <%= form.submit "Criar Caso Clínico"%>
+      <%= form.button :submit do %>
+        <%= image_tag("ico05.png")%>
+      <% end %>
+
     <%else%>
-      <%= form.submit "Atualizar Caso Clínico"%>
+      <%= form.button :submit do %>
+        <%= image_tag("ico01.png")%>
+      <% end %>
     <%end%>
 
-    <%= form.submit "Anterior", :name => "back_button" unless @clinic_case.first_step? %>
   </div>
 <% end %>

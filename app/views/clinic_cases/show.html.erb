@@ -1,19 +1,19 @@
 <%= render partial: "layouts/header" %>
-<div class='form-style-5'>
+<div class='form-style-5', style="width: fit-content;">
   <p id="notice"><%= notice %></p>
   <h1 style='text-align: center;'> Caso Clínico </h1>
-  <p style='text-align: center;'><b>Clique na imagem para aumentar sua resolução.</b></p>
 
   <p>
-    <strong>Título:</strong>
-    <%= @clinic_case.title %>
+    <h2><u><%= @clinic_case.title %></u></h2>
   </p>
 
   <p>
     <strong>Informações Clínicas:</strong>
     <%= @clinic_case.clinicInformation %>
   </p>
-
+  <p style='text-align: left; font-size: 12px; margin-bottom: 6px;'>
+    <i>Clique na imagem para aumentar sua resolução.</i>
+  </p>
   <table>
     <tr>
       <% @clinic_case.images.each_with_index do |image, i| %>
@@ -44,12 +44,24 @@
     <strong>Aprendendo um pouco mais:</strong>
     <%= @clinic_case.extraInformation %>
   </p>
+
+  <p style='margin-bottom: 0px;'>
+    <strong>Dicionário:</strong>
+  </p>
+  <div class="dictionary-button button-style">
+    <%= link_to module_dic_dictionaries_path(@module) do %>
+      <%= "Dicionário" %>
+      <% session[:back_dic] = {"type" => "clinic", "topic_id" => @topic.id, "clinic_id" => @clinic_case.id} %>
+    <% end %>
+  </div>
   
   <div class="actions">
     <%if !current_user.student? %>
-      <%= link_to 'Editar', edit_topic_clinic_case_path(@topic, @clinic_case) %>
+      <div class="button-style">
+        <%= link_to 'Editar Caso Clínico', edit_topic_clinic_case_path(@topic, @clinic_case) %>
+      </div>
     <%end%>
     
-      <%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
+      <%= link_to image_tag("ico04.png"), topic_clinic_cases_path(@topic) %>
   </div>
 </div>

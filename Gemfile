@@ -29,7 +29,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Active Storage Amazon S3 gem.
- gem "aws-sdk-s3", require: false
+gem "aws-sdk-s3", require: false
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -37,6 +37,11 @@ gem 'jbuilder', '~> 2.5'
 
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
+# A session store backed by an Active Record class
+gem 'activerecord-session_store'
+
+# Whenever is a Ruby gem that provides a clear syntax for writing and deploying cron jobs
+gem 'whenever', require: false
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -3,32 +3,48 @@
 <p id="notice"><%= notice %></p>
 
 <% if current_user.admin? %>
-  <% User.all.each do |user| %>
-      <table>
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Permissão</th>
-            <th>Editar</th>
-          </tr>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Permissão</th>
+        <th>Editar</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% User.all.each do |user| %>
+        <% if user.role == "admin" %>
+          <% next %>
+
+        <% else %>
           <tr>
             <td><%=user.email=%></td>
-            <td><%=user.role=%></td>
-            <td>
-              <% if user.role == "student" %>
-                <li>
-                  <%= form_tag(home_tornar_professor_path(:email => user.email), method: :post) do %>
-                    <%= submit_tag "tornar_professor '#{user.email}'" %>
-                  <%end%>
-                </li>
-              <% elsif user.role == "professor" %>
-                <li>
-                    <%= form_tag(home_tornar_estudante_path(:email => user.email), method: :post) do %>
-                      <%= submit_tag "tornar_estudante '#{user.email}'" %>
-                    <%end%>
-                </li>
-              <% end %>
-            </td>
+            
+            <% if user.role == "student" %>
+              <td>Aluno</td>
+
+              <td><div class="button-style">
+                <%= form_tag(home_tornar_professor_path(:email => user.email), method: :post) do %>
+                  <%= submit_tag "Tornar professor" %>
+                <%end%>
+              </div></td>
+
+            <% elsif user.role == "professor" %>
+              <td>Professor</td>
+
+              <td><div class="button-style">
+                <%= form_tag(home_tornar_estudante_path(:email => user.email), method: :post) do %>
+                  <%= submit_tag "Tornar estudante" %>
+                <%end%>
+              </div></td>
+
+            <% end %>
           </tr>
-  <%end%>
+
+        <% end %>
+      <% end %>
+    </tbody>
+
+  </table>
 <%end%>

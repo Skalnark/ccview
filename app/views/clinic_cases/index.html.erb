@@ -6,18 +6,22 @@
 
   <%= form_tag(topic_clinic_cases_path(@topic), method: :get) do %>
       <%= text_field_tag :term, params[:term] %>
-      <%= submit_tag 'Buscar', name: nil %>
+      <div class="button-style">
+        <%= submit_tag 'Buscar', name: nil %>  
+      </div>
   <% end %>
 
-  <%= link_to "Voltar para o Assunto '#{@topic.title}'", case_module_topic_path(@topic.case_module_id, @topic) %>
+  <div class="button-style">
+    <%= link_to "Voltar para o Assunto '#{@topic.title}'", case_module_topic_path(@topic.case_module_id, @topic) %>
+  </div>
   <br>
   
   <%if !current_user.student? %>
-    <%= link_to 'Novo Caso Clínico', new_topic_clinic_case_path(@topic) %>
+    <%= link_to image_tag("ico06.png"), new_topic_clinic_case_path(@topic) %>
   <%end%>
 
   <div class="model_items">
-    <p style='text-align: center;'><b>Clique na imagem para visualizar o caso.</b></p>
+    <p style='text-align: center; font-size: 12px;'><i>Clique na imagem para visualizar o caso.</i></p>
     <ol>
       <% @clinic_cases.each do |clinic_case| %>
         <li>

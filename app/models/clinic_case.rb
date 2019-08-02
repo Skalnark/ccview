@@ -63,7 +63,7 @@ class ClinicCase < ApplicationRecord
 
 		if images.attached?
 			if images.length > 10
-				errors.add(:base, "#{images.length} arquivos foram selecionados, limite: 10")
+				errors.add(:base, "#{images.length} imagens foram selecionadas, limite: 10")
 			else 
 				images.each do |image|
 					if !image.content_type.in?(%('image/jpeg image/png image/jpg'))

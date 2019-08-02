@@ -5,14 +5,14 @@
 	<%if !current_user.student? %>
 		<%= render 'form', clinic_case: @clinic_case %>
 		<div class="actions">
-	  		<%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
+	  		<%= link_to image_tag("ico04.png"), topic_clinic_cases_path(@topic) %>
 	  	</div>
 	<%else%>
 		<div class="actions">
 			Você não possui autorização para adicionar um novo assunto.
 			<br>
 			<br>
-			<%= link_to 'Voltar', topic_clinic_cases_path(@topic) %>
+			<%= link_to image_tag("ico04.png"), topic_clinic_cases_path(@topic) %>
 		</div>
 	<%end%>
 </div>

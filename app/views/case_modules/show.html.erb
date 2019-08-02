@@ -2,11 +2,9 @@
 <div class='form-style-5'>
   <p id="notice"><%= notice %></p>
   <h1 style='text-align: center;'> Módulo </h1>
-  <p style='text-align: center;'><b>Clique na imagem para aumentar sua resolução.</b></p>
 
   <p>
-    <strong>Título:</strong>
-    <%= @case_module.title %>
+    <h2><u><%= @case_module.title %></u></h2>
   </p>
   
   <p>
@@ -15,6 +13,9 @@
   <pre><%= @case_module.description %></pre>
 
   <div class="image_button">
+    <p style='text-align: left; font-size: 12px; margin-bottom: 6px;'>
+      <i>Clique na imagem para aumentar sua resolução.</i>
+    </p>
     <%= link_to image_case_module_path(@case_module) do %>
       <%= image_tag(@case_module.thumbnail) if @case_module.image.attached? %>
     <% end %><br>
@@ -25,34 +26,27 @@
     <%= @case_module.author %>
   </p>
 
-  <p>
+  <p style='margin-bottom: 0px;'>
     <strong>Dicionário:</strong>
   </p>
-  <table>
-    <thead>
-      <tr>
-        <th>Termo</th>
-        <th>Descrição</th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <% @case_module.dictionaries.each do |dictionary| %>
-        <tr>
-          <td><%= dictionary.term %></td>
-          <td><%= dictionary.description %></td>
-        </tr>
-      <% end %>
-    </tbody>
-    
-</table>
+  <div class="dictionary-button button-style">
+    <%= link_to module_dic_dictionaries_path(@case_module) do %>
+      <%= "Dicionário" %>
+      <% session[:back_dic] = {"type" => "module", "id" => @case_module.id} %>
+    <% end %>
+  </div>
   
   <div class="actions">
     <%if !current_user.student? %>
-      <%= link_to 'Editar Módulo', edit_case_module_path(@case_module) %>
-      <%= link_to 'Novo Assunto', new_case_module_topic_path(@case_module) %>
-    <%end%>  
-    <%= link_to 'Visualizar Assuntos', case_module_topics_path(@case_module)%>
-    <%= link_to 'Voltar', case_modules_path %>
+      <div class="button-style">
+        <%= link_to 'Editar Módulo', edit_case_module_path(@case_module) %>
+        <%= link_to 'Novo Assunto', new_case_module_topic_path(@case_module) %>
+      </div>
+    <%end%>
+    <div class="button-style">
+      <%= link_to 'Visualizar Assuntos', case_module_topics_path(@case_module)%>
+    </div>
+    <%= link_to image_tag("ico04.png"), case_modules_path %>
   </div>
 </div>

@@ -10,18 +10,21 @@
       </ul>
     </div>
   <% end %>
+  <div style="text-align: left">
+    <div class="field">
+      Termo: <br>
+      <%= form.text_field :term %>
+    </div>
 
-  <div class="field">
-    Termo: <br>
-    <%= form.text_field :term %>
-  </div>
+    <div class="field">
+      Descrição:<br>
+      <%= form.text_area :description %>
+    </div>
 
-  <div class="field">
-    Descrição:<br>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Salvar" %>
+    <div class="actions">
+      <%= form.button :submit do %>
+        <%= image_tag("ico01.png")%>
+      <% end %>
+    </div>
   </div>
 <% end %>

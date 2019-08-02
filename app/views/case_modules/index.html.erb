@@ -6,15 +6,17 @@
 
   <%= form_tag(case_modules_path, method: :get) do %>
       <%= text_field_tag :term, params[:term] %>
-      <%= submit_tag 'Buscar', name: nil %>
+      <div class="button-style">
+        <%= submit_tag 'Buscar', name: nil %>
+      </div>
   <% end %>
 
 	<%if !current_user.student? %>
-    <%= link_to 'Novo Módulo', new_case_module_path %>
+    <%= link_to image_tag("ico13.png"), new_case_module_path %>
   <%end%>
 
   <div class="model_items">
-    <p style='text-align: center;'><b>Clique na imagem para visualizar o módulo.</b></p>
+    <p style='text-align: center; font-size: 12px; margin: 12px 0px 0px 0px;'><i>Clique na imagem para visualizar o módulo.</i></p>
     <ol>
       <% @case_modules.each do |case_module| %>
         <li>

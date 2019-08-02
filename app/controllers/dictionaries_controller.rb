@@ -13,12 +13,18 @@ class DictionariesController < ApplicationController
   end
 
   # GET /dictionaries/new
+  # GET /dictionaries/new.json
   def new
     @dictionary = Dictionary.new
   end
 
   # GET /dictionaries/1/edit
   def edit
+  end
+
+  # GET /dictionaries/1/show_image
+  def module_dic
+    @module = CaseModule.find(params[:case_module_id])
   end
 
   # POST /dictionaries

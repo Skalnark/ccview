@@ -22,7 +22,11 @@ Rails.application.routes.draw do
 	end
 
 	resources :clinic_cases
-	resources :dictionaries
+	resources :dictionaries do
+		collection do
+			get 'module_dic/:case_module_id', as: 'module_dic', to: 'dictionaries#module_dic'
+		end
+	end
 
 	root 'home#Index'
 	get 'home/administration'
