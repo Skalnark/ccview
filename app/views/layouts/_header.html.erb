@@ -13,6 +13,7 @@
 	<%end%>
 
 	<%= link_to "Sobre", home_About_path %> | 
+	<%= link_to "Fórum", "http://ccview.forumeiros.com", :target => "_blank" %> |
 
 	<% if user_signed_in? %>
 		<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
