@@ -50,7 +50,7 @@ gem 'whenever', require: false
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # High-level image processing helper methods with libvips and ImageMagick/GraphicsMagick
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
